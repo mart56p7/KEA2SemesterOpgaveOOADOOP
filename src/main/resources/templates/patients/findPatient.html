@@ -1,0 +1,15 @@
+<th:block th:include="header.html"></th:block>
+
+<div id="content">
+    <form method="post" action="/patients/findPatient">
+        <input type="text" name="patientdata"><input type="submit">
+    </form>
+</div>
+<th:block th:if="${patients?.size() == 0}">
+    Ingen patienter blev fundet via din søgning..
+</th:block>
+<th:block th:each="patient : ${patients}">
+    <div th:text="${patient.Firstname}"></div>
+    <div th:text="${patient.Lastname}"></div>
+</th:block>
+<th:block th:include="footer.html"></th:block>

@@ -1,0 +1,5 @@
+<th:block th:switch="${userType.name()}">
+<div th:case="'NOTLOGGEDIN'"></div>
+<div th:case="'SECRETARY'">Secretary menu</div>
+<div th:case="'DOCTOR'">Doctor menu</div>
+</th:block>
