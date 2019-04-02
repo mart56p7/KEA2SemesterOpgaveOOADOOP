@@ -4,6 +4,8 @@ package s2ooadoop.kea.models;
 import java.util.Date;
 
 public class PatientModel implements PatientModelInterface {
+
+    private int id;
     private int CPR;
     private Date Birthday;
     private String Firstname;
@@ -13,6 +15,16 @@ public class PatientModel implements PatientModelInterface {
     private float Height;
     private float Weight;
     private String Description;
+
+    @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public void setId(int id) {
+        this.id = id;
+    }
 
     @Override
     public int getCPR() {

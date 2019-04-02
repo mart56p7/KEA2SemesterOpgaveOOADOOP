@@ -41,21 +41,22 @@ public class PatientController {
                 {
                     //We show the list of patients to pick from
                     model.addAttribute("patients", pd);
+                    logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): end");
                     return("patients/findPatient");
                 }
                 //We redirect to show a single patient
+                logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): end");
                 return("patients/patient/");
             }
             //We return that we couldnt find any patients
             model.addAttribute("patients", pd);
+            logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): end");
             return("patients/findPatient");
         } catch (SQLException e) {
-            logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): " + e.getMessage());
+            logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): erorr " + e.getMessage(), 1);
         }
         logger.log("findPatient(@RequestParam(value=\"patientdata\", required=true) String patientdata): end");
         return "error";
-
-        //return "patients/patientlist";
     }
 
     @ModelAttribute("userType")
@@ -63,6 +64,6 @@ public class PatientController {
         //0 = Not logged in
         //1 = Secretary
         //2 = Doctor
-        return UserType.DOCTOR;
+        return UserType.NOTLOGGEDIN;
     }
 }

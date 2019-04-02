@@ -18,7 +18,7 @@ public class DefaultController {
     public String root(HttpSession session){
         //If the user hasnt logged in, we want to validate the user
         if(userType(session) == UserType.NOTLOGGEDIN){
-            return "redirect:users/validateUser";
+            return "users/validateUser";
         }
         //Else we want to search for a patient
         return "redirect:patients/findPatient";
@@ -29,6 +29,6 @@ public class DefaultController {
         //0 = Not logged in
         //1 = Secretary
         //2 = Doctor
-        return UserType.DOCTOR;
+        return UserType.NOTLOGGEDIN;
     }
 }

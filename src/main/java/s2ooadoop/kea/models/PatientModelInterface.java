@@ -4,6 +4,8 @@ import java.util.Date;
 
 public interface PatientModelInterface {
 
+    public int getId();
+    public void setId(int id);
     public int getCPR();
     public void setCPR(int CPR);
     public Date getBirthday();
