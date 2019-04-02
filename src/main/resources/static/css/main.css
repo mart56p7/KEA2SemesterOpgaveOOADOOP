@@ -1,17 +1,53 @@
-#loginbox{
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    height: 200px;
-    margin-left: -150px;
-    margin-top: -100px;
+#container{
+    width: 1024px;
+    margin: 0 auto;
+    display: block;
+    border: 1px solid black;
+    margin-top: 5px;
+    height: auto;
 }
 
-#loginbox input['text'], input['password'], input['submit']{
+header.top{
+    height: 200px;
+    border-bottom: 1px solid black;
+}
+
+header.top > img{
+    height: 100%;
     width: 100%;
+}
+
+nav.topmenu{
+    height: 25px;
+    border-bottom: 1px solid black;
+    display: flex;
+    justify-content: space-around;
 }
 
 div.box{
     display: block;
+    width: 100%;
+}
+
+#loginbox{
+    margin: auto auto;
+    height: 200px;
+    width: 350px;
+}
+
+form.fw400{
+    width: 400px;
+}
+
+form.fw400_center {
+    width: 400px;
+    margin: 0 auto;
+}
+
+form.fw500, form.fw400_center > input, input[type=text],input[type=password], input[type=submit], textarea {
+    width: 100%;
+}
+
+form.fw500, form.fw400_center > input[type=checkbox],input[type=radiobutton] {
+    width: auto !important;
 }

@@ -1,5 +1,15 @@
 <th:block th:switch="${userType.name()}">
-<div th:case="'NOTLOGGEDIN'"></div>
-<div th:case="'SECRETARY'">Secretary menu</div>
-<div th:case="'DOCTOR'">Doctor menu</div>
+<!--
+    <nav th:case="'NOTLOGGEDIN'">
+    NotLoggedIn
+    <a href=""></a>
+</nav>
+-->
+<nav th:case="'SECRETARY'" class="topmenu">
+    Secretary menu
+</nav>
+<nav th:case="'DOCTOR'" class="topmenu">
+    <a href="/patients/">Manage Patients</a> | <a href="/medicines/">Manage Medicines</a> | <a href="/diagnoses/">Manage Diagnoses</a> | <a href="/users/">Manage Users</a>
+
+</nav>
 </th:block>
