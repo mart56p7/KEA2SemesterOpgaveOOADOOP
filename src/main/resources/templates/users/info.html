@@ -2,8 +2,8 @@
 
 <h1 class="block">User info</h1><br/>
 
-<p>ID: </p><p th:text="${user.getUserID()}"></p>
+<p>ID: </p><p th:text="${user.getID()}"></p>
 <p>Username: </p><p th:text="${user.getUsername()}"></p>
-
+<p>Brugertype: </p><p th:text="${user.getUserType().name()}"></p>
 
 <th:block th:include="footer.html"></th:block>

@@ -1,8 +1,13 @@
 <th:block th:include="header.html"></th:block>
 
 
-<form method="post" action="/patients/findPatient" class="fw400_center">
-    <input type="text" name="patientdata"><input type="submit">
+<form class="navbar-form class="fw400_center" method="post" action="/patients/findPatient"">
+    <div class="form-group">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Find patient">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+        </div>
+    </div>
 </form>
 
 <th:block th:if="${patients?.size() == 0}">

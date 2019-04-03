@@ -5,19 +5,19 @@ public enum UserType {
     SECRETARY (1),
     DOCTOR(2);
 
-    UserType(int id){
-        this.id = id;
+    UserType(int ID){
+        this.ID = ID;
     }
 
-    private int id = 0;
-    public int getId()
+    private int ID = 0;
+    public int GetID()
     {
-                return id;
+                return ID;
     }
 
-    public static UserType getUserType(int id){
+    public static UserType GetUserType(int ID){
         for (UserType usertype : UserType.values()) {
-            if(id == usertype.getId()){
+            if(ID == usertype.GetID()){
                 return usertype;
             }
         }

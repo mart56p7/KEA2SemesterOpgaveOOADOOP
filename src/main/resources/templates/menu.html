@@ -6,10 +6,11 @@
 </nav>
 -->
 <nav th:case="'SECRETARY'" class="topmenu">
-    Secretary menu
+    <a href="/">Start</a> | <a href="logout">Logout</a>
 </nav>
 <nav th:case="'DOCTOR'" class="topmenu">
-    <a href="/patients/">Manage Patients</a> | <a href="/medicines/">Manage Medicines</a> | <a href="/diagnoses/">Manage Diagnoses</a> | <a href="/users/">Manage Users</a>
+
+    <a href="/">Start</a> | <a href="/patients/">Manage Patients</a> | <a href="/medicines/">Manage Medicines</a> | <a href="/diagnoses/">Manage Diagnoses</a> | <a href="/users/">Manage Users</a> | <a href="logout">Logout</a>
 
 </nav>
 </th:block>

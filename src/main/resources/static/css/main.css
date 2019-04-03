@@ -7,6 +7,12 @@
     height: auto;
 }
 
+#contentarea{
+    padding-left: 30px;
+    padding-right: 30px;
+    padding-bottom: 30px;
+}
+
 header.top{
     height: 200px;
     border-bottom: 1px solid black;
@@ -50,4 +56,56 @@ form.fw500, form.fw400_center > input, input[type=text],input[type=password], in
 
 form.fw500, form.fw400_center > input[type=checkbox],input[type=radiobutton] {
     width: auto !important;
+}
+
+span.numfield{
+    width: 60px;
+    display: inline-block;
+}
+
+span.textfield{
+    width: 100px;
+    display: inline-block;
+}
+
+span.pencilfield{
+    width: 25px;
+    display: inline-block;
+}
+
+span.removefield{
+    width: 25px;
+    display: inline-block;
+}
+
+a.right{
+    display: inline-block;
+    float: right;
+    margin-top: 20px;
+}
+
+div.right{
+    float: right;
+}
+
+h1{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+h2{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+h3{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+div.padded5{
+    padding: 5px;
 }

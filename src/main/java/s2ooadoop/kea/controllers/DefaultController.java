@@ -47,17 +47,31 @@ public class DefaultController {
     }
 
     @PostMapping("/")
-    public String validateUser(@RequestParam(value="username", required=true) String username, @RequestParam(value="password", required=true) String password,Model model, HttpSession session){
-        //Returns a user object on success or null on failure
-        session.setAttribute("user", us.ValidateUser(username, password));
-
-        //If the user hasnt logged in, we want to validate the user
-        if(userType(session) == UserType.NOTLOGGEDIN){
-            return "validateUser";
+    public String validateUser(@RequestParam(value="username", required=true) String username, @RequestParam(value="password", required=true) String password,Model model, HttpSession session)  {
+        try {
+            //Returns a user object on success or null on failure
+            session.setAttribute("user", us.ValidateUser(username, password));
+            //If the user hasnt logged in, we want to validate the user
+            if(userType(session) == UserType.NOTLOGGEDIN){
+                return "validateUser";
+            }
+            //If we dont specificly update the userType, it takes 1 more load of the page for it to update..
+            model.addAttribute("userType", userType(session));
+            return "/patients/findPatient";
+        } catch (SQLException e) {
+            logger.log("Error: " + e.getMessage());
+            return "error";
         }
-        //If we dont specificly update the userType, it takes 1 more load of the page for it to update..
-        model.addAttribute("userType", userType(session));
-        return "/patients/findPatient";
+
+
+    }
+
+    @GetMapping("logout")
+    public String logout(HttpSession session){
+        logger.log("logout(HttpSession session): START");
+        session.removeAttribute("user");
+        logger.log("logout(HttpSession session): END");
+        return "redirect:/";
     }
 
     @ModelAttribute("userType")

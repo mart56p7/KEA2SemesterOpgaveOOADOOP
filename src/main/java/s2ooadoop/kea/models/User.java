@@ -7,14 +7,27 @@ public class User {
 	private UserType userType;
 	private int ID;
 
+	public User(){}
+
+	public User(int ID, String Username, String Password, UserType userType){
+		this.ID = ID;
+		this.Username = Username;
+		this.Password = Password;
+		this.userType = userType;
+	}
+
+	public User(String Username, String Password, int userType){
+		this(0, Username, Password, UserType.GetUserType(userType));
+	}
+
+	public User(int ID, String Username, String Password, int userType){
+		this(ID, Username, Password, UserType.GetUserType(userType));
+	}
+
 	public String getUsername() {
 		return this.Username;
 	}
 
-	/**
-	 * 
-	 * @param Username
-	 */
 	public void setUsername(String Username) {
 		this.Username = Username;
 	}
@@ -23,10 +36,6 @@ public class User {
 		return this.Password;
 	}
 
-	/**
-	 * 
-	 * @param Password
-	 */
 	public void setPassword(String Password) {
 		this.Password = Password;
 	}
@@ -35,10 +44,6 @@ public class User {
 		return this.userType;
 	}
 
-	/**
-	 * 
-	 * @param userType
-	 */
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
@@ -47,10 +52,6 @@ public class User {
 		return this.ID;
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
 	public void setID(int ID) {
 		this.ID = ID;
 	}
