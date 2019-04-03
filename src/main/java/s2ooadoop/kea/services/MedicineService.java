@@ -4,45 +4,35 @@ import org.springframework.stereotype.Service;
 import s2ooadoop.kea.models.Medicine;
 import s2ooadoop.kea.repositories.MedicineRepositoryInterface;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 @Service
 public class MedicineService {
 
 	private MedicineRepositoryInterface MRI;
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	public Medicine GetMedicine(int ID) {
-		// TODO - implement MedicineService.GetMedicine
-		throw new UnsupportedOperationException();
+
+	public Medicine GetMedicine(int ID) throws SQLException {
+        ResultSet rs = MRI.getMedicine(ID);
+        Medicine medicine = null;
+        if (rs.next()) {
+            medicine = new Medicine(rs.getString("Name"),rs.getInt("ID"));
+        }
+        return medicine;
 	}
 
-	/**
-	 * 
-	 * @param Medicine
-	 */
-	public int CreateMedicine(Medicine Medicine) {
-		// TODO - implement MedicineService.CreateMedicine
-		throw new UnsupportedOperationException();
+
+	public int CreateMedicine(Medicine Medicine) throws SQLException {
+	    return MRI.CreateMedicine(Medicine.getName());
 	}
 
-	/**
-	 * 
-	 * @param Medicine
-	 */
-	public void EditMedicine(Medicine Medicine) {
-		// TODO - implement MedicineService.EditMedicine
-		throw new UnsupportedOperationException();
+	public void EditMedicine(Medicine Medicine) throws SQLException {
+		MRI.EditMedicine(Medicine.getName());
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	public void DeleteMedicine(int ID) {
-		// TODO - implement MedicineService.DeleteMedicine
-		throw new UnsupportedOperationException();
+	public void DeleteMedicine(int ID) throws SQLException{
+		MRI.DeleteMedicine(ID);
 	}
 
 }
