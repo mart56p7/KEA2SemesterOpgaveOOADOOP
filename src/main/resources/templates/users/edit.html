@@ -1,5 +1,27 @@
 <th:block th:include="header.html"></th:block>
 
+<h1>Edit User</h1><br/>
+
+
+<p>To change a username or password, please provide the old password</p>
+<div class="form-group">
+    <form method="post" action="/users/edit" class="fw500">
+        <input type="hidden" name="userID" th:value="${user.getUserID()}">
+        <div class="block">
+            <span class="textfield">Username:</span>
+            <input type="text" name="newUsername" th:value="${user.getUsername()}" class="form-control">
+        </div>
+        <div class="block">
+            <span class="textfield">Old password:</span>
+            <input type="password" name="oldPassword" class="form-control">
+        </div>
+        <div class="block">
+            <span class="textfield">New password:</span>
+            <input type="password" name="newPassword" class="form-control">
+        </div>
+        <input type="submit" value="Edit" class="btn btn-info form-control">
+    </form>
+</div>
 
 
 <th:block th:include="footer.html"></th:block>
