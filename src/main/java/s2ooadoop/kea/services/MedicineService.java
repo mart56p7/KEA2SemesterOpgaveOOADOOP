@@ -25,12 +25,14 @@ public class MedicineService {
         return medicine;
 	}
 	public List<MedicineInterface> getMedicines(int[] ID) throws SQLException{
+	    if(ID == null){
+	        return null;
+        }
 		ResultSet rs = MRI.getMedicines(ID);
 		Medicine medicine = null;
 		List<MedicineInterface> medicines = new ArrayList<>();
         while (rs.next()){
-            medicine = new Medicine(rs.getString("Name"),rs.getInt("ID"));
-            medicines.add(medicine);
+            medicines.add(new Medicine(rs.getString("Name"),rs.getInt("ID")));
 		}
 		return medicines;
 	}
