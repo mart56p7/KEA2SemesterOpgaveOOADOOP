@@ -1,5 +1,6 @@
 package s2ooadoop.kea.repositories;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -7,7 +8,8 @@ import java.sql.ResultSet;
 @Repository
 public class MedicineRepository implements MedicineRepositoryInterface {
 
-	private Database Database;
+	@Autowired
+	private Database DB;
 
 	@Override
 	public ResultSet getMedicine(int ID) {
@@ -22,5 +24,9 @@ public class MedicineRepository implements MedicineRepositoryInterface {
 	}
 	@Override
 	public void DeleteMedicine(int ID) {
+	}
+	@Override
+	public ResultSet getMedicines(int[] ID) {
+		return null;
 	}
 }

@@ -6,6 +6,8 @@ import s2ooadoop.kea.repositories.MedicineRepositoryInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class MedicineService {
@@ -20,6 +22,16 @@ public class MedicineService {
             medicine = new Medicine(rs.getString("Name"),rs.getInt("ID"));
         }
         return medicine;
+	}
+	public List<Medicine> getMedicines(int[] ID) throws SQLException{
+		ResultSet rs = MRI.getMedicines(ID);
+		Medicine medicine = null;
+		List<Medicine> medicines = new ArrayList<>();
+        while (rs.next()){
+            medicine = new Medicine(rs.getString("Name"),rs.getInt("ID"));
+            medicines.add(medicine);
+		}
+		return medicines;
 	}
 
 

@@ -11,5 +11,7 @@ public interface MedicineRepositoryInterface {
 	int CreateMedicine(String Name);
 	void EditMedicine(String Name);
 	void DeleteMedicine(int ID);
+	ResultSet getMedicines(int[] ID);
+
 
 }
