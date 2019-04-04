@@ -28,7 +28,7 @@ public class MedicineRepository implements MedicineRepositoryInterface {
     }
 	@Override
 	public int CreateMedicine(String Name) throws SQLException{
-        String sql = "INSERT INTO users (`Name`) VALUES (?)";
+        String sql = "INSERT INTO medicine (`Name`) VALUES (?)";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setString(1, Name);
         return DB.ExecuteSql(pstmt);
