@@ -43,7 +43,7 @@ public class MedicineService {
 	}
 
 	public void EditMedicine(Medicine Medicine) throws SQLException {
-		MRI.EditMedicine(Medicine.getName());
+		MRI.EditMedicine(Medicine.getID(),Medicine.getName());
 	}
 
 	public void DeleteMedicine(int ID) throws SQLException{

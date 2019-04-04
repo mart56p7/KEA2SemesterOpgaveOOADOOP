@@ -22,7 +22,7 @@ public class MedicineRepository implements MedicineRepositoryInterface {
 	}
 	@Override
     public ResultSet getMedicines(int[] ID) throws SQLException{
-        String sql = "SELECT * FROM medicine WHERE ID=?";
+        String sql = "SELECT * FROM medicine WHERE id=?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         return DB.QuerySql(pstmt);
     }
@@ -34,10 +34,18 @@ public class MedicineRepository implements MedicineRepositoryInterface {
         return DB.ExecuteSql(pstmt);
 	}
 	@Override
-	public void EditMedicine(String Name) throws SQLException {
+	public void EditMedicine(int ID, String Name) throws SQLException {
+        String sql = "UPDATE medicine SET `Name` = ? WHERE id = ?";
+        PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
+        pstmt.setString(1, Name);
+        pstmt.setInt(2, ID);
+        DB.ExecuteSql(pstmt);
 	}
 	@Override
 	public void DeleteMedicine(int ID) throws SQLException{
+	    String sql = "DELETE FROM medicine WHERE id=?";
+	    PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
+	    pstmt.setInt(1,ID);
+	    DB.ExecuteSql(pstmt);
 	}
-
 }

@@ -2,29 +2,29 @@ package s2ooadoop.kea.models;
 
 import java.util.Date;
 
-public class PatientDiagnose {
+public class Diagnose {
 
 	private PatientInterface patient;
-	private Diagnose diagnose;
+	private Illness Illness;
 	private String note;
 	private Date date;
 	private int ID;
 
-	public PatientDiagnose() {
-		// TODO - implement PatientDiagnose.PatientDiagnose
+	public Diagnose() {
+		// TODO - implement PatientIllness.PatientIllness
 		throw new UnsupportedOperationException();
 	}
 
 	/**
 	 * 
 	 * @param patient
-	 * @param diagnose
+	 * @param Illness
 	 * @param note
 	 * @param date
 	 * @param ID
 	 */
-	public PatientDiagnose(PatientInterface patient, Diagnose diagnose, String note, Date date, int ID) {
-		// TODO - implement PatientDiagnose.PatientDiagnose
+	public Diagnose(PatientInterface patient, Illness Illness, String note, Date date, int ID) {
+		// TODO - implement PatientIllness.PatientIllness
 		throw new UnsupportedOperationException();
 	}
 
@@ -40,16 +40,16 @@ public class PatientDiagnose {
 		this.patient = patient;
 	}
 
-	public Diagnose getDiagnose() {
-		return this.diagnose;
+	public Illness getIllness() {
+		return this.Illness;
 	}
 
 	/**
 	 * 
-	 * @param diagnose
+	 * @param Illness
 	 */
-	public void setDiagnose(Diagnose diagnose) {
-		this.diagnose = diagnose;
+	public void setIllness(Illness Illness) {
+		this.Illness = Illness;
 	}
 
 	public String getNote() {
@@ -77,7 +77,7 @@ public class PatientDiagnose {
 	}
 
 	public int getID() {
-		// TODO - implement PatientDiagnose.getID
+		// TODO - implement PatientIllness.getID
 		throw new UnsupportedOperationException();
 	}
 
@@ -86,7 +86,7 @@ public class PatientDiagnose {
 	 * @param ID
 	 */
 	public void setID(int ID) {
-		// TODO - implement PatientDiagnose.setID
+		// TODO - implement PatientIllness.setID
 		throw new UnsupportedOperationException();
 	}
 

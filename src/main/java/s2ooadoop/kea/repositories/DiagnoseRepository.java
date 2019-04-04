@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 @Repository
-public class PatientDiagnoseRepository implements PatientDiagnoseRepositoryInterface {
+public class DiagnoseRepository implements DiagnoseRepositoryInterface {
 
 	private Database Database;
 

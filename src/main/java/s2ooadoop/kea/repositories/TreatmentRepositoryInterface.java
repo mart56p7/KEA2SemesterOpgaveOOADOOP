@@ -1,7 +1,11 @@
 package s2ooadoop.kea.repositories;
 
-import java.sql.ResultSet;
+import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@Repository
 public interface TreatmentRepositoryInterface {
 
 	/**
@@ -32,5 +36,5 @@ public interface TreatmentRepositoryInterface {
 	 * @param ID
 	 */
 	void DeleteTreatment(int ID);
-	public ResultSet getTreatmentMedicineIds(int ID);
+	public ResultSet getTreatmentMedicineIds(int ID) throws SQLException;
 }

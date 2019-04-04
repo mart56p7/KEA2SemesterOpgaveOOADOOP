@@ -2,10 +2,9 @@ package s2ooadoop.kea.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import s2ooadoop.kea.models.Medicine;
 import s2ooadoop.kea.models.MedicineInterface;
 import s2ooadoop.kea.models.Treatment;
+import s2ooadoop.kea.repositories.TreatmentRepository;
 import s2ooadoop.kea.repositories.TreatmentRepositoryInterface;
 
 import java.sql.ResultSet;
@@ -14,8 +13,9 @@ import java.util.List;
 
 @Service
 public class TreatmentService {
-	@Autowired
-	private TreatmentRepositoryInterface TRI;
+
+	private TreatmentRepositoryInterface TRI = new TreatmentRepository() {
+	};
 	@Autowired
 	private MedicineService MS;
 

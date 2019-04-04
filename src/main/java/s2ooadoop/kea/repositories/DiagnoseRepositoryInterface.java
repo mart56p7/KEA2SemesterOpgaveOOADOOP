@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.util.Date;
 
 @Repository
-public interface PatientDiagnoseRepositoryInterface {
+public interface DiagnoseRepositoryInterface {
 
 	/**
 	 * 
