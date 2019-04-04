@@ -1,34 +1,19 @@
 package s2ooadoop.kea.repositories;
 
-import java.sql.ResultSet;
+import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+@Repository
 public interface IllnessRepositoryInterface {
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	ResultSet GetIllness(int ID);
+	ResultSet GetIllness(int ID) throws SQLException;
 
-	/**
-	 * 
-	 * @param Name
-	 * @param TreatmentID
-	 */
-	int CreateIllness(String Name, int[] TreatmentID);
+	int CreateIllness(String Name, int[] TreatmentID) throws SQLException;
 
-	/**
-	 * 
-	 * @param Name
-	 * @param TreatmentID
-	 * @param ID
-	 */
-	void EditIllness(String Name, int[] TreatmentID, int ID);
+	void EditIllness(String Name, int[] TreatmentID, int ID) throws SQLException;
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	void DeleteIllness(int ID);
+	void DeleteIllness(int ID) throws SQLException;
 
 }
