@@ -1,10 +1,8 @@
 package s2ooadoop.kea.repositories;
 
-import com.fasterxml.jackson.databind.deser.std.DateDeserializers;
 import org.springframework.stereotype.Repository;
 
 import java.sql.*;
-
 @Repository
 public class Database {
 
@@ -40,10 +38,10 @@ public class Database {
 	 * Create a new RWM database conenction
 	 */
 	private Connection NewRWMConnection() throws SQLException {
-		String username = "s2oo";
-		String password = "Password1234";
-		String server   = "localhost";
-		String dbName   = "dat18a";
+		String username = "patientsystemkea";
+		String password = "Yj1d!ZqWp-Sd";
+		String server   = "den1.mysql2.gear.host";
+		String dbName   = "patientsystemkea";
 		String port     = "3306";
 		this.Conn = DriverManager.getConnection("jdbc:mysql://" + server + ":" + port + "/" + dbName, username, password);
 		mode = 777;
@@ -75,10 +73,10 @@ public class Database {
 	}
 
 	private Connection NewRConnection() throws SQLException {
-		String username = "s2oo";
-		String password = "Password1234";
-		String server   = "Localhost";
-		String dbName   = "dat18a";
+		String username = "patientsystemkea";
+		String password = "Yj1d!ZqWp-Sd";
+		String server   = "den1.mysql2.gear.host";
+		String dbName   = "patientsystemkea";
 		String port     = "3306";
 		this.Conn = DriverManager.getConnection("jdbc:mysql://" + server + ":" + port + "/" + dbName, username, password);
 		mode = 444;
