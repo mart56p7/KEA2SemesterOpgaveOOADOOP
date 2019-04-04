@@ -1,9 +1,11 @@
 package s2ooadoop.kea.models;
 
+import java.util.List;
+
 public class Treatment {
 
 	private String name;
-	private MedicineInterface[] medicine;
+	private List<MedicineInterface> medicine;
 	private String note;
 	private int ID;
 
@@ -19,7 +21,7 @@ public class Treatment {
 	 * @param note
 	 * @param ID
 	 */
-	public Treatment(String name, MedicineInterface[] medicine, String note, int ID) {
+	public Treatment(int ID, String name, String note, List<MedicineInterface> medicine) {
 		// TODO - implement Treatment.Treatment
 		throw new UnsupportedOperationException();
 	}
@@ -36,7 +38,7 @@ public class Treatment {
 		this.name = name;
 	}
 
-	public MedicineInterface[] getMedicine() {
+	public List<MedicineInterface> getMedicine() {
 		return this.medicine;
 	}
 
@@ -44,7 +46,7 @@ public class Treatment {
 	 * 
 	 * @param medicine
 	 */
-	public void setMedicine(MedicineInterface[] medicine) {
+	public void setMedicine(List<MedicineInterface> medicine) {
 		this.medicine = medicine;
 	}
 

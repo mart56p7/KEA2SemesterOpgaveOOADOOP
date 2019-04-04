@@ -1,0 +1,15 @@
+<th:block th:include="header.html"></th:block>
+
+<h1>Delete User</h1><br/>
+
+<p>You are about to delete the user</p><p th:text="${user.getUsername()}"></p>
+<p>Please confirm.</p>
+<div class="form-group">
+    <form method="post" action="/users/delete">
+        <input type="hidden" name="userID" th:value="${user.getID()}">
+        <input type="submit" value="Slet" class="btn btn-info form-control">
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

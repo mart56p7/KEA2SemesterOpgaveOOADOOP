@@ -32,5 +32,5 @@ public interface TreatmentRepositoryInterface {
 	 * @param ID
 	 */
 	void DeleteTreatment(int ID);
-
+	public ResultSet getTreatmentMedicineIds(int ID);
 }
