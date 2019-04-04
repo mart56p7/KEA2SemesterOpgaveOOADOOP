@@ -1,9 +1,14 @@
-<th:block th:include="header.html"></th:block>
+<th:block th:include="header.html" xmlns:th="http://www.w3.org/1999/html"></th:block>
 
-<h1 class="block">User info</h1><br/>
+<h1 class="block">Treatment info</h1><br/>
 
-<p>ID: </p><p th:text="${user.getID()}"></p>
-<p>Username: </p><p th:text="${user.getUsername()}"></p>
-<p>Brugertype: </p><p th:text="${user.getUserType().name()}"></p>
-
+<p>ID: </p><p th:text="${treatment.getID()}"></p>
+<p>Name: </p><p th:text="${treatment.getName()}"></p>
+<p>Note: </p><p th:text="${treatment.getNote()}"></p>
+<p>Medicine:
+    <th:block th:each="medicine : ${treatment.getMedicine()}">
+        <p th:if="${medicine != null}" th:text="${medicine.getName()}"></p>
+        <p th:unless="${medicine != null}">None</p>
+    </th:block>
+</p>
 <th:block th:include="footer.html"></th:block>

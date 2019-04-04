@@ -1,17 +1,16 @@
 <th:block th:include="header.html"></th:block>
 
 
-<h1 class="block">Users</h1><a href="/users/create" class="btn btn-primary right">Create user</a><br/>
+<h1 class="block">Users</h1><a href="/treatments/create" class="btn btn-primary right">Create Treatment</a><br/>
 
 
-<span class="numfield">ID</span><span class="textfield">Username</span><span class="textfield">Type</span>
-<th:block th:each="user : ${users}">
+<span class="numfield">ID</span><span class="textfield300">Name</span>
+<th:block th:each="treatment : ${treatments}">
     <div class="block">
-        <span class="numfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getID()}"></a></span>
-        <span class="textfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUsername()}"></a></span>
-        <span class="textfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUserType().name()}"></a></span>
-        <span class="pencilfield"><a th:href="@{/users/edit/} + ${user.getID()}" class="glyphicon glyphicon-pencil"></a></span>
-        <span class="removefield"><a th:href="@{/users/delete/} + ${user.getID()}" class="glyphicon glyphicon-remove"></a></span>
+        <span class="numfield"><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getID()}"></a></span>
+        <span class="textfield300"><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getName()}"></a></span>
+        <span class="pencilfield"><a th:href="@{/treatments/edit/} + ${treatment.getID()}" class="glyphicon glyphicon-pencil"></a></span>
+        <span class="removefield"><a th:href="@{/treatments/delete/} + ${treatment.getID()}" class="glyphicon glyphicon-remove"></a></span>
     </div>
 </th:block>
 

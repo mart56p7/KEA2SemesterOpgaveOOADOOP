@@ -6,8 +6,8 @@
 <p>Please confirm.</p>
 <div class="form-group">
     <form method="post" action="/users/delete">
-        <input type="hidden" name="userID" th:value="${user.getID()}">
-        <input type="submit" value="Slet" class="btn btn-info form-control">
+        <input type="hidden" name="id" th:value="${user.getID()}">
+        <input type="submit" value="Delete" class="btn btn-info form-control">
     </form>
 </div>
 

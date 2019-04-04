@@ -178,7 +178,7 @@ public class UserController {
 	}
 
 	@PostMapping("/users/delete")
-	public String deleteUser(@RequestParam(value="userID", required=true) int userID, HttpSession session)
+	public String deleteUser(@RequestParam(value="id", required=true) int id, HttpSession session)
 	{
 		logger.log("deleteUser(@ModelAttribute int userID): START");
 		if(userType(session) != UserType.DOCTOR)
@@ -187,7 +187,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			US.DeleteUser(userID);
+			US.DeleteUser(id);
 			logger.log("deleteUser(@ModelAttribute int userID): END");
 			return "redirect:/users/";
 		} catch (SQLException e) {
@@ -235,14 +235,16 @@ public class UserController {
 
 	@ModelAttribute("userType")
 	public UserType userType(HttpSession session){
+		return UserType.DOCTOR;
 		//0 = Not logged in
 		//1 = Secretary
 		//2 = Doctor
-		Object user = session.getAttribute("user");
-		if(user instanceof User && user != null){
-			System.out.println(((User)user).getUserType().name());
-			return ((User)user).getUserType();
-		}
-		return UserType.NOTLOGGEDIN;
+        /*Object user = session.getAttribute("user");
+        if(user instanceof User && user != null){
+            System.out.println(((User)user).getUserType().name());
+            return ((User)user).getUserType();
+        }
+        return UserType.NOTLOGGEDIN;
+    */
 	}
 }

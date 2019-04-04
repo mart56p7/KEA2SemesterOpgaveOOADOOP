@@ -1,0 +1,22 @@
+<th:block th:include="header.html"></th:block>
+
+
+<h1 class="block">Create Patient</h1><br/>
+
+<div class="form-group">
+    <form method="post" action="/patients/create">
+        <p>CPR: <input type="text" name="birthday" class="form-control"> - <input type="text" name="cpr" class="form-control" placeholder="Last 4"></p>
+        <p>Firstname: <input type="text" name="firstname" class="form-control"></p>
+        <p>Lastname: <input type="text" name="lastname" class="form-control"></p>
+        <p>Phonenumber: <input type="text" name="phonenumber" class="form-control"></p>
+        <p>Address: <input type="text" name="Address" class="form-control"></p>
+        <p>Weight: <input type="text" name="weight" class="form-control"></p>
+        <p>Height: <input type="text" name="height" class="form-control"></p>
+        <p>Description: <textarea class="form-control" name="textarea"></textarea></p>
+
+        <input type="submit" value="Create Patient" class="btn btn-info form-control">
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

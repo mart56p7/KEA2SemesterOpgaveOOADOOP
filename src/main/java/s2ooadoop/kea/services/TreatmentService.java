@@ -9,6 +9,7 @@ import s2ooadoop.kea.repositories.TreatmentRepositoryInterface;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -26,6 +27,15 @@ public class TreatmentService {
 			treatment = new Treatment(rs.getInt("id"), rs.getString("name"), rs.getString("note"), getTreatmentMedicines(rs.getInt("id")));
 		}
 		return treatment;
+	}
+
+	public List<Treatment> GetTreatments() throws SQLException {
+		ResultSet rs = TRI.GetTreatments();
+		ArrayList<Treatment> treatments = new ArrayList<>();
+		while (rs.next()) {
+			treatments.add(new Treatment(rs.getInt("id"), rs.getString("name"), rs.getString("note"), getTreatmentMedicines(rs.getInt("id"))));
+		}
+		return treatments;
 	}
 
 	public List<Treatment> GetTreatments(int[] IDS) throws SQLException{
@@ -46,27 +56,18 @@ public class TreatmentService {
 		return MS.getMedicines(ids);
 	}
 
-	public int CreateTreatment(Treatment treatment) {
-		// TODO - implement TreatmentService.CreateTreatment
-		throw new UnsupportedOperationException();
+	public int CreateTreatment(String name, String note, int[] medicine_ids) throws SQLException {
+		return TRI.CreateTreatment(name, note, medicine_ids);
 	}
 
-	/**
-	 * 
-	 * @param treatment
-	 */
-	public void EditTreatment(Treatment treatment) {
-		// TODO - implement TreatmentService.EditTreatment
-		throw new UnsupportedOperationException();
+
+	public void EditTreatment(int ID, String name, String note, int[] medicine_ids) throws SQLException {
+		TRI.EditTreatment(ID, name, note, medicine_ids);
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	public void DeleteTreatment(int ID) {
-		// TODO - implement TreatmentService.DeleteTreatment
-		throw new UnsupportedOperationException();
+
+	public void DeleteTreatment(int ID) throws SQLException {
+		TRI.DeleteTreatment(ID);
 	}
 
 }

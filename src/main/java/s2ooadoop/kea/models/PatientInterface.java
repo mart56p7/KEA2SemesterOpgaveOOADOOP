@@ -12,13 +12,13 @@ public interface PatientInterface {
 	 */
 	void setCPR(int CPR);
 
-	Date getBirthday();
+	int getBirthday();
 
 	/**
 	 * 
 	 * @param Birthday
 	 */
-	void setBirthday(Date Birthday);
+	void setBirthday(int Birthday);
 
 	String getFirstname();
 

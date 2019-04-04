@@ -1,0 +1,18 @@
+<th:block th:include="header.html"></th:block>
+
+<div style="display: block; width: 100%">
+    <a href="/users/create" class="btn btn-primary right">Start Consultation</a>&nbsp;<a href="/users/create" class="btn btn-primary right">New diagnose</a>
+</div>
+
+
+<br/>
+
+<p th:text="${'Name: ' + patient.getFirstname() + ' ' + patient.getLastname()}" style="border-bottom: 1px solid black; font-size: 30px;"></p>
+
+<h1 style="border-bottom: 1px solid black">Consultations</h1><br/>
+
+<h1 style="border-bottom: 1px solid black">Diagnoses</h1><br/>
+<h1 style="border-bottom: 1px solid black">Illness</h1><br/>
+
+
+<th:block th:include="footer.html"></th:block>

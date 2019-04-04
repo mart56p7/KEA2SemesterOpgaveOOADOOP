@@ -1,39 +1,31 @@
 <th:block th:include="header.html"></th:block>
 
-<h1>Edit User</h1><br/>
+<h1>Edit Treatment</h1><br/>
 
-
-<p>To make any changes, please provide the old password</p>
 <div class="form-group">
-    <form method="post" action="/users/edit" class="fw500">
-        <input type="hidden" name="userID" th:value="${user.getID()}">
+    <form method="post" action="/treatments/edit" class="fw500">
+        <input type="hidden" name="id" th:value="${treatment.getID()}">
         <div class="block">
-            <span class="textfield">Username:</span>
-            <input type="text" name="newUsername" th:value="${user.getUsername()}" class="form-control">
+            <span class="textfield">Name:</span>
+            <input type="text" name="name" th:value="${treatment.getName()}" class="form-control">
         </div>
         <div class="block">
-            <span class="textfield">Old password:</span>
-            <input type="password" name="oldPassword" class="form-control">
+            <span class="textfield">Note:</span>
+            <textarea name="note" class="form-control" th:text="${treatment.getNote()}"></textarea>
         </div>
         <div class="block">
-            <span class="textfield">New password:</span>
-            <input type="password" name="newPassword" class="form-control">
-        </div>
-        <div class="block">
-            <span class="textfield">Bruger type:</span>
-            <select size="1" name="userType" class="form-control">
-                <th:block th:switch="${user.getUserType().name()}">
-                    <th:block th:case="'SECRETARY'">
-                        <option value="1" SELECTED>Sekretær</option>
-                        <option value="2">Doktor</option>
+            <span class="textfield">Medicine:</span>
+            <select size="10" name="userType" class="form-control">
+                <th:block th:each="medicine : ${medicines}">
+                    <th:block th:if="${treatment.getMedicine().contains(medicine)}}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}" SELECTED="SELECTED"></option>
                     </th:block>
-                    <th:block th:case="'DOCTOR'">
-                        <option value="1">Sekretær</option>
-                        <option value="2" SELECTED>Doktor</option>
+                    <th:block th:unless="${treatment.getMedicine().contains(medicine)}}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}"></option>
                     </th:block>
                 </th:block>
-
             </select>
+            <p>* Use CTRL to select multiple values</p>
         </div>
         <input type="submit" value="Edit" class="btn btn-info form-control">
     </form>

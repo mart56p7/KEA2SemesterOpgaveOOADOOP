@@ -1,13 +1,22 @@
 <th:block th:include="header.html"></th:block>
 
 
-<h1 class="block">Create User</h1><br/>
+<h1 class="block">Create Treatment</h1><br/>
 
 <div class="form-group">
-    <form method="post" action="/users/create">
-        <p>Username: <input type="text" name="Username" class="form-control"></p>
-        <p>Password: <input type="password" name="Password" class="form-control"></p>
-        <p>Type:  <select size="1" name="userType" class="form-control"><option value="1">Sekretær</option><option value="2">Doktor</option></select></p>
+    <form method="post" action="/treatments/create">
+        <p>Name: <input type="text" name="name" class="form-control"></p>
+        <p>
+            <textarea name="note" class="form-control"></textarea>
+        </p>
+        <p>Medicine:
+            <select size="10" class="form-control">
+                <th:block th:each="medicine : ${medicines}">
+                    <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}"></option>
+                </th:block>
+            </select>
+        </p>
+        <p>* Use CTRL to select multiple values</p>
         <input type="submit" value="Create user" class="btn btn-info form-control">
     </form>
 </div>
