@@ -114,8 +114,12 @@ public class TreatmentController {
             logger.log("User access denied");
             return "users/error";
         }
-//------------------------ ADD MEDICINE ------------------ ////
-        model.addAttribute("medicine", null);
+
+        try {
+            model.addAttribute("medicine", MS.getMedicines());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return "treatments/create";
     }
 
