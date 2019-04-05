@@ -63,12 +63,17 @@ public class DefaultController {
 
     }
 
-    @GetMapping("logout")
+    @GetMapping("/logout")
     public String logout(HttpSession session){
         logger.log("logout(HttpSession session): START");
         session.removeAttribute("user");
         logger.log("logout(HttpSession session): END");
         return "redirect:/";
+    }
+
+    @GetMapping("/help")
+    public String help(HttpSession session){
+        return "help";
     }
 
     @ModelAttribute("userType")

@@ -1,0 +1,26 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Create Consultation</h1>
+    <a th:href="@{/diagnose/create/} + ${patient.getID()}" class="btn btn-primary right" target="_blank">New Diagnose</a>
+    <a th:href="@{/prescription/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Prescription</a>
+</div>
+
+<div class="form-group">
+    <form method="post" action="/consultations/create">
+        <input type="hidden" name="patientid" th:value="${patient.getID()}">
+        <p>Description:<br/>
+            <textarea name="description" class="form-control"></textarea>
+        </p>
+        <p>Conclusion:<br/>
+            <textarea name="conclusion" class="form-control"></textarea>
+        </p>
+        <p>Date: <input type="text" name="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+
+        <input type="submit" value="Create Consultation" class="btn btn-info form-control">
+
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

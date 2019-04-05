@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.*;
+import s2ooadoop.kea.services.ConsultationService;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.PatientService;
 
@@ -16,6 +17,8 @@ import java.util.List;
 public class PatientController {
     @Autowired
     PatientService PS;
+    @Autowired
+    ConsultationService CS;
 
     Logging logger = new Logging("PatientController");
 
@@ -50,6 +53,7 @@ public class PatientController {
         logger.log("showPatient(): START");
         try {
             model.addAttribute("patient", PS.GetPatient(ID));
+            model.addAttribute("consultations", CS.GetActiveConsultations(ID));
             logger.log("showPatient(): END");
             return "patients/info";
         } catch (SQLException e) {
@@ -118,13 +122,92 @@ public class PatientController {
             PS.CreatePatient(patient);
             logger.log("Created patient", 1);
             logger.log("createPatient(@ModelAttribute Patient patient): END");
-            return "redirect:/users/";
+            return "redirect:/patients/";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             logger.log("createPatient(@ModelAttribute Patient patient): END");
-            return "redirect:/users/error";
+            return "redirect:/error";
         }
+    }
 
+    @GetMapping("/patients/edit/{patientID}")
+    public String edit(@PathVariable int patientID, Model model, HttpSession session)
+    {
+        logger.log("edit() : START");
+        if(userType(session) != UserType.DOCTOR)
+        {
+            logger.log("User access denied");
+            return "users/error";
+        }
+        try {
+            model.addAttribute("patient", PS.GetPatient(patientID));
+            logger.log("edit() : END");
+            return "patients/edit";
+        } catch (SQLException e) {
+            logger.log("An error occurred " + e.getMessage(), 1);
+            logger.log("edit() : END");
+            return "users/error";
+        }
+    }
+
+    @PostMapping("/patients/edit")
+    public String editPatient(@ModelAttribute Patient patient,HttpSession session)
+    {
+        logger.log("editPatient(): START");
+        if(userType(session) != UserType.DOCTOR)
+        {
+            logger.log("User access denied");
+            return "users/error";
+        }
+        try {
+            PS.EditPatient(patient);
+
+        } catch (SQLException e) {
+            logger.log("Error " + e.getMessage());
+            logger.log("editPatient(): END");
+            return "redirect:/error";
+        }
+        return "redirect:/patients/info/" + patient.getID();
+    }
+
+    @GetMapping("/patients/delete/{patientID}")
+    public String delete(@PathVariable int patientID, Model model, HttpSession session)
+    {
+        logger.log("delete(): START");
+        if(userType(session) != UserType.DOCTOR)
+        {
+            logger.log("User access denied");
+            return "users/error";
+        }
+        try {
+            model.addAttribute("patient", PS.GetPatient(patientID));
+            logger.log("delete(): END");
+            return "patients/delete";
+        } catch (SQLException e) {
+            logger.log("An error occurred " + e.getMessage(), 1);
+            logger.log("delete(): END");
+            return "redirect:/error";
+        }
+    }
+
+    @PostMapping("/patients/delete")
+    public String deletePatient(@RequestParam(value="id", required=true) int id, HttpSession session)
+    {
+        logger.log("deletePatient(): START");
+        if(userType(session) != UserType.DOCTOR)
+        {
+            logger.log("User access denied");
+            return "users/error";
+        }
+        try {
+            PS.DeletePatient(id);
+            logger.log("deletePatient(): END");
+            return "redirect:/patients/";
+        } catch (SQLException e) {
+            logger.log("deletePatient(): Error " + e.getMessage());
+            logger.log("deletePatient(): END");
+            return "redirect:/error";
+        }
     }
 
     @ModelAttribute("userType")

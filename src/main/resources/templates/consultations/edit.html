@@ -1,0 +1,27 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Edit Consultation</h1>
+</div>
+
+
+
+<div class="form-group">
+    <form method="post" action="/consultations/edit">
+        <input type="hidden" name="patientid" th:value="${patient.getID()}">
+        <input type="hidden" name="consultationid" th:value="${consultation.getID()}">
+        <p>Description:<br/>
+            <textarea name="description" class="form-control" th:text="${consultation.getDescription()}"></textarea>
+        </p>
+        <p>Conclusion:<br/>
+            <textarea name="conclusion" class="form-control" th:text="${consultation.getConclusion()}"></textarea>
+        </p>
+        <p>Date: <input type="text" name="date" th:value="${#dates.format(consultation.getDate(), 'dd/MM yyyy')}" class="form-control"></p>
+
+        <input type="submit" value="Edit Consultation" class="btn btn-info form-control">
+
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

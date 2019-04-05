@@ -1,0 +1,21 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Consultation Info</h1>
+    <a th:href="@{/consultations/edit/} + ${patient.getID()} + '/' + ${consultation.getID()}" class="btn btn-primary right marginright5">Edit</a>
+    <a th:href="@{/consultations/delete/} + ${patient.getID()} + '/' + ${consultation.getID()}" class="btn btn-primary right marginright5">Delete</a>
+
+</div>
+
+<label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>
+<label>Date: </label> <p th:text="${consultation.getDate()}"></p>
+
+<label>Conclusion</label>
+<p class="boxstyle" th:text="${consultation.getConclusion()}"></p>
+<label>Description</label>
+<p class="boxstyle" th:text="${consultation.getDescription()}"></p>
+
+
+
+
+<th:block th:include="footer.html"></th:block>

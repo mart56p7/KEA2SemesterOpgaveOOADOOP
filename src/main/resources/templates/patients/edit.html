@@ -3,15 +3,16 @@
 <h1>Edit Patient</h1><br/>
 
 <div class="form-group">
-    <form method="post" action="/treatments/edit" class="fw500">
-        <p>CPR: <input type="text" name="birthday" class="form-control" th:value="${patient.getBirthday()}"> - <input type="text" name="cpr" class="form-control" placeholder="Last 4" th:value="${patient.getCPR()}"></p>
-        <p>Firstname: <input type="text" name="firstname" class="form-control" th:value="${patient.getFirstname()}"></p>
-        <p>Lastname: <input type="text" name="lastname" class="form-control" th:value="${patient.getLastname()}"></p>
-        <p>Phonenumber: <input type="text" name="phonenumber" class="form-control" th:value="${patient.getPhonenumber()}"></p>
+    <form method="post" action="/patients/edit" class="fw500" modelAttribute="patient">
+        <input type="hidden" name="ID" th:value="${patient.getID()}">
+        <p>CPR: <input type="text" name="Birthday" class="form-control" th:value="${patient.getBirthday()}"> - <input type="text" name="cpr" class="form-control" placeholder="Last 4" th:value="${patient.getCPR()}"></p>
+        <p>Firstname: <input type="text" name="Firstname" class="form-control" th:value="${patient.getFirstname()}"></p>
+        <p>Lastname: <input type="text" name="Lastname" class="form-control" th:value="${patient.getLastname()}"></p>
+        <p>Phonenumber: <input type="text" name="Phonenumber" class="form-control" th:value="${patient.getPhonenumber()}"></p>
         <p>Address: <input type="text" name="Address" class="form-control" th:value="${patient.getAddress()}"></p>
-        <p>Weight: <input type="text" name="weight" class="form-control" th:value="${patient.getWeight()}"></p>
-        <p>Height: <input type="text" name="height" class="form-control" th:value="${patient.getHeight()}"></p>
-        <p>Description: <textarea class="form-control" name="textarea" th:text="${patient.getDescription()}"></textarea></p>
+        <p>Weight: <input type="text" name="Weight" class="form-control" th:value="${patient.getWeight()}"></p>
+        <p>Height: <input type="text" name="Height" class="form-control" th:value="${patient.getHeight()}"></p>
+        <p>Description: <textarea class="form-control" name="Description" th:text="${patient.getDescription()}"></textarea></p>
         <input type="submit" value="Edit" class="btn btn-info form-control">
     </form>
 </div>

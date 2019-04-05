@@ -68,21 +68,6 @@ public class PatientService {
             ));    
         }
         return patients;
-        /*
-        ArrayList<PatientInterface> patients = new ArrayList<PatientInterface>();
-        if(findPatient.equalsIgnoreCase("Oliver") || findPatient.equalsIgnoreCase("Rasmus"))
-        {
-            PatientModel p = new PatientModel();
-            p.setFirstname("Oliver");
-            p.setLastname("Varnild");
-            patients.add(p);
-            p = new PatientModel();
-            p.setFirstname("Rasmus Langelund");
-            p.setLastname("Christensen");
-            patients.add(p);
-        }
-        return patients;
-        */
     }
 
     public PatientInterface GetPatient(int ID) throws SQLException {
@@ -125,31 +110,36 @@ public class PatientService {
         return patients;
     }
 
-    /**
-     *
-     * @param Patient
-     */
-    public int CreatePatient(Patient Patient) throws SQLException {
-        // TODO - implement PatientService.CreatePatient
-        throw new UnsupportedOperationException();
+    public int CreatePatient(Patient patient) throws SQLException {
+        return PRI.CreatePatient(patient.getCPR(),
+                patient.getBirthday(),
+                patient.getFirstname(),
+                patient.getLastname(),
+                patient.getPhonenumber(),
+                patient.getAddress(),
+                patient.getHeight(),
+                patient.getWeight(),
+                patient.getDescription()
+        );
     }
 
-    /**
-     *
-     * @param Patient
-     */
-    public void EditPatient(Patient Patient) throws SQLException {
-        // TODO - implement PatientService.EditPatient
-        throw new UnsupportedOperationException();
+    public void EditPatient(Patient patient) throws SQLException {
+        PRI.EditPatient(
+                patient.getID(),
+                patient.getCPR(),
+                patient.getBirthday(),
+                patient.getFirstname(),
+                patient.getLastname(),
+                patient.getPhonenumber(),
+                patient.getAddress(),
+                patient.getHeight(),
+                patient.getWeight(),
+                patient.getDescription()
+        );
     }
 
-    /**
-     *
-     * @param ID
-     */
     public void DeletePatient(int ID) throws SQLException {
-        // TODO - implement PatientService.DeletePatient
-        throw new UnsupportedOperationException();
+        PRI.DeletePatient(ID);
     }
 
 }

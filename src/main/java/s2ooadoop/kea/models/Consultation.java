@@ -4,80 +4,70 @@ import java.util.Date;
 
 public class Consultation {
 
-	private PatientInterface Patient;
-	private String Description;
-	private String Conclusion;
-	private java.util.Date Date;
-	private int ID;
+	private PatientInterface patient;
+	private String description;
+	private String conclusion;
+	private java.util.Date date;
+	private int id;
 
-	public PatientInterface getPatient() {
-		// TODO - implement Consultation.getPatient
-		throw new UnsupportedOperationException();
+	public Consultation(){
+
 	}
 
-	/**
-	 * 
-	 * @param Patient
-	 */
-	public void setPatient(PatientInterface Patient) {
-		// TODO - implement Consultation.setPatient
-		throw new UnsupportedOperationException();
+	public Consultation(PatientInterface patient, String description, String conclusion, Date date){
+		this(0, patient, description, conclusion, date);
+	}
+
+	public Consultation(int id, PatientInterface patient, String description, String conclusion, Date date){
+		this.id = id;
+		this.patient = patient;
+		this.description = description;
+		this.conclusion = conclusion;
+		this.date = date;
+	}
+
+	public PatientInterface getPatient() {
+		return this.patient;
+	}
+
+	public void setPatient(PatientInterface patient) {
+		this.patient = patient;
 	}
 
 	public String getDescription() {
-		// TODO - implement Consultation.getDescription
-		throw new UnsupportedOperationException();
+		return this.description;
 	}
 
-	/**
-	 * 
-	 * @param Description
-	 */
-	public void setDescription(String Description) {
-		// TODO - implement Consultation.setDescription
-		throw new UnsupportedOperationException();
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getConclusion() {
-		// TODO - implement Consultation.getConclusion
-		throw new UnsupportedOperationException();
+		return this.conclusion;
 	}
 
-	/**
-	 * 
-	 * @param Conclusion
-	 */
-	public void setConclusion(String Conclusion) {
-		// TODO - implement Consultation.setConclusion
-		throw new UnsupportedOperationException();
+	public String getConclusion(int length) {
+		return this.conclusion.substring(0, Math.min(length, conclusion.length()));
+	}
+
+	public void setConclusion(String conclusion) {
+		this.conclusion = conclusion;
 	}
 
 	public Date getDate() {
-		// TODO - implement Consultation.getDate
-		throw new UnsupportedOperationException();
+		return this.date;
 	}
 
-	/**
-	 * 
-	 * @param Date
-	 */
-	public void setDate(Date Date) {
-		// TODO - implement Consultation.setDate
-		throw new UnsupportedOperationException();
+	public void setDate(Date date) {
+		this.date = date;
 	}
 
 	public int getID() {
-		// TODO - implement Consultation.getID
-		throw new UnsupportedOperationException();
+		return this.id;
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	public void setID(int ID) {
-		// TODO - implement Consultation.setID
-		throw new UnsupportedOperationException();
+	public void setID(int id) {
+		this.id = id;
 	}
 
 }

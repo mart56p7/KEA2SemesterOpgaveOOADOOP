@@ -1,18 +1,49 @@
 <th:block th:include="header.html"></th:block>
 
-<div style="display: block; width: 100%">
-    <a href="/users/create" class="btn btn-primary right">Start Consultation</a>&nbsp;<a href="/users/create" class="btn btn-primary right">New diagnose</a>
+<div class="box sectionheader">
+    <th:block th:fragment="patientname">
+        <h1 th:text="'Name: ' +  ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
+    </th:block>
+    <a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right" target="_blank">Start Consultation</a>
+    <a th:href="@{/diagnose/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Diagnose</a>
+    <a th:href="@{/prescription/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Prescription</a>
 </div>
-
 
 <br/>
 
-<p th:text="${'Name: ' + patient.getFirstname() + ' ' + patient.getLastname()}" style="border-bottom: 1px solid black; font-size: 30px;"></p>
+<th:block th:fragment="patientdata">
+    <div class="sectionheader">
+        <h2>Consultations </h2>
+        <a th:href="@{/consultations/}  + ${patient.getID()} " class="btn btn-primary right">View All</a>
+    </div>
+    <th:block th:each="consultation : ${consultations}">
+        <a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getDate()} + ' ' + ${consultation.getConclusion(300)}"></a><br/>
+    </th:block>
 
-<h1 style="border-bottom: 1px solid black">Consultations</h1><br/>
+    <div class="sectionheader">
+        <h2>Diagnoses</h2>
+        <a th:href="@{/diagnoses/}  + ${patient.getID()} " class="btn btn-primary right">View All</a>
+    </div>
+    <th:block th:each="diagnose : ${diagnoses}">
+        <a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getDate()} + ' ' + ${diagnose.getName()}"></a><br/>
+    </th:block>
 
-<h1 style="border-bottom: 1px solid black">Diagnoses</h1><br/>
-<h1 style="border-bottom: 1px solid black">Illness</h1><br/>
+    <div class="sectionheader">
+        <h2>Prescriptions</h2>
+        <a th:href="@{/prescriptions/}  + ${patient.getID()} " class="btn btn-primary right">View All</a>
+    </div>
+    <th:block th:each="prescription : ${prescriptions}">
+        <a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getDate()} + ' ' + ${prescription.getName()}"></a><br/>
+    </th:block>
+</th:block>
 
+<div class="sectionheader">
+    <h2>Patient data</h2>
+</div>
+<label>Phonenumber:</label><p th:text="${patient.getPhonenumber()}"></p>
+<label>Address:</label><p th:text="${patient.getAddress()}"></p>
+<label>Weight:</label><p th:text="${patient.getAddress()}"></p>
+<label>Height:</label><p th:text="${patient.getHeight()}"></p>
+<label>Description:</label><p th:text="${patient.getDescription()}"></p>
 
 <th:block th:include="footer.html"></th:block>

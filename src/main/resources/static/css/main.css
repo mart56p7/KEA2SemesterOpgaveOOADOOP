@@ -116,6 +116,22 @@ h1{
     margin: 0px;
 }
 
+h1.sectionheader {
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
+h2{
+    display: inline-block;
+    padding: 0px;
+    margin: 0px;
+}
+
+h2.sectionheader {
+    border-bottom: 1px solid black;
+    width: 100%;
+}
+
 h2{
     display: inline-block;
     padding: 0px;
@@ -128,6 +144,28 @@ h3{
     margin: 0px;
 }
 
-div.padded5{
+div.sectionheader{
+    width: 100%;
+    border-bottom: 1px solid black;
+}
+
+.padded5{
     padding: 5px;
+}
+
+.marginright5{
+    margin: 5px;
+}
+
+.boxstyle{
+    border: 1px dotted silver;
+}
+
+span.lineseperator{
+    border-bottom: 1px solid black;
+    display: block;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-bottom: 20px;
+
 }

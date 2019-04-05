@@ -51,7 +51,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public void EditPatient(int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description, int ID) throws SQLException {
+    public void EditPatient(int ID, int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description) throws SQLException {
         String sql = "UPDATE patients SET cpr = ?, birthday = ?, firstname = ?, lastname = ?, phonenumber = ?, address = ?, height = ?, weight = ?, description = ? WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, CPR);
@@ -69,7 +69,7 @@ public class PatientRepository implements PatientRepositoryInterface {
 
     @Override
     public void DeletePatient(int ID) throws SQLException {
-        String sql = "DELETE * FROM patients WHERE id = ?";
+        String sql = "DELETE FROM patients WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, ID);
         DB.ExecuteSql(pstmt);

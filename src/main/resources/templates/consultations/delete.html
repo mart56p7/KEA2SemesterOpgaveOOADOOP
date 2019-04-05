@@ -1,0 +1,24 @@
+<th:block th:include="header.html"></th:block>
+
+<h1>Delete Consultation</h1><br/>
+
+<p>You are about to delete the Consultation that happaned on date: </p>
+<p th:text="${consultation.getDate()}"></p>
+<p>That contains the following information</p>
+
+<label>Conclusion:</label>
+<p th:text="${consultation.getConclusion()}"></p>
+
+<label>Description:</label>
+<p th:text="${consultation.getDescription()}"></p>
+<p><br/>Please confirm.</p>
+<div class="form-group">
+    <form method="post" action="/consultations/delete">
+        <input type="hidden" name="consultation_id" th:value="${consultation.getID()}">
+        <input type="hidden" name="patient_id" th:value="${patient.getID()}">
+        <input type="submit" value="Delete" class="btn btn-info form-control">
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>
