@@ -10,6 +10,10 @@ public interface IllnessRepositoryInterface {
 
 	ResultSet GetIllness(int ID) throws SQLException;
 
+	ResultSet GetIllnesses() throws SQLException;
+
+	ResultSet getIllnessTreatmentIds(int ID) throws SQLException;
+
 	int CreateIllness(String Name, int[] TreatmentID) throws SQLException;
 
 	void EditIllness(String Name, int[] TreatmentID, int ID) throws SQLException;
