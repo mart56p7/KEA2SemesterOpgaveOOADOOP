@@ -15,10 +15,10 @@ import java.sql.SQLException;
 @Controller
 public class TreatmentController {
     @Autowired
-    TreatmentService TS;
+    private TreatmentService TS;
 
     @Autowired
-    MedicineService MS;
+    private MedicineService MS;
 
     @Autowired
     private Logging logger;

@@ -52,9 +52,8 @@ public class PatientService {
 
 
         }
-        System.out.println("1");
         List<PatientInterface> patients = new ArrayList<>();
-        while(rs.next()){
+        while(rs != null && rs.next()){
             patients.add(new Patient(
                     rs.getInt("id"),
                     rs.getInt("cpr"),
@@ -68,7 +67,6 @@ public class PatientService {
                     rs.getString("description")
             ));    
         }
-        System.out.println("2");
         return patients;
         /*
         ArrayList<PatientInterface> patients = new ArrayList<PatientInterface>();

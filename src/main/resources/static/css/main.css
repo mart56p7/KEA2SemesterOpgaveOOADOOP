@@ -41,6 +41,10 @@ div.box{
     width: 350px;
 }
 
+div.searchglyph{
+    width: 25px;
+}
+
 form.fw400{
     width: 400px;
 }
@@ -50,11 +54,19 @@ form.fw400_center {
     margin: 0 auto;
 }
 
-form.fw500, form.fw400_center > input, input[type=text],input[type=password], input[type=submit], textarea {
+form.search {
+
+    width: 100%;
+    margin: 0px;
+    padding-left: 0px;
+    padding-top: 40px;
+}
+
+form.fw500, form.fw400_center, form.search > input, input[type=text],input[type=password], input[type=submit], textarea {
     width: 100%;
 }
 
-form.fw500, form.fw400_center > input[type=checkbox],input[type=radiobutton] {
+form.fw500, form.fw400_center, form.search > input[type=checkbox],input[type=radiobutton] {
     width: auto !important;
 }
 
