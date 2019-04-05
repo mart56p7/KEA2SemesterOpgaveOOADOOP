@@ -1,5 +1,6 @@
 package s2ooadoop.kea.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import s2ooadoop.kea.models.Medicine;
 import s2ooadoop.kea.models.MedicineInterface;
@@ -12,7 +13,7 @@ import java.util.List;
 
 @Service
 public class MedicineService {
-
+    @Autowired
 	private MedicineRepositoryInterface MRI;
 
 
