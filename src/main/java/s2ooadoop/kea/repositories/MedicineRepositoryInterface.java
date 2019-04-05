@@ -13,6 +13,7 @@ public interface MedicineRepositoryInterface {
 	void EditMedicine(int ID,String Name)throws SQLException;
 	void DeleteMedicine(int ID)throws SQLException;
 	ResultSet getMedicines(int[] ID)throws SQLException;
+	ResultSet getMedicines() throws SQLException;
 
 
 }

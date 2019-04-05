@@ -26,7 +26,15 @@ public class MedicineRepository implements MedicineRepositoryInterface {
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         return DB.QuerySql(pstmt);
     }
-	@Override
+
+    @Override
+    public ResultSet getMedicines() throws SQLException {
+        String sql = "SELECT * FROM medicine ORDER BY name";
+        PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
+        return DB.QuerySql(pstmt);
+    }
+
+    @Override
 	public int CreateMedicine(String Name) throws SQLException{
         String sql = "INSERT INTO medicine (`Name`) VALUES (?)";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
@@ -48,4 +56,5 @@ public class MedicineRepository implements MedicineRepositoryInterface {
 	    pstmt.setInt(1,ID);
 	    DB.ExecuteSql(pstmt);
 	}
+
 }

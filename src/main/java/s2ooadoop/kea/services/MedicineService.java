@@ -36,6 +36,15 @@ public class MedicineService {
 		}
 		return medicines;
 	}
+	public  List<MedicineInterface> getMedicines() throws SQLException{
+        ResultSet rs = MRI.getMedicines();
+        Medicine medicine = null;
+        List<MedicineInterface> medicines = new ArrayList<>();
+        while (rs.next()){
+            medicines.add(new Medicine(rs.getString("Name"),rs.getInt(("ID"))));
+        }
+        return medicines;
+    }
 
 
 	public int CreateMedicine(Medicine Medicine) throws SQLException {
@@ -49,5 +58,7 @@ public class MedicineService {
 	public void DeleteMedicine(int ID) throws SQLException{
 		MRI.DeleteMedicine(ID);
 	}
+
+
 
 }
