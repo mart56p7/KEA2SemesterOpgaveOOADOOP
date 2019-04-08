@@ -35,8 +35,8 @@ public class ConsultationController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("patient", PS.GetPatient(patientID));
-			model.addAttribute("consultations", CS.GetConsultations(patientID));
+			model.addAttribute("patient", PS.getPatient(patientID));
+			model.addAttribute("consultations", CS.getConsultations(patientID));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -51,9 +51,9 @@ public class ConsultationController {
 			return "users/error";
 		}
 		try {
-			Consultation c = CS.GetConsultation(consultationID);
+			Consultation c = CS.getConsultation(consultationID);
 			model.addAttribute("consultation", c);
-			model.addAttribute("patient", PS.GetPatient(c.getPatient().getID()));
+			model.addAttribute("patient", PS.getPatient(c.getPatient().getID()));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -68,8 +68,8 @@ public class ConsultationController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("patient", PS.GetPatient(patientID));
-			model.addAttribute("consultations", CS.GetActiveConsultations(patientID));
+			model.addAttribute("patient", PS.getPatient(patientID));
+			model.addAttribute("consultations", CS.getActiveConsultations(patientID));
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -93,7 +93,7 @@ public class ConsultationController {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
 				Date dateformatted = format.parse ( date );
-				CS.CreateConsultation(new Consultation(PS.GetPatient(patientid), description, conclusion, dateformatted));
+				CS.CreateConsultation(new Consultation(PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Created consultation", 1);
 			} catch (ParseException e) {
 				logger.log("Error parsing date format");
@@ -110,8 +110,8 @@ public class ConsultationController {
 	}
 
 
-	@GetMapping("/consultations/delete/{patientID}/{consultationID}")
-	public String delete(@PathVariable int patientID, @PathVariable int consultationID, Model model, HttpSession session)
+	@GetMapping("/consultations/delete/{consultationID}")
+	public String delete(@PathVariable int consultationID, Model model, HttpSession session)
 	{
 		logger.log("delete(): START");
 		if(userType(session) != UserType.DOCTOR)
@@ -120,8 +120,9 @@ public class ConsultationController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("consultation", CS.GetConsultation(consultationID));
-			model.addAttribute("patient", PS.GetPatient(patientID));
+			Consultation c =  CS.getConsultation(consultationID);
+			model.addAttribute("consultation", c);
+			model.addAttribute("patient", c.getPatient());
 			logger.log("delete(): END");
 			return "consultations/delete";
 		} catch (SQLException e) {
@@ -153,8 +154,8 @@ public class ConsultationController {
 	}
 
 
-	@GetMapping("/consultations/edit/{patientID}/{consultationID}")
-	public String edit(@PathVariable int patientID, @PathVariable int consultationID, Model model, HttpSession session)
+	@GetMapping("/consultations/edit/{consultationID}")
+	public String edit(@PathVariable int consultationID, Model model, HttpSession session)
 	{
 		logger.log("edit() : START");
 		if(userType(session) != UserType.DOCTOR)
@@ -163,8 +164,10 @@ public class ConsultationController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("patient", PS.GetPatient(patientID));
-			model.addAttribute("consultation", CS.GetConsultation(consultationID));
+			Consultation c = CS.getConsultation(consultationID);
+			model.addAttribute("consultation", c);
+			model.addAttribute("patient", c.getPatient());
+
 			logger.log("edit() : END");
 			return "consultations/edit";
 		} catch (SQLException e) {
@@ -194,7 +197,7 @@ public class ConsultationController {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
 				Date dateformatted = format.parse ( date );
-				CS.EditConsultation(new Consultation(consultationid, PS.GetPatient(patientid), description, conclusion, dateformatted));
+				CS.EditConsultation(new Consultation(consultationid, PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Edited consultation", 1);
 			} catch (ParseException e) {
 				logger.log("Error parsing date format");

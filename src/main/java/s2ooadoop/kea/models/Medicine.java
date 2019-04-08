@@ -15,6 +15,10 @@ public class Medicine implements MedicineInterface {
     }
 
     public String getName() {
+		if(Name == null)
+		{
+			return "";
+		}
 		return Name;
 	}
 
@@ -28,5 +32,9 @@ public class Medicine implements MedicineInterface {
 
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+
+	public boolean equals(Object obj){
+		return (obj instanceof Medicine && getID() == ((Medicine)obj).getID());
 	}
 }

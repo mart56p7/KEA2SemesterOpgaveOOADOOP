@@ -27,7 +27,7 @@ public class MedicineService {
 	}
 	public List<MedicineInterface> getMedicines(int[] ID) throws SQLException{
 	    if(ID == null){
-	        return null;
+	        return  new ArrayList<MedicineInterface>();
         }
 		ResultSet rs = MRI.getMedicines(ID);
 		Medicine medicine = null;

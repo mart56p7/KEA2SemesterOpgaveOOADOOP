@@ -3,17 +3,24 @@
 
 <h1 class="block">Users</h1><a href="/users/create" class="btn btn-primary right">Create User</a><br/>
 
-
-<span class="numfield">ID</span><span class="textfield">Username</span><span class="textfield">Type</span>
-<th:block th:each="user : ${users}">
-    <div class="block">
-        <span class="numfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getID()}"></a></span>
-        <span class="textfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUsername()}"></a></span>
-        <span class="textfield"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUserType().name()}"></a></span>
-        <span class="pencilfield"><a th:href="@{/users/edit/} + ${user.getID()}" class="glyphicon glyphicon-pencil"></a></span>
-        <span class="removefield"><a th:href="@{/users/delete/} + ${user.getID()}" class="glyphicon glyphicon-remove"></a></span>
-    </div>
-</th:block>
+<table class="pdata">
+    <thead>
+        <tr>
+            <th class="pdata">Username</th>
+            <th class="pdata pdata-lp">Type</th>
+            <th class="pdata pdata-lp"></th>
+            <th class="pdata pdata-lp"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="user : ${users}">
+            <td class="pdata"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUsername()}"></a></td>
+            <td class="pdata pdata-lp"><a th:href="@{/users/info/} + ${user.getID()}" th:text="${user.getUserType().name()}"></a></td>
+            <td class="pdata pdata-lp"><a th:href="@{/users/edit/} + ${user.getID()}" class="glyphicon glyphicon-pencil"></a></td>
+            <td class="pdata pdata-lp"><a th:href="@{/users/delete/} + ${user.getID()}" class="glyphicon glyphicon-remove"></a></td>
+        </tr>
+    </tbody>
+</table>
 
 
 <th:block th:include="footer.html"></th:block>

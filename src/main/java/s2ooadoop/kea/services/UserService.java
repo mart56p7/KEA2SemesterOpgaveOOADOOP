@@ -10,14 +10,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+/**
+ * The User service provides users and userstypes for the system.
+ * The user access handling is done in the Controller layer
+ * UserTypes are hardcoded in s2ooadoop.kea.models.UserType
+ * */
 @Service
 public class UserService {
 	@Autowired
 	private UserRepositoryInterface URI;
 
-	public User GetUser(int ID) throws SQLException {
-		ResultSet rs = URI.GetUser(ID);
+	public User getUser(int ID) throws SQLException {
+		ResultSet rs = URI.getUser(ID);
 		User user = null;
 		if (rs.next()) {
 			user = new User(rs.getInt("ID"), rs.getString("Username"), "", rs.getInt("userType"));
@@ -25,8 +29,8 @@ public class UserService {
 		return user;
 	}
 
-	public ArrayList<User> GetUsers() throws SQLException {
-		ResultSet rs = URI.GetUsers();
+	public ArrayList<User> getUsers() throws SQLException {
+		ResultSet rs = URI.getUsers();
 		ArrayList<User> users = new ArrayList<User>();
 		while (rs.next()) {
 			users.add(new User(rs.getInt("ID"), rs.getString("Username"), "", rs.getInt("userType")));
@@ -34,8 +38,8 @@ public class UserService {
 		return users;
 	}
 
-	public User ValidateUser(String name, String password) throws SQLException {
-		ResultSet rs = URI.ValidateUser(name, password);
+	public User validateUser(String name, String password) throws SQLException {
+		ResultSet rs = URI.validateUser(name, password);
 		User user = null;
 		if (rs.next()) {
 			user = new User(rs.getInt("ID"), rs.getString("Username"), "", rs.getInt("userType"));
@@ -55,19 +59,19 @@ public class UserService {
 		return user;
 	}
 
-	public int CreateUser(User User) throws SQLException {
+	public int createUser(User User) throws SQLException {
 		System.out.println(User.getUsername());
 		System.out.println(User.getPassword());
-		System.out.println(User.getUserType().GetID());
-		return URI.CreateUser(User.getUsername(), User.getPassword(), User.getUserType().GetID());
+		System.out.println(User.getUserType().getID());
+		return URI.createUser(User.getUsername(), User.getPassword(), User.getUserType().getID());
 	}
 
-	public void EditUser(User User) throws SQLException {
-		URI.EditUser(User.getID(), User.getUsername(), User.getPassword(), User.getUserType().GetID());
+	public void editUser(User User) throws SQLException {
+		URI.editUser(User.getID(), User.getUsername(), User.getPassword(), User.getUserType().getID());
 	}
 
-	public void DeleteUser(int ID) throws SQLException {
-		URI.DeleteUser(ID);
+	public void deleteUser(int ID) throws SQLException {
+		URI.deleteUser(ID);
 	}
 
 }

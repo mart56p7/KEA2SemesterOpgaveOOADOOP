@@ -10,9 +10,9 @@
             <textarea name="note" class="form-control"></textarea>
         </p>
         <p>Medicine:
-            <select size="10" class="form-control">
+            <select size="10" class="form-control" name="medicine_ids" multiple>
                 <th:block th:each="medicine : ${medicines}">
-                    <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}"></option>
+                    <option th:value="${medicine.getID()}" th:text="${medicine.getName()}"></option>
                 </th:block>
             </select>
         </p>

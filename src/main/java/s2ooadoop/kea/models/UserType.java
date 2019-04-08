@@ -10,14 +10,14 @@ public enum UserType {
     }
 
     private int ID = 0;
-    public int GetID()
+    public int getID()
     {
                 return ID;
     }
 
-    public static UserType GetUserType(int ID){
+    public static UserType getUserType(int ID){
         for (UserType usertype : UserType.values()) {
-            if(ID == usertype.GetID()){
+            if(ID == usertype.getID()){
                 return usertype;
             }
         }

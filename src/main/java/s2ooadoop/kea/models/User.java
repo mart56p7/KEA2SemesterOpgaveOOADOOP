@@ -2,8 +2,8 @@ package s2ooadoop.kea.models;
 
 public class User {
 
-	private String Username;
-	private String Password;
+	private String username;
+	private String password;
 	private UserType userType;
 	private int ID;
 
@@ -11,33 +11,33 @@ public class User {
 
 	public User(int ID, String Username, String Password, UserType userType){
 		this.ID = ID;
-		this.Username = Username;
-		this.Password = Password;
+		this.username = Username;
+		this.password = Password;
 		this.userType = userType;
 	}
 
 	public User(String Username, String Password, int userType){
-		this(0, Username, Password, UserType.GetUserType(userType));
+		this(0, Username, Password, UserType.getUserType(userType));
 	}
 
 	public User(int ID, String Username, String Password, int userType){
-		this(ID, Username, Password, UserType.GetUserType(userType));
+		this(ID, Username, Password, UserType.getUserType(userType));
 	}
 
 	public String getUsername() {
-		return this.Username;
+		return this.username;
 	}
 
 	public void setUsername(String Username) {
-		this.Username = Username;
+		this.username = Username;
 	}
 
 	public String getPassword() {
-		return this.Password;
+		return this.password;
 	}
 
 	public void setPassword(String Password) {
-		this.Password = Password;
+		this.password = Password;
 	}
 
 	public UserType getUserType() {
@@ -55,7 +55,6 @@ public class User {
 	public void setID(int ID) {
 		this.ID = ID;
 	}
-
 
 	public boolean equals(Object obj){
 		return (obj instanceof User && getID() == ((User)obj).getID());

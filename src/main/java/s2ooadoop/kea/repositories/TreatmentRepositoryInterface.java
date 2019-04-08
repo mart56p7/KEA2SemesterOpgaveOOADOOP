@@ -9,11 +9,10 @@ import java.util.List;
 
 @Repository
 public interface TreatmentRepositoryInterface {
-	public ResultSet GetTreatment(int ID) throws SQLException;
-	public ResultSet GetTreatments() throws SQLException;
-	public ResultSet GetTreatments(int[] ids) throws SQLException;
-	public int CreateTreatment(String name, String note, int[] medicines) throws SQLException;
-	public void EditTreatment(int ID, String name, String note, int[] medicines) throws SQLException;
-	public void DeleteTreatment(int ID) throws SQLException;
-	public ResultSet getTreatmentMedicineIds(int ID) throws SQLException;
+	public ResultSet getTreatment(int ID) throws SQLException;
+	public ResultSet getTreatments() throws SQLException;
+	public ResultSet getTreatments(int[] ids) throws SQLException;
+	public int createTreatment(String name, String note, int[] medicines) throws SQLException;
+	public void editTreatment(int ID, String name, String note, int[] medicines) throws SQLException;
+	public void deleteTreatment(int ID) throws SQLException;
 }

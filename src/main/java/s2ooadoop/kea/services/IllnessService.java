@@ -46,7 +46,7 @@ public class IllnessService {
 		for(int i = 0; rs.next(); i++){
 			ids[i] = rs.getInt("treatment_id");
 		}
-		return ts.GetTreatments(ids);
+		return ts.getTreatments(ids);
 	}
 
 	public int CreateIllness(String name, int[] treatment_IDs) throws SQLException {

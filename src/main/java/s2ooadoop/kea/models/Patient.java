@@ -8,125 +8,125 @@ public class Patient implements PatientInterface {
 
 
 	private int ID;
-	@NotEmpty(message="Please provide CPR")
-	private int CPR;
-	@NotEmpty(message="Please provide Birthday")
-	private int Birthday;
+	@NotEmpty(message="Please provide cpr")
+	private int cpr;
+	@NotEmpty(message="Please provide birthday")
+	private int birthday;
 	@NotEmpty(message="Please provide First name")
-	private String Firstname;
+	private String firstname;
 	@NotEmpty(message="Please provide Last name")
-	private String Lastname;
-	private String Phonenumber;
-	private String Address;
-	private float Height;
-	private float Weight;
-	private String Description;
+	private String lastname;
+	private String phonenumber;
+	private String address;
+	private float height;
+	private float weight;
+	private String description;
 
 	public Patient(){
 
 	}
 
-	public Patient(int ID, int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description){
+	public Patient(int ID, int cpr, int birthday, String firstname, String lastname, String phonenumber, String address, float height, float weight, String description){
 		this.ID = ID;
-		this.CPR = CPR;
-		this.Birthday = Birthday;
-		this.Firstname = Firstname;
-		this.Lastname = Lastname;
-		this.Phonenumber = Phonenumber;
-		this.Address = Address;
-		this.Height = Height;
-		this.Weight = Weight;
-		this.Description = Description;
+		this.cpr = cpr;
+		this.birthday = birthday;
+		this.firstname = firstname;
+		this.lastname = lastname;
+		this.phonenumber = phonenumber;
+		this.address = address;
+		this.height = height;
+		this.weight = weight;
+		this.description = description;
 	}
 
 	@Override
 	public int getCPR() {
-		return this.CPR;
+		return this.cpr;
 	}
 
 	@Override
-	public void setCPR(int CPR) {
-		this.CPR = CPR;
+	public void setCPR(int cpr) {
+		this.cpr = cpr;
 	}
 
 	@Override
 	public int getBirthday() {
-		return this.Birthday;
+		return this.birthday;
 	}
 
 	@Override
-	public void setBirthday(int Birthday) {
-		this.Birthday = Birthday;
+	public void setBirthday(int birthday) {
+		this.birthday = birthday;
 	}
 
 	@Override
 	public String getFirstname(){
-		return this.Firstname;
+		return this.firstname;
 	}
 
 	@Override
-	public void setFirstname(String Firstname) {
-		this.Firstname = Firstname;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
 	}
 
 	@Override
 	public String getLastname() {
-		return this.Lastname;
+		return this.lastname;
 	}
 
 	@Override
-	public void setLastname(String Lastname) {
-		this.Lastname = Lastname;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	@Override
 	public String getPhonenumber() {
-		return this.Phonenumber;
+		return this.phonenumber;
 	}
 
 	@Override
-	public void setPhonenumber(String Phonenumber) {
-		this.Phonenumber = Phonenumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 
 	@Override
 	public String getAddress() {
-		return this.Address;
+		return this.address;
 	}
 
 	@Override
-	public void setAddress(String Address) {
-		this.Address = Address;
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	@Override
 	public float getHeight() {
-		return this.Height;
+		return this.height;
 	}
 
 	@Override
 	public void setHeight(float Height) {
-		this.Height = Height;
+		this.height = Height;
 	}
 
 	@Override
 	public float getWeight() {
-		return this.Weight;
+		return this.weight;
 	}
 
 	@Override
-	public void setWeight(float Weight) {
-		this.Weight = Weight;
+	public void setWeight(float weight) {
+		this.weight = weight;
 	}
 
 	@Override
 	public String getDescription() {
-		return this.Description;
+		return this.description;
 	}
 
 	@Override
-	public void setDescription(String Description) {
-		this.Description = Description;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	@Override

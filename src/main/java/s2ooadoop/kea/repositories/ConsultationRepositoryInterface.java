@@ -10,12 +10,12 @@ import java.util.Date;
 @Repository
 public interface ConsultationRepositoryInterface {
 
-	ResultSet GetConsultation(int ID) throws SQLException;
-	ResultSet GetConsultations(int personID) throws SQLException;
+	ResultSet getConsultation(int ID) throws SQLException;
+	ResultSet getConsultations(int personID) throws SQLException;
 	//Contains Consultations where its less than 1 year since the consultation
-	ResultSet GetActiveConsultations(int personID) throws SQLException;
+	ResultSet getActiveConsultations(int personID) throws SQLException;
 
-	int CreateConsultation(int PatientID, String Description, String Conclusion, Date Date) throws SQLException;
-	void EditConsultation(int ID, int PatientID, String Description, String Conclusion, Date Date) throws SQLException;
-	void DeleteConsultation(int ID) throws SQLException;
+	int createConsultation(int PatientID, String Description, String Conclusion, Date Date) throws SQLException;
+	void editConsultation(int ID, int PatientID, String Description, String Conclusion, Date Date) throws SQLException;
+	void deleteConsultation(int ID) throws SQLException;
 }

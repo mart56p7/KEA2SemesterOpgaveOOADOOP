@@ -3,7 +3,6 @@ package s2ooadoop.kea.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import s2ooadoop.kea.models.Patient;
-import s2ooadoop.kea.models.PatientModel;
 import s2ooadoop.kea.models.PatientInterface;
 import s2ooadoop.kea.repositories.PatientRepositoryInterface;
 
@@ -12,13 +11,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The PatientService contains core patient functionality. (CRUD / GET single or all patients)
+ * */
 @Service
 public class PatientService {
     @Autowired
     PatientRepositoryInterface PRI;
 
     public List<PatientInterface> findPatient(String findPatient) throws SQLException {
-        System.out.println("SERVICE findPatient: " + findPatient);
         //Termer en bruger kan søge efter for at finde en patient. Fuldt navn, delvist navn, fuldt CPR nummer, eller sidste 4 cifre i CPR nummer.
         //if findPatient = 4 digits and is a number search for CPR PRI.findPatientFromCPR
         //if findPatient = 10 digits search for birthday + cpr PRI.findPatientFromBirthdayCPR
@@ -28,14 +30,17 @@ public class PatientService {
         {
             try
             {
-                int intvalue = Integer.parseInt(findPatient);
+
                 if(findPatient.length() == 4)
                 {
+                    int intvalue = Integer.parseInt(findPatient);
                     rs = PRI.findPatientFromCPR(intvalue);
                 }
-                else if(findPatient.length() == 4)
+                else if(findPatient.length() == 10)
                 {
-                    rs = PRI.findPatientFromBirthdayCPR(intvalue);
+                    int cpr = Integer.parseInt(findPatient.substring(0, 4));
+                    int birthday = Integer.parseInt(findPatient.substring(4, 10));
+                    rs = PRI.findPatientFromBirthdayCPR(birthday, cpr);
                 }
                 else
                 {
@@ -70,8 +75,8 @@ public class PatientService {
         return patients;
     }
 
-    public PatientInterface GetPatient(int ID) throws SQLException {
-        ResultSet rs = PRI.GetPatient(ID);
+    public PatientInterface getPatient(int ID) throws SQLException {
+        ResultSet rs = PRI.getPatient(ID);
         Patient patient = null;
         if (rs.next()) {
             patient = new Patient(
@@ -90,8 +95,8 @@ public class PatientService {
         return patient;
     }
 
-    public List<PatientInterface> GetPatients(String SortBy, boolean asc) throws SQLException{
-        ResultSet rs = PRI.GetPatients(SortBy, asc);
+    public List<PatientInterface> getPatients(String SortBy, boolean asc) throws SQLException{
+        ResultSet rs = PRI.getPatients(SortBy, asc);
         ArrayList<PatientInterface> patients = new ArrayList<>();
         while (rs.next()) {
             patients.add( new Patient(
@@ -110,8 +115,8 @@ public class PatientService {
         return patients;
     }
 
-    public int CreatePatient(Patient patient) throws SQLException {
-        return PRI.CreatePatient(patient.getCPR(),
+    public int createPatient(Patient patient) throws SQLException {
+        return PRI.createPatient(patient.getCPR(),
                 patient.getBirthday(),
                 patient.getFirstname(),
                 patient.getLastname(),
@@ -123,8 +128,8 @@ public class PatientService {
         );
     }
 
-    public void EditPatient(Patient patient) throws SQLException {
-        PRI.EditPatient(
+    public void editPatient(Patient patient) throws SQLException {
+        PRI.editPatient(
                 patient.getID(),
                 patient.getCPR(),
                 patient.getBirthday(),
@@ -138,8 +143,8 @@ public class PatientService {
         );
     }
 
-    public void DeletePatient(int ID) throws SQLException {
-        PRI.DeletePatient(ID);
+    public void deletePatient(int ID) throws SQLException {
+        PRI.deletePatient(ID);
     }
 
 }

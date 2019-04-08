@@ -2,8 +2,8 @@
 
 <div class="box sectionheader">
     <h1>Consultation Info</h1>
-    <a th:href="@{/consultations/edit/} + ${patient.getID()} + '/' + ${consultation.getID()}" class="btn btn-primary right marginright5">Edit</a>
-    <a th:href="@{/consultations/delete/} + ${patient.getID()} + '/' + ${consultation.getID()}" class="btn btn-primary right marginright5">Delete</a>
+    <a th:href="@{/consultations/edit/} + ${consultation.getID()}" class="btn btn-primary right marginright5">Edit</a>
+    <a th:href="@{/consultations/delete/} + ${consultation.getID()}" class="btn btn-primary right marginright5">Delete</a>
 
 </div>
 

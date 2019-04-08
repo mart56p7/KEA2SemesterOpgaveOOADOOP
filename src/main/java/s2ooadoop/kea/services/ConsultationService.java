@@ -10,6 +10,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A consultation is done between a doctor and a patient.
+ * After the consultation is done, the consiltation containing
+ * Description
+ * Conclusion
+ * Date
+ *
+ * is saved, referring to the patient
+ * */
+
 @Service
 public class ConsultationService {
 
@@ -18,16 +28,17 @@ public class ConsultationService {
 	@Autowired
 	private PatientService PS;
 
-	public List<Consultation> GetActiveConsultations(int personID) throws SQLException {
-		ResultSet rs = KRI.GetActiveConsultations(personID);
+	/**
+	 * Active consultations, are consultations that are less than 12 months old.
+	 * */
+	public List<Consultation> getActiveConsultations(int patientID) throws SQLException {
+		ResultSet rs = KRI.getActiveConsultations(patientID);
 		ArrayList<Consultation> consultations = new ArrayList<>();
-		System.out.println("GOT" + personID);
 		while (rs.next()) {
-			System.out.println("RETURNING" + rs.getInt("id"));
 			consultations.add(
 					new Consultation(
 							rs.getInt("id"),
-							PS.GetPatient(rs.getInt("patient_id")),
+							PS.getPatient(rs.getInt("patient_id")),
 							rs.getString("description"),
 							rs.getString("conclusion"),
 							rs.getDate("date"))
@@ -36,14 +47,14 @@ public class ConsultationService {
 		return consultations;
 	}
 
-	public List<Consultation> GetConsultations(int personID) throws SQLException {
-		ResultSet rs = KRI.GetConsultations(personID);
+	public List<Consultation> getConsultations(int patientID) throws SQLException {
+		ResultSet rs = KRI.getConsultations(patientID);
 		ArrayList<Consultation> consultations = new ArrayList<>();
 		while (rs.next()) {
 			consultations.add(
 					new Consultation(
 							rs.getInt("id"),
-							PS.GetPatient(rs.getInt("patient_id")),
+							PS.getPatient(rs.getInt("patient_id")),
 							rs.getString("description"),
 							rs.getString("conclusion"),
 							rs.getDate("date"))
@@ -54,13 +65,13 @@ public class ConsultationService {
 
 
 
-	public Consultation GetConsultation(int ID) throws SQLException {
-		ResultSet rs = KRI.GetConsultation(ID);
+	public Consultation getConsultation(int ID) throws SQLException {
+		ResultSet rs = KRI.getConsultation(ID);
 		Consultation consultation = null;
 		if (rs.next()) {
 			consultation = new Consultation(
 							rs.getInt("id"),
-							PS.GetPatient(rs.getInt("patient_id")),
+							PS.getPatient(rs.getInt("patient_id")),
 							rs.getString("description"),
 							rs.getString("conclusion"),
 							rs.getDate("date"));
@@ -69,15 +80,15 @@ public class ConsultationService {
 	}
 
 	public int CreateConsultation(Consultation consultation) throws SQLException {
-		return KRI.CreateConsultation(consultation.getPatient().getID(), consultation.getDescription(), consultation.getConclusion(), consultation.getDate());
+		return KRI.createConsultation(consultation.getPatient().getID(), consultation.getDescription(), consultation.getConclusion(), consultation.getDate());
 	}
 
 	public void EditConsultation(Consultation consultation) throws SQLException {
-		KRI.EditConsultation(consultation.getID(), consultation.getPatient().getID(), consultation.getDescription(), consultation.getConclusion(), consultation.getDate());
+		KRI.editConsultation(consultation.getID(), consultation.getPatient().getID(), consultation.getDescription(), consultation.getConclusion(), consultation.getDate());
 	}
 
 	public void DeleteConsultation(int ID) throws SQLException {
-		KRI.DeleteConsultation(ID);
+		KRI.deleteConsultation(ID);
 	}
 
 }

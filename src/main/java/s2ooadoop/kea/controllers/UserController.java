@@ -32,7 +32,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("users", US.GetUsers());
+			model.addAttribute("users", US.getUsers());
 			logger.log("index(Model model): END");
 			return "users/index";
 		} catch (SQLException e) {
@@ -53,7 +53,7 @@ public class UserController {
 		}
 		try
 		{
-			model.addAttribute("users", US.GetUsers());
+			model.addAttribute("users", US.getUsers());
 			logger.log("index2(Model model): END");
 			return "users/index";
 		} catch (SQLException e) {
@@ -84,7 +84,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			US.CreateUser(new User(Username, Password, userType));
+			US.createUser(new User(Username, Password, userType));
 			logger.log("Created user", 1);
 			logger.log("createUser(@ModelAttribute User user): END");
 			return "redirect:/users/";
@@ -106,7 +106,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("user", US.GetUser(userID));
+			model.addAttribute("user", US.getUser(userID));
 			logger.log("edit(@PathVariable int userID, Model model) : END");
 			return "users/edit";
 		} catch (SQLException e) {
@@ -133,18 +133,18 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			User user = US.ValidateUser(US.GetUser(userID).getUsername(), oldPassword);
+			User user = US.validateUser(US.getUser(userID).getUsername(), oldPassword);
 
 			if(user != null)
 			{
 				logger.log("User validation success new username: " + newUsername, 1);
-				US.EditUser(new User(userID, newUsername, newPassword, UserType.GetUserType(userType)));
+				US.editUser(new User(userID, newUsername, newPassword, UserType.getUserType(userType)));
 				logger.log("editUser(@ModelAttribute User user, @ModelAttribute int userID): END");
 				return "redirect:/users/info/" + Integer.toString(userID);
 			}
 			else
 			{
-				logger.log("User validation failed username: " + US.GetUser(userID).getUsername(), 1);
+				logger.log("User validation failed username: " + US.getUser(userID).getUsername(), 1);
 				logger.log("editUser(@ModelAttribute User user, @ModelAttribute int userID): END");
 				return "redirect:/users/edit/" + Integer.toString(userID);
 			}
@@ -167,7 +167,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			model.addAttribute("user", US.GetUser(userID));
+			model.addAttribute("user", US.getUser(userID));
 			logger.log("delete(@PathVariable int userID): END");
 			return "users/delete";
 		} catch (SQLException e) {
@@ -187,7 +187,7 @@ public class UserController {
 			return "users/error";
 		}
 		try {
-			US.DeleteUser(id);
+			US.deleteUser(id);
 			logger.log("deleteUser(@ModelAttribute int userID): END");
 			return "redirect:/users/";
 		} catch (SQLException e) {
@@ -213,7 +213,7 @@ public class UserController {
 		}
 		logger.log("showUser(@RequestParam(value=\"userID\", required=true) int userID, Model model): START");
 		try {
-			model.addAttribute("user", US.GetUser(userID));
+			model.addAttribute("user", US.getUser(userID));
 			logger.log("showUser(@RequestParam(value=\"userID\", required=true) int userID, Model model): END");
 			return "users/info";
 		} catch (SQLException e) {

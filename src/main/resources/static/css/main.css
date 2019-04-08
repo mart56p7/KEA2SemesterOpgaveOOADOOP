@@ -169,3 +169,19 @@ span.lineseperator{
     margin-bottom: 20px;
 
 }
+
+table.pdata{
+    border-collapse:collapse;
+}
+
+th.pdata{
+    font-weight: bold;
+}
+
+td.pdata{
+    vertical-align: top;
+}
+
+td.pdata-lp, th.pdata-lp{
+    padding-left: 10px;
+}

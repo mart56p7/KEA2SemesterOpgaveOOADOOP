@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import s2ooadoop.kea.models.Treatment;
 import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.MedicineService;
@@ -32,7 +33,7 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-            model.addAttribute("treatments", TS.GetTreatments());
+            model.addAttribute("treatments", TS.getTreatments());
             logger.log("index(Model model): END");
             return "treatments/index";
         } catch (SQLException e) {
@@ -58,7 +59,7 @@ public class TreatmentController {
         }
         logger.log("showTreatment(@PathVariable int treatmentID, Model model): START");
         try {
-            model.addAttribute("treatment", TS.GetTreatment(treatmentID));
+            model.addAttribute("treatment", TS.getTreatment(treatmentID));
             logger.log("showTreatment(@PathVariable int treatmentID, Model model): END");
             return "treatments/info";
         } catch (SQLException e) {
@@ -78,7 +79,7 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-            model.addAttribute("treatment", TS.GetTreatment(treatmentID));
+            model.addAttribute("treatment", TS.getTreatment(treatmentID));
             logger.log("delete(@PathVariable int treatmentID): END");
             return "treatments/delete";
         } catch (SQLException e) {
@@ -98,7 +99,7 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-            TS.DeleteTreatment(id);
+            TS.deleteTreatment(id);
             logger.log("deleteTreatment(@ModelAttribute int treatmentID): END");
             return "treatments/";
         } catch (SQLException e) {
@@ -134,7 +135,7 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-            TS.CreateTreatment(name, note, medicine_ids);
+            TS.createTreatment(name, note, medicine_ids);
             logger.log("Created treatment", 1);
             logger.log("createTreatment(): END");
             return "redirect:/treatments/";
@@ -158,9 +159,18 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-//------------------------ ADD MEDICINE ------------------ ////
-            model.addAttribute("medicine", null);
-            model.addAttribute("treatment", TS.GetTreatment(treatmentID));
+            Treatment t = TS.getTreatment(treatmentID);
+            if(t == null){
+                System.out.println("NULL 1");
+            }
+            else{
+                if(((Treatment) t).getMedicine() == null){
+                    System.out.println("NULL 2");
+                }}
+            model.addAttribute("medicines", MS.getMedicines());
+            model.addAttribute("treatment", TS.getTreatment(treatmentID));
+
+
             logger.log("edit(@PathVariable int treatmentID, Model model) : END");
             return "treatments/edit";
         } catch (SQLException e) {
@@ -186,7 +196,7 @@ public class TreatmentController {
             return "users/error";
         }
         try {
-            TS.EditTreatment(ID, name, note, medicine_ids);
+            TS.editTreatment(ID, name, note, medicine_ids);
             logger.log("Treatment with " + ID + " edited");
 
         } catch (SQLException e) {

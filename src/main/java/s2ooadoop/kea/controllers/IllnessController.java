@@ -110,7 +110,7 @@ public class IllnessController {
             return "users/error";
         }
         try {
-            model.addAttribute("treatments", TS.GetTreatments());
+            model.addAttribute("treatments", TS.getTreatments());
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -150,7 +150,7 @@ public class IllnessController {
         try {
 //------------------------ ADD TREATMENT ------------------ ////
             model.addAttribute("illness", IS.getIllness(illnessID));
-            model.addAttribute("treatments", TS.GetTreatments());
+            model.addAttribute("treatments", TS.getTreatments());
             logger.log("edit(@PathVariable int illnessID, Model model) : END");
             return "illnesses/edit";
         } catch (SQLException e) {

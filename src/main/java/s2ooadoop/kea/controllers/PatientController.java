@@ -3,7 +3,6 @@ package s2ooadoop.kea.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.*;
 import s2ooadoop.kea.services.ConsultationService;
@@ -11,7 +10,6 @@ import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.PatientService;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -32,7 +30,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            model.addAttribute("patients", PS.GetPatients("id", true));
+            model.addAttribute("patients", PS.getPatients("id", true));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -54,8 +52,8 @@ public class PatientController {
         }
         logger.log("showPatient(): START");
         try {
-            model.addAttribute("patient", PS.GetPatient(ID));
-            model.addAttribute("consultations", CS.GetActiveConsultations(ID));
+            model.addAttribute("patient", PS.getPatient(ID));
+            model.addAttribute("consultations", CS.getActiveConsultations(ID));
             logger.log("showPatient(): END");
             return "patients/info";
         } catch (SQLException e) {
@@ -121,7 +119,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            PS.CreatePatient(patient);
+            PS.createPatient(patient);
             logger.log("Created patient", 1);
             logger.log("createPatient(@ModelAttribute Patient patient): END");
             return "redirect:/patients/";
@@ -142,7 +140,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            model.addAttribute("patient", PS.GetPatient(patientID));
+            model.addAttribute("patient", PS.getPatient(patientID));
             logger.log("edit() : END");
             return "patients/edit";
         } catch (SQLException e) {
@@ -162,7 +160,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            PS.EditPatient(patient);
+            PS.editPatient(patient);
 
         } catch (SQLException e) {
             logger.log("Error " + e.getMessage());
@@ -182,7 +180,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            model.addAttribute("patient", PS.GetPatient(patientID));
+            model.addAttribute("patient", PS.getPatient(patientID));
             logger.log("delete(): END");
             return "patients/delete";
         } catch (SQLException e) {
@@ -202,7 +200,7 @@ public class PatientController {
             return "users/error";
         }
         try {
-            PS.DeletePatient(id);
+            PS.deletePatient(id);
             logger.log("deletePatient(): END");
             return "redirect:/patients/";
         } catch (SQLException e) {

@@ -3,16 +3,21 @@
 
 <h1 class="block">Treatments</h1><a href="/treatments/create" class="btn btn-primary right">Create Treatment</a><br/>
 
-
-<span class="numfield">ID</span><span class="textfield300">Name</span>
-<th:block th:each="treatment : ${treatments}">
-    <div class="block">
-        <span class="numfield"><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getID()}"></a></span>
-        <span class="textfield300"><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getName()}"></a></span>
-        <span class="pencilfield"><a th:href="@{/treatments/edit/} + ${treatment.getID()}" class="glyphicon glyphicon-pencil"></a></span>
-        <span class="removefield"><a th:href="@{/treatments/delete/} + ${treatment.getID()}" class="glyphicon glyphicon-remove"></a></span>
-    </div>
-</th:block>
-
+<table class="pdata">
+    <thead>
+    <tr>
+        <th class="pdata">Treatment</th>
+        <th class="pdata pdata-lp"></th>
+        <th class="pdata pdata-lp"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="treatment : ${treatments}">
+        <td class="pdata"><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getName()}"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/treatments/edit/} + ${treatment.getID()}" class="glyphicon glyphicon-pencil"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/treatments/delete/} + ${treatment.getID()}" class="glyphicon glyphicon-remove"></a></td>
+    </tr>
+    </tbody>
+</table>
 
 <th:block th:include="footer.html"></th:block>

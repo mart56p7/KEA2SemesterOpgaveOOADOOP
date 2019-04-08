@@ -15,13 +15,13 @@
         </div>
         <div class="block">
             <span class="textfield">Medicine:</span>
-            <select size="10" name="userType" class="form-control">
+            <select size="10" name="medicine_ids" class="form-control" multiple>
                 <th:block th:each="medicine : ${medicines}">
-                    <th:block th:if="${treatment.getMedicine().contains(medicine)}}">
-                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}" SELECTED="SELECTED"></option>
+                    <th:block th:if="${treatment.getMedicine().contains(medicine)}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}" SELECTED></option>
                     </th:block>
-                    <th:block th:unless="${treatment.getMedicine().contains(medicine)}}">
-                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}}"></option>
+                    <th:block th:unless="${treatment.getMedicine().contains(medicine)}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}"></option>
                     </th:block>
                 </th:block>
             </select>

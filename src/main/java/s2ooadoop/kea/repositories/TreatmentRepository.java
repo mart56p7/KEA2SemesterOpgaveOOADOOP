@@ -2,17 +2,15 @@ package s2ooadoop.kea.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import s2ooadoop.kea.models.MedicineInterface;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
 @Repository
 public class TreatmentRepository  implements TreatmentRepositoryInterface{
 
-	//@Autowired
+	@Autowired
 	private Database DB;
 
 	public TreatmentRepository(){
@@ -20,47 +18,62 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 	}
 
 	@Override
-	public ResultSet GetTreatment(int ID) throws SQLException {
-		String sql = "SELECT * FROM treatment WHERE id  = ?";
+	public ResultSet getTreatment(int ID) throws SQLException {
+		String sql = "SELECT treatment.id AS treatment_id, " +
+						"treatment.name AS treatment_name, " +
+						"treatment.note AS treatment_note, " +
+						"medicine.id AS medicine_id, " +
+						"medicine.name AS medicine_name " +
+						"FROM treatment " +
+						"LEFT JOIN treatmentmedicine ON treatment.id = treatmentmedicine.treatment_id " +
+						"LEFT JOIN medicine ON medicine_id = medicine.id " +
+						"WHERE treatment.id = ? ORDER BY medicine.name";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setInt(1, ID);
 		return DB.QuerySql(pstmt);
 	}
 
 	@Override
-	public ResultSet GetTreatments() throws SQLException {
-		String sql = "SELECT * FROM treatment ORDER BY name";
-		System.out.println("1");
-		if(DB == null){
-			System.out.println("DB = null");
-		}
-		if(DB.CreateConnectionR() == null){
-			System.out.println("DB.CreateConnectionR() = null");
-		}
+	public ResultSet getTreatments() throws SQLException {
+		String sql = "SELECT treatment.id AS treatment_id, " +
+				"treatment.name AS treatment_name, " +
+				"treatment.note AS treatment_note, " +
+				"medicine.id AS medicine_id, " +
+				"medicine.name AS medicine_name " +
+				"FROM treatment " +
+				"LEFT JOIN treatmentmedicine ON treatment.id = treatmentmedicine.treatment_id " +
+				"LEFT JOIN medicine ON medicine_id = medicine.id " +
+				"ORDER BY treatment.id, medicine.name";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
-		System.out.println("2");
 		return DB.QuerySql(pstmt);
 	}
 
 	@Override
-	public ResultSet GetTreatments(int[] ids) throws SQLException {
+	public ResultSet getTreatments(int[] ids) throws SQLException {
 		if(ids == null || ids.length == 0) { return null; }
 		String idslist = "";
 		for (int id : ids) {
 			idslist += "?,";
 		}
 		idslist = idslist.substring(0, idslist.length()-1);
-		String sql = "SELECT * FROM treatment WHERE id IN (" + idslist + ") ORDER BY name";
+		String sql = "SELECT treatment.id AS treatment_id, " +
+				"treatment.name AS treatment_name, " +
+				"treatment.note AS treatment_note, " +
+				"medicine.id AS medicine_id, " +
+				"medicine.name AS medicine_name " +
+				"FROM treatment " +
+				"LEFT JOIN treatmentmedicine ON treatment.id = treatmentmedicine.treatment_id " +
+				"LEFT JOIN medicine ON medicine_id = medicine.id " +
+				"WHERE treatment.id IN (" + idslist + ") ORDER BY treatment.id, medicine.name";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		for (int i = 1; i < ids.length+1; i++) {
 			pstmt.setInt(i, ids[i-1]);
 		}
-		System.out.println(pstmt.toString());
 		return DB.QuerySql(pstmt);
 	}
 
 	@Override
-	public int CreateTreatment(String name, String note, int[] medicines) throws SQLException {
+	public int createTreatment(String name, String note, int[] medicines) throws SQLException {
 		String sql = "INSERT INTO treatment (`name`, `note`) VALUES (?, ?)";
 		PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 		pstmt.setString(1, name);
@@ -71,7 +84,7 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 	}
 
 	@Override
-	public void EditTreatment(int ID, String name, String note, int[] medicines) throws SQLException {
+	public void editTreatment(int ID, String name, String note, int[] medicines) throws SQLException {
 		String sql = "UPDATE treatment SET name = ?, note = ? WHERE id = ?";
 		PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 		pstmt.setString(1, name);
@@ -83,7 +96,7 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 
 
 	@Override
-	public void DeleteTreatment(int ID) throws SQLException {
+	public void deleteTreatment(int ID) throws SQLException {
 		String sql = "DELETE FROM treatment WHERE id = ?";
 		PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 		pstmt.setInt(1, ID);
@@ -101,10 +114,10 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 	private void CreateTreatmentMedicine(int treatment_id, int[] medicine_ids) throws SQLException{
 		if(medicine_ids == null){ return; }
 		for(int i = 0; i < medicine_ids.length; i++){
-			String sql = "INSERT INTO treatementmedicine (`threatment_id`, `medicine_id`) VALUES (?, ?)";
+			String sql = "INSERT INTO treatmentmedicine (`treatment_id`, `medicine_id`) VALUES (?, ?)";
 			PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 			pstmt.setInt(1, treatment_id);
-			pstmt.setInt(1, medicine_ids[i]);
+			pstmt.setInt(2, medicine_ids[i]);
 			DB.ExecuteSql(pstmt);
 		}
 	}

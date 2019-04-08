@@ -13,7 +13,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     private Database DB;
 
     @Override
-    public ResultSet GetPatient(int ID) throws SQLException {
+    public ResultSet getPatient(int ID) throws SQLException {
         String sql = "SELECT * FROM patients WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, ID);
@@ -21,7 +21,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public ResultSet GetPatients(String SortBy, boolean asc) throws SQLException {
+    public ResultSet getPatients(String SortBy, boolean asc) throws SQLException {
         String sql = "SELECT * FROM patients ORDER BY ? ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setString(1, SortBy);
@@ -35,7 +35,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public int CreatePatient(int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description) throws SQLException {
+    public int createPatient(int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description) throws SQLException {
         String sql = "INSERT INTO patients (`cpr`, `birthday`, `firstname`, `lastname`, `phonenumber`, `address`, `height`, `weight`, `description`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, CPR);
@@ -51,7 +51,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public void EditPatient(int ID, int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description) throws SQLException {
+    public void editPatient(int ID, int CPR, int Birthday, String Firstname, String Lastname, String Phonenumber, String Address, float Height, float Weight, String Description) throws SQLException {
         String sql = "UPDATE patients SET cpr = ?, birthday = ?, firstname = ?, lastname = ?, phonenumber = ?, address = ?, height = ?, weight = ?, description = ? WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, CPR);
@@ -68,7 +68,7 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public void DeletePatient(int ID) throws SQLException {
+    public void deletePatient(int ID) throws SQLException {
         String sql = "DELETE FROM patients WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, ID);
@@ -84,10 +84,11 @@ public class PatientRepository implements PatientRepositoryInterface {
     }
 
     @Override
-    public ResultSet findPatientFromBirthdayCPR(int BirthdayCPR) throws SQLException {
-        String sql = "SELECT * FROM patients WHERE conbat(birthday, cpr) = ?";
+    public ResultSet findPatientFromBirthdayCPR(int birthday, int cpr) throws SQLException {
+        String sql = "SELECT * FROM patients WHERE birthday=? and cpr=?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
-        pstmt.setInt(1, BirthdayCPR);
+        pstmt.setInt(1, birthday);
+        pstmt.setInt(2, cpr);
         return DB.QuerySql(pstmt);
     }
 

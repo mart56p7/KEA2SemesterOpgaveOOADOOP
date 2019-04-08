@@ -14,7 +14,7 @@ public class UserRepository implements UserRepositoryInterface {
 	private Database DB;
 
 	@Override
-	public ResultSet GetUser(int ID) throws SQLException {
+	public ResultSet getUser(int ID) throws SQLException {
 		String sql = "SELECT * FROM users WHERE id = ?";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setInt(1, ID);
@@ -22,14 +22,14 @@ public class UserRepository implements UserRepositoryInterface {
 	}
 
 	@Override
-	public ResultSet GetUsers() throws SQLException{
+	public ResultSet getUsers() throws SQLException{
 		String sql = "SELECT * FROM users ORDER BY id";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		return DB.QuerySql(pstmt);
 	}
 
 	@Override
-	public ResultSet ValidateUser(String Username, String Password) throws SQLException {
+	public ResultSet validateUser(String Username, String Password) throws SQLException {
 		String sql = "SELECT * FROM users WHERE username = ? and password = md5(?)";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setString(1, Username);
@@ -38,7 +38,7 @@ public class UserRepository implements UserRepositoryInterface {
 	}
 
 	@Override
-	public int CreateUser(String Username, String Password, int UserType) throws SQLException {
+	public int createUser(String Username, String Password, int UserType) throws SQLException {
 		String sql = "INSERT INTO users (`username`, `password`, `usertype`) VALUES (?, md5(?), ?)";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setString(1, Username);
@@ -48,7 +48,7 @@ public class UserRepository implements UserRepositoryInterface {
 	}
 
 	@Override
-	public void EditUser(int ID, String Username, String Password, int UserType) throws SQLException {
+	public void editUser(int ID, String Username, String Password, int UserType) throws SQLException {
 		String sql = "UPDATE users SET `username` = ?, `password` = md5(?), `usertype` = ? WHERE id = ?";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setString(1, Username);
@@ -59,7 +59,7 @@ public class UserRepository implements UserRepositoryInterface {
 	}
 
 	@Override
-	public void DeleteUser(int ID) throws SQLException {
+	public void deleteUser(int ID) throws SQLException {
 		String sql = "DELETE FROM  users WHERE id = ?";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setInt(1, ID);

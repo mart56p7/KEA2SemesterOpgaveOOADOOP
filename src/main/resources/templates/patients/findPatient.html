@@ -16,7 +16,7 @@
 <th:block th:if="${patients?.size() == 0}">
     <br/><br/>No result was returned for your query
 </th:block>
-<th:block th:unless="${patients?.size() == 0}">
+<th:block th:if="${patients?.size() > 0}">
     <br/><br/>We found the following patients matching your search query:<br/>
 </th:block>
 <th:block th:each="patient : ${patients}">

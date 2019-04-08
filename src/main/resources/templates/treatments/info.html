@@ -6,9 +6,9 @@
 <p>Name: </p><p th:text="${treatment.getName()}"></p>
 <p>Note: </p><p th:text="${treatment.getNote()}"></p>
 <p>Medicine:
-    <th:block th:each="medicine : ${treatment.getMedicine()}">
-        <p th:if="${medicine != null}" th:text="${medicine.getName()}"></p>
-        <p th:unless="${medicine != null}">None</p>
-    </th:block>
+<p th:if="${treatment.getMedicine().size() == 0}">None</p>
+<th:block th:each="medicine : ${treatment.getMedicine()}">
+    <p th:text="${medicine.getName()}"><br/></p>
+</th:block>
 </p>
 <th:block th:include="footer.html"></th:block>

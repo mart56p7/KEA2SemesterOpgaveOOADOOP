@@ -4,15 +4,24 @@
 <h1 th:text="'Consultations for ' + ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
 <a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right">Create Consultation</a><br/>
 
-<span class="numfield">Date</span>
-<span class="textfield300">Conclusion</span>
-
-<th:block th:each="consultation : ${consultations}">
-    <div class="block">
-        <span class="numfield"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getDate()}"></a></span>
-        <span class="textfield300"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getConclusion(300)}"></a></span>
-    </div>
-</th:block>
+<table class="pdata">
+    <thead>
+    <tr>
+        <th class="pdata">Date</th>
+        <th class="pdata pdata-lp">Conclusion</th>
+        <th class="pdata pdata-lp"></th>
+        <th class="pdata pdata-lp"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="consultation : ${consultations}">
+        <td class="pdata"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getDate()}"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getConclusion()}"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/consultations/edit/} + ${consultation.getID()}" class="glyphicon glyphicon-pencil"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/consultations/delete/} + ${consultation.getID()}" class="glyphicon glyphicon-remove"></a></td>
+    </tr>
+    </tbody>
+</table>
 
 
 <th:block th:include="footer.html"></th:block>
