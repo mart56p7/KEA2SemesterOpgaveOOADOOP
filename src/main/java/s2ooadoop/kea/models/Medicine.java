@@ -9,9 +9,9 @@ public class Medicine implements MedicineInterface {
     public Medicine() {
     }
 
-    public Medicine(String name, int ID) {
-        Name = name;
-        this.ID = ID;
+    public Medicine(int ID, String name) {
+		this.ID = ID;
+		Name = name;
     }
 
     public String getName() {

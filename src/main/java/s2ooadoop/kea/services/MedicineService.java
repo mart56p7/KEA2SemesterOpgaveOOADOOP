@@ -21,7 +21,7 @@ public class MedicineService {
         ResultSet rs = MRI.getMedicine(ID);
         Medicine medicine = null;
         if (rs.next()) {
-            medicine = new Medicine(rs.getString("Name"),rs.getInt("ID"));
+            medicine = new Medicine(rs.getInt("ID"),rs.getString("Name"));
         }
         return medicine;
 	}
@@ -33,7 +33,7 @@ public class MedicineService {
 		Medicine medicine = null;
 		List<MedicineInterface> medicines = new ArrayList<>();
         while (rs.next()){
-            medicines.add(new Medicine(rs.getString("Name"),rs.getInt("ID")));
+            medicines.add(new Medicine(rs.getInt("ID"), rs.getString("Name")));
 		}
 		return medicines;
 	}
@@ -42,18 +42,18 @@ public class MedicineService {
         Medicine medicine = null;
         List<MedicineInterface> medicines = new ArrayList<>();
         while (rs.next()){
-            medicines.add(new Medicine(rs.getString("Name"),rs.getInt(("ID"))));
+            medicines.add(new Medicine(rs.getInt(("ID")), rs.getString("Name")));
         }
         return medicines;
     }
 
 
-	public int CreateMedicine(Medicine Medicine) throws SQLException {
-	    return MRI.CreateMedicine(Medicine.getName());
+	public int CreateMedicine(String medicine) throws SQLException {
+	    return MRI.CreateMedicine(medicine);
 	}
 
-	public void EditMedicine(Medicine Medicine) throws SQLException {
-		MRI.EditMedicine(Medicine.getID(),Medicine.getName());
+	public void EditMedicine(Medicine medicine) throws SQLException {
+		MRI.EditMedicine(medicine.getID(),medicine.getName());
 	}
 
 	public void DeleteMedicine(int ID) throws SQLException{

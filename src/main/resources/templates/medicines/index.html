@@ -1,0 +1,15 @@
+<th:block th:include="header.html"></th:block>
+
+<h1 class="block">Medicine</h1><a href="/medicines/create" class="btn btn-primary right">Create Medicine</a><br/>
+
+<span class="numfield">ID</span><span class="textfield300">Name</span>
+<th:block th:each="medicine : ${medicines}">
+    <div class="block">
+        <span class="numfield"><a th:href="@{/medicines/info/} + ${medicine.getID()}" th:text="${medicine.getID()}"></a></span>
+        <span class="textfield300"><a th:href="@{/medicines/info/} + ${medicine.getID()}" th:text="${medicine.getName()}"></a></span>
+        <span class="pencilfield"><a th:href="@{/medicines/edit/} + ${medicine.getID()}" class="glyphicon glyphicon-pencil"></a></span>
+        <span class="removefield"><a th:href="@{/medicines/delete/} + ${medicine.getID()}" class="glyphicon glyphicon-remove"></a></span>
+    </div>
+</th:block>
+
+<th:block th:include="footer.html"></th:block>
