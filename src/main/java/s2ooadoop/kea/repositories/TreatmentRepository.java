@@ -46,14 +46,16 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 	public ResultSet GetTreatments(int[] ids) throws SQLException {
 		if(ids == null || ids.length == 0) { return null; }
 		String idslist = "";
-		for(int i = 0; i < ids.length; i++){
-			idslist = ids[i] + "," + idslist;
+		for (int id : ids) {
+			idslist += "?,";
 		}
-		idslist.substring(0, idslist.length()-1);
-
-		String sql = "SELECT * FROM treatment WHERE id IN (?) ORDER BY name";
+		idslist = idslist.substring(0, idslist.length()-1);
+		String sql = "SELECT * FROM treatment WHERE id IN (" + idslist + ") ORDER BY name";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
-		pstmt.setString(1, idslist);
+		for (int i = 1; i < ids.length+1; i++) {
+			pstmt.setInt(i, ids[i-1]);
+		}
+		System.out.println(pstmt.toString());
 		return DB.QuerySql(pstmt);
 	}
 

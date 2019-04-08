@@ -133,4 +133,9 @@ public class Patient implements PatientInterface {
 	public void setID(int ID) {
 		this.ID = ID;
 	}
+
+	public boolean equals(Object obj){
+		return (obj instanceof Patient && getID() == ((Patient)obj).getID());
+	}
+
 }

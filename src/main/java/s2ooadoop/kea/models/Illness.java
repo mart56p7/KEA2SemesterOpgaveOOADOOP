@@ -1,17 +1,17 @@
 package s2ooadoop.kea.models;
 
+import java.util.List;
+
 public class Illness {
 
 	private String name;
-	private Treatment[] treatment;
+	private List<Treatment> treatment;
 	private int ID;
 
 	public Illness() {
-		// TODO - implement Diagnose.Diagnose
-		throw new UnsupportedOperationException();
 	}
 
-	public Illness(String name, Treatment[] treatment, int ID) {
+	public Illness(int ID, String name, List<Treatment> treatment) {
 		this.name = name;
 		this.treatment = treatment;
 		this.ID = ID;
@@ -25,11 +25,11 @@ public class Illness {
 		this.name = name;
 	}
 
-	public Treatment[] getTreatment() {
+	public List<Treatment> getTreatment() {
 		return this.treatment;
 	}
 
-	public void setTreatment(Treatment[] treatment) {
+	public void setTreatment(List<Treatment> treatment) {
 		this.treatment = treatment;
 	}
 
@@ -39,6 +39,11 @@ public class Illness {
 
 	public void setID(int ID) {
 		this.ID = ID;
+	}
+
+
+	public boolean equals(Object obj){
+		return (obj instanceof Illness && getID() == ((Illness)obj).getID());
 	}
 
 }

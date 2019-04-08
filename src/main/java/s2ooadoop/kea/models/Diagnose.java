@@ -90,4 +90,9 @@ public class Diagnose {
 		throw new UnsupportedOperationException();
 	}
 
+
+	public boolean equals(Object obj){
+		return (obj instanceof Diagnose && getID() == ((Diagnose)obj).getID());
+	}
+
 }

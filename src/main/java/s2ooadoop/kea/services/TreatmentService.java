@@ -15,8 +15,8 @@ import java.util.List;
 @Service
 public class TreatmentService {
 
-	private TreatmentRepositoryInterface TRI = new TreatmentRepository() {
-	};
+	private TreatmentRepositoryInterface TRI = new TreatmentRepository();
+
 	@Autowired
 	private MedicineService MS;
 
@@ -39,7 +39,17 @@ public class TreatmentService {
 	}
 
 	public List<Treatment> GetTreatments(int[] IDS) throws SQLException{
-		return null;
+		if(IDS == null){
+			return null;
+		}
+		ResultSet rs = TRI.GetTreatments(IDS);
+		List<Treatment> treatments = new ArrayList<>();
+		if(rs != null){
+			while (rs.next()){
+				treatments.add(new Treatment(rs.getInt("id"), rs.getString("name"), rs.getString("note"), getTreatmentMedicines(rs.getInt("id"))));
+			}
+		}
+		return treatments;
 	}
 
 	private List<MedicineInterface> getTreatmentMedicines(int treatmentid) throws SQLException {
