@@ -8,15 +8,15 @@ import java.sql.SQLException;
 @Repository
 public interface IllnessRepositoryInterface {
 
-	ResultSet GetIllness(int ID) throws SQLException;
+	ResultSet getIllness(int ID) throws SQLException;
 
-	ResultSet GetIllnesses() throws SQLException;
+	ResultSet getIllnesses() throws SQLException;
 
 	ResultSet getIllnessTreatmentIds(int ID) throws SQLException;
 
-	int CreateIllness(String Name, int[] TreatmentID) throws SQLException;
+	int CreateIllness(String Name, int[] treatment_IDs) throws SQLException;
 
-	void EditIllness(String Name, int[] TreatmentID, int ID) throws SQLException;
+	void EditIllness(int ID, String Name, int[] treatment_IDs) throws SQLException;
 
 	void DeleteIllness(int ID) throws SQLException;
 

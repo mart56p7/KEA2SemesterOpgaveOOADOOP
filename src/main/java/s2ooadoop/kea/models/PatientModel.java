@@ -115,4 +115,9 @@ public class PatientModel implements PatientModelInterface {
     public void setDescription(String description) {
         Description = description;
     }
+
+    public boolean equals(Object obj){
+        return (obj instanceof PatientModel && getId() == ((PatientModel)obj).getId());
+    }
+
 }

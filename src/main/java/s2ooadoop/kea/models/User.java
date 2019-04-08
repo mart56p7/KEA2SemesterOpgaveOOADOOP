@@ -56,4 +56,9 @@ public class User {
 		this.ID = ID;
 	}
 
+
+	public boolean equals(Object obj){
+		return (obj instanceof User && getID() == ((User)obj).getID());
+	}
+
 }

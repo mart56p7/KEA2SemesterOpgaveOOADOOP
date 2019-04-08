@@ -52,4 +52,9 @@ public class Treatment {
 		this.ID = ID;
 	}
 
+
+	public boolean equals(Object obj){
+		return (obj instanceof Treatment && getID() == ((Treatment)obj).getID());
+	}
+
 }

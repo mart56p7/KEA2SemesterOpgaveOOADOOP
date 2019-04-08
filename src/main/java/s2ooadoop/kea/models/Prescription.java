@@ -95,4 +95,9 @@ public class Prescription {
 		throw new UnsupportedOperationException();
 	}
 
+
+	public boolean equals(Object obj){
+		return (obj instanceof Prescription && getID() == ((Prescription)obj).getID());
+	}
+
 }

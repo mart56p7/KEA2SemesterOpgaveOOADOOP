@@ -70,4 +70,9 @@ public class Consultation {
 		this.id = id;
 	}
 
+
+	public boolean equals(Object obj){
+		return (obj instanceof Consultation && getID() == ((Consultation)obj).getID());
+	}
+
 }

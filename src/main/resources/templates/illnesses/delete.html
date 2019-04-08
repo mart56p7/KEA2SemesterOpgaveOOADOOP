@@ -1,0 +1,15 @@
+<th:block th:include="header.html"></th:block>
+
+<h1>Illness User</h1><br/>
+
+<p>You are about to delete the illness</p><p th:text="${illness.getName()}"></p>
+<p>Please confirm.</p>
+<div class="form-group">
+    <form method="post" action="/illnesses/delete">
+        <input type="hidden" name="id" th:value="${illness.getID()}">
+        <input type="submit" value="Delete" class="btn btn-info form-control">
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

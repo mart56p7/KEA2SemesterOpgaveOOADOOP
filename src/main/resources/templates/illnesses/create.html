@@ -1,0 +1,22 @@
+<th:block th:include="header.html"></th:block>
+
+
+<h1 class="block">Create Illness</h1><br/>
+
+<div class="form-group">
+    <form method="post" action="/illnesses/create">
+        <p>Name: <input type="text" name="name" class="form-control"></p>
+        <p>Treatment:
+            <select size="10" class="form-control">
+                <th:block th:each="treatment : ${treatments}">
+                    <option th:value="${treatment.getID()}" th:text="${treatment.getName()}"></option>
+                </th:block>
+            </select>
+        </p>
+        <p>* Use CTRL to select multiple values</p>
+        <input type="submit" value="Create illness" class="btn btn-info form-control">
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

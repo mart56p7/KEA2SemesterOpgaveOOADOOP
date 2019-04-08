@@ -15,60 +15,46 @@ import java.util.List;
 @Service
 public class IllnessService {
 
-	@Autowired
-	private IllnessRepositoryInterface IRI;
+	private IllnessRepositoryInterface IRI = new IllnessRepository();
 
 	@Autowired
 	private TreatmentService ts;
 
-	public Illness GetIllness(int ID) throws SQLException {
-		ResultSet rs = IRI.GetIllness(ID);
+	public Illness getIllness(int ID) throws SQLException {
+		ResultSet rs = IRI.getIllness(ID);
 		Illness newIllness = null;
 		if(rs.next()) {
-			newIllness = new Illness(rs.getString("name"), getIllnessTreatments(ID).toArray(new Treatment[0]), rs.getInt("id"));
+			newIllness = new Illness(rs.getInt("id"), rs.getString("name"), getIllnessTreatments(ID));
 		}
 		return newIllness;
 	}
 
-	public List<Illness> GetIllnesses() throws SQLException {
+	public List<Illness> getIllnesses() throws SQLException {
+		ResultSet rs = IRI.getIllnesses();
 		List<Illness> list = new ArrayList<>();
-		ResultSet rs = IRI.GetIllnesses();
 		while (rs.next()){
-			list.add(new Illness(rs.getString("name"), getIllnessTreatments(rs.getInt("id")).toArray(new Treatment[0]), rs.getInt("id")));
+			list.add(new Illness(rs.getInt("id"), rs.getString("name"), getIllnessTreatments(rs.getInt("id"))));
 		}
 		return list;
 	}
 
-	private List<Treatment> getIllnessTreatments(int illnessid) throws SQLException {
-		ResultSet rs = IRI.getIllnessTreatmentIds(illnessid);
-		boolean first = true;
-		int[] ids = null;
+	public List<Treatment> getIllnessTreatments(int illnessID) throws SQLException {
+		ResultSet rs = IRI.getIllnessTreatmentIds(illnessID);
+		rs.last();
+		int[] ids = new int[rs.getRow()];
+		rs.beforeFirst();
 		for(int i = 0; rs.next(); i++){
-			if(first){
-				first = false;
-				ids = new int[rs.getInt("rows")];
-			}
 			ids[i] = rs.getInt("treatment_id");
 		}
 		return ts.GetTreatments(ids);
 	}
 
-	public int CreateIllness(Illness illness) throws SQLException {
-		int[] TreatmentID = new int[illness.getTreatment().length];
-		Treatment[] treatment = illness.getTreatment();
-		for(int i = 0; i < treatment.length; i++){
-			TreatmentID[i] = treatment[i].getID();
-		}
-		return IRI.CreateIllness(illness.getName(), TreatmentID);
+	public int CreateIllness(String name, int[] treatment_IDs) throws SQLException {
+		return IRI.CreateIllness(name, treatment_IDs);
 	}
 
-	public void EditIllness(Illness illness) throws SQLException {
-		int[] TreatmentID = new int[illness.getTreatment().length];
-		Treatment[] treatment = illness.getTreatment();
-		for(int i = 0; i < treatment.length; i++){
-			TreatmentID[i] = treatment[i].getID();
-		}
-		IRI.EditIllness(illness.getName(), TreatmentID, illness.getID());
+	public void EditIllness(int ID, String name, int[] treatment_IDs) throws SQLException {
+		IRI.EditIllness(ID, name, treatment_IDs);
 	}
 
 	public void DeleteIllness(int ID) throws SQLException {
@@ -76,3 +62,16 @@ public class IllnessService {
 	}
 
 }
+/*
+ 	public List<Treatment> GetTreatments(int[] IDS) throws SQLException{
+		if(IDS == null){
+	        return null;
+        }
+		ResultSet rs = TRI.GetTreatments(IDS);
+		List<Treatment> treatments = new ArrayList<>();
+        while (rs.next()){
+            treatments.add(new Treatment(rs.getInt("id"), rs.getString("name"), rs.getString("note"), getTreatmentMedicines(rs.getInt("id"))));
+		}
+		return treatments;
+	}
+*/
