@@ -3,6 +3,7 @@ package s2ooadoop.kea.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.*;
 import s2ooadoop.kea.services.ConsultationService;
@@ -10,6 +11,7 @@ import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.PatientService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -111,7 +113,7 @@ public class PatientController {
     }
 
     @PostMapping("/patients/create")
-    public String createPatient(@ModelAttribute Patient patient, HttpSession session){
+    public String createPatient(@ModelAttribute("Patient") Patient patient, HttpSession session){
         logger.log("createPatient(@ModelAttribute Patient patient): START");
         if(userType(session) != UserType.DOCTOR)
         {

@@ -2,14 +2,19 @@ package s2ooadoop.kea.models;
 
 
 
-import java.util.Date;
+import javax.validation.constraints.NotEmpty;
 
 public class Patient implements PatientInterface {
 
+
 	private int ID;
+	@NotEmpty(message="Please provide CPR")
 	private int CPR;
+	@NotEmpty(message="Please provide Birthday")
 	private int Birthday;
+	@NotEmpty(message="Please provide First name")
 	private String Firstname;
+	@NotEmpty(message="Please provide Last name")
 	private String Lastname;
 	private String Phonenumber;
 	private String Address;
