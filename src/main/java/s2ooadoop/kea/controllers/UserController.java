@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
 /**
- * CRUD for Users.
+ * CRUD for Users + Get a single target
  * */
 
 @Controller
