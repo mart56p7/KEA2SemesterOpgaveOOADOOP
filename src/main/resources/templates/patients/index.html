@@ -17,10 +17,9 @@
     <tr th:each="patient : ${patients}">
         <td class="pdata"><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()}"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getLastname()}"></a></td>
-        <td class="pdata pdata-lp"><a th:href="@{/patients/info/} + ${patient.getID()}" class="glyphicon glyphicon-pencil"></a></td>
-        <td class="pdata pdata-lp"><a th:href="@{/patients/info/} + ${patient.getID()}" class="glyphicon glyphicon-remove"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/patients/edit/} + ${patient.getID()}" class="glyphicon glyphicon-pencil"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/patients/delete/} + ${patient.getID()}" class="glyphicon glyphicon-remove"></a></td>
     </tr>
     </tbody>
 </table>
-
 <th:block th:include="footer.html"></th:block>
