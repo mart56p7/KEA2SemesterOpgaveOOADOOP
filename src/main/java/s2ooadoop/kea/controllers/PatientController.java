@@ -3,13 +3,16 @@ package s2ooadoop.kea.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.*;
 import s2ooadoop.kea.services.ConsultationService;
+import s2ooadoop.kea.services.DiagnoseService;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.PatientService;
 
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -19,6 +22,8 @@ public class PatientController {
     PatientService PS;
     @Autowired
     ConsultationService CS;
+    @Autowired
+    DiagnoseService DS;
 
     Logging logger = new Logging("PatientController");
 
@@ -54,6 +59,7 @@ public class PatientController {
         try {
             model.addAttribute("patient", PS.getPatient(ID));
             model.addAttribute("consultations", CS.getActiveConsultations(ID));
+            model.addAttribute("diagnoses", DS.getActiveDiagnoses(ID));
             logger.log("showPatient(): END");
             return "patients/info";
         } catch (SQLException e) {

@@ -5,90 +5,47 @@ import java.util.Date;
 public class Diagnose {
 
 	private PatientInterface patient;
-	private Illness Illness;
+	private Illness illness;
 	private String note;
 	private Date date;
 	private int ID;
 
-	public Diagnose() {
-		// TODO - implement PatientIllness.PatientIllness
-		throw new UnsupportedOperationException();
-	}
+	public Diagnose() {}
 
-	/**
-	 * 
-	 * @param patient
-	 * @param Illness
-	 * @param note
-	 * @param date
-	 * @param ID
-	 */
-	public Diagnose(PatientInterface patient, Illness Illness, String note, Date date, int ID) {
-		// TODO - implement PatientIllness.PatientIllness
-		throw new UnsupportedOperationException();
-	}
-
-	public PatientInterface getPatient() {
-		return this.patient;
-	}
-
-	/**
-	 * 
-	 * @param patient
-	 */
-	public void setPatient(PatientInterface patient) {
+	public Diagnose(PatientInterface patient, Illness illness, String note, Date date) {
 		this.patient = patient;
-	}
-
-	public Illness getIllness() {
-		return this.Illness;
-	}
-
-	/**
-	 * 
-	 * @param Illness
-	 */
-	public void setIllness(Illness Illness) {
-		this.Illness = Illness;
-	}
-
-	public String getNote() {
-		return this.note;
-	}
-
-	/**
-	 * 
-	 * @param note
-	 */
-	public void setNote(String note) {
+		this.illness = illness;
 		this.note = note;
-	}
-
-	public Date getDate() {
-		return this.date;
-	}
-
-	/**
-	 * 
-	 * @param date
-	 */
-	public void setDate(Date date) {
 		this.date = date;
 	}
 
-	public int getID() {
-		// TODO - implement PatientIllness.getID
-		throw new UnsupportedOperationException();
+	public Diagnose(int ID, PatientInterface patient, Illness illness, String note, Date date) {
+		this.ID = ID;
+		this.patient = patient;
+		this.illness = illness;
+		this.note = note;
+		this.date = date;
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	public void setID(int ID) {
-		// TODO - implement PatientIllness.setID
-		throw new UnsupportedOperationException();
-	}
+	public PatientInterface getPatient() { return this.patient; }
+
+	public void setPatient(PatientInterface patient) { this.patient = patient; }
+
+	public Illness getIllness() { return this.illness; }
+
+	public void setIllness(Illness Illness) { this.illness = Illness; }
+
+	public String getNote() { return this.note; }
+
+	public void setNote(String note) { this.note = note; }
+
+	public Date getDate() {	return this.date; }
+
+	public void setDate(Date date) { this.date = date; }
+
+	public int getID() { return this.ID; }
+
+	public void setID(int ID) { this.ID = ID; }
 
 
 	public boolean equals(Object obj){

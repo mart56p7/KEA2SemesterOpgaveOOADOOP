@@ -16,37 +16,42 @@ public class IllnessRepository implements IllnessRepositoryInterface {
 	}
 
 	@Override
-	public ResultSet getIllness(int ID) throws SQLException {
+	public ResultSet getIllness(int ID) throws SQLException { // Returnerer specifik illness baseret på ID
 		PreparedStatement stmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM illness WHERE id=?");
 		stmt.setInt(1, ID);
 		return DB.QuerySql(stmt);
 	}
 
-	public ResultSet getIllnesses() throws SQLException {
+	@Override
+	public ResultSet getIllnesses() throws SQLException { // Returnerer alle illnesses
 		PreparedStatement stmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM illness ORDER BY name");
 		return DB.QuerySql(stmt);
 	}
 
 	@Override
-	public int CreateIllness(String Name, int[] treatment_IDs) throws SQLException {
+	public int createIllness(String Name, int[] treatment_IDs) throws SQLException { // Opretter en ny illness i databasen, og tilhørende illnesstreatment relationer
 		PreparedStatement stmt = DB.CreateConnectionRWM().prepareStatement("INSERT INTO illness (name) VALUES (?)");
 		stmt.setString(1, Name);
-		int ID = DB.ExecuteSql(stmt);
-		CreateIllnessTreatment(ID, treatment_IDs);
-		return ID;
+		DB.ExecuteSql(stmt);
+		stmt = DB.CreateConnectionR().prepareStatement("SELECT max(id) FROM illness");
+		ResultSet rs = DB.QuerySql(stmt);
+		rs.next();
+		int id = rs.getInt("max(id)");
+		createIllnessTreatment(id, treatment_IDs);
+		return id;
 	}
 
 	@Override
-	public void EditIllness(int ID, String Name, int[] treatment_IDs) throws SQLException {
+	public void editIllness(int ID, String Name, int[] treatment_IDs) throws SQLException { // Opdaterer en illness i databasen, og tilhørende illnesstreatment relationer
 		PreparedStatement stmt = DB.CreateConnectionRWM().prepareStatement("UPDATE Illness SET name=? WHERE id=?");
 		stmt.setString(1, Name);
 		stmt.setInt(2, ID);
-		EditIllnessTreatment(ID, treatment_IDs);
+		editIllnessTreatment(ID, treatment_IDs);
 		DB.ExecuteSql(stmt);
 	}
 
 	@Override
-	public void DeleteIllness(int ID) throws SQLException {
+	public void deleteIllness(int ID) throws SQLException { // Sletter en illness fra databsen
 		PreparedStatement stmt = DB.CreateConnectionRWM().prepareStatement("DELETE FROM illness WHERE id=?");
 		stmt.setInt(1, ID);
 		DB.ExecuteSql(stmt);
@@ -55,13 +60,13 @@ public class IllnessRepository implements IllnessRepositoryInterface {
 
 	// illnesstreatment section
 	@Override
-	public ResultSet getIllnessTreatmentIds(int ID) throws SQLException {
+	public ResultSet getIllnessTreatmentIds(int ID) throws SQLException { // Finder ID på tilhørende treatments, når den får illness ID
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM illnesstreatment WHERE illness_id = ?");
 		pstmt.setInt(1, ID);
 		return DB.QuerySql(pstmt);
 	}
 
-	private void CreateIllnessTreatment(int illness_id, int[] treatment_ids) throws SQLException{
+	private void createIllnessTreatment(int illness_id, int[] treatment_ids) throws SQLException{ // Opretter nye relationer mellem illness og treatment
 		if(treatment_ids == null){ return; }
 		for(int i = 0; i < treatment_ids.length; i++){
 			PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement("INSERT INTO illnesstreatment (`illness_id`, `treatment_id`) VALUES (?, ?)");
@@ -71,12 +76,12 @@ public class IllnessRepository implements IllnessRepositoryInterface {
 		}
 	}
 
-	private void EditIllnessTreatment(int illness_id, int[] treatment_ids) throws SQLException{
-		DeleteIllnessTreatment(illness_id);
-		CreateIllnessTreatment(illness_id, treatment_ids);
+	private void editIllnessTreatment(int illness_id, int[] treatment_ids) throws SQLException{ // Sletter gamle illnesstreatment relationer, og opretter nye.
+		deleteIllnessTreatment(illness_id);
+		createIllnessTreatment(illness_id, treatment_ids);
 	}
 
-	private void DeleteIllnessTreatment(int ID) throws SQLException{
+	private void deleteIllnessTreatment(int ID) throws SQLException{ // Sletter en illnesstreatment relation.
 		PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement("DELETE FROM illnesstreatment WHERE illness_id = ?");
 		pstmt.setInt(1, ID);
 		DB.ExecuteSql(pstmt);

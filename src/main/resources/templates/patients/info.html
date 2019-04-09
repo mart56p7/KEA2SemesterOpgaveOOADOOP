@@ -5,7 +5,7 @@
         <h1 th:text="'Name: ' +  ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
     </th:block>
     <a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right" target="_blank">Start Consultation</a>
-    <a th:href="@{/diagnose/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Diagnose</a>
+    <a th:href="@{/diagnoses/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Diagnose</a>
     <a th:href="@{/prescription/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Prescription</a>
 </div>
 
@@ -25,7 +25,7 @@
         <a th:href="@{/diagnoses/}  + ${patient.getID()} " class="btn btn-primary right">View All</a>
     </div>
     <th:block th:each="diagnose : ${diagnoses}">
-        <a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getDate()} + ' ' + ${diagnose.getName()}"></a><br/>
+        <a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getDate()} + ' ' + ${diagnose.getIllness().getName()}"></a><br/>
     </th:block>
 
     <div class="sectionheader">

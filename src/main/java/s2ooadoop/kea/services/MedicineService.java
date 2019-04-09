@@ -32,8 +32,10 @@ public class MedicineService {
 		ResultSet rs = MRI.getMedicines(ID);
 		Medicine medicine = null;
 		List<MedicineInterface> medicines = new ArrayList<>();
-        while (rs.next()){
-            medicines.add(new Medicine(rs.getInt("ID"), rs.getString("Name")));
+		if(rs != null) {
+			while (rs.next()) {
+				medicines.add(new Medicine(rs.getInt("ID"), rs.getString("Name")));
+			}
 		}
 		return medicines;
 	}

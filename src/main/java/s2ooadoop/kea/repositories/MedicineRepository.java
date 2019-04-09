@@ -22,8 +22,17 @@ public class MedicineRepository implements MedicineRepositoryInterface {
 	}
 	@Override
     public ResultSet getMedicines(int[] ID) throws SQLException{
-        String sql = "SELECT * FROM medicine WHERE id=?";
+        if(ID == null || ID.length == 0) { return null; }
+        String idslist = "";
+        for (int id : ID) {
+            idslist += "?,";
+        }
+        idslist = idslist.substring(0, idslist.length()-1);
+        String sql = "SELECT * FROM medicine WHERE id IN (" + idslist + ") ORDER BY name";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
+        for (int i = 1; i < ID.length+1; i++) {
+            pstmt.setInt(i, ID[i-1]);
+        }
         return DB.QuerySql(pstmt);
     }
 

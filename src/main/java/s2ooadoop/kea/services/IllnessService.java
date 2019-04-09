@@ -20,7 +20,7 @@ public class IllnessService {
 	@Autowired
 	private TreatmentService ts;
 
-	public Illness getIllness(int ID) throws SQLException {
+	public Illness getIllness(int ID) throws SQLException { // Returner specifik illness ud fra id
 		ResultSet rs = IRI.getIllness(ID);
 		Illness newIllness = null;
 		if(rs.next()) {
@@ -29,7 +29,7 @@ public class IllnessService {
 		return newIllness;
 	}
 
-	public List<Illness> getIllnesses() throws SQLException {
+	public List<Illness> getIllnesses() throws SQLException { // Læser et resultset og opretter Illness objekter baseret på indhold. Returner alle i en liste.
 		ResultSet rs = IRI.getIllnesses();
 		List<Illness> list = new ArrayList<>();
 		while (rs.next()){
@@ -38,7 +38,7 @@ public class IllnessService {
 		return list;
 	}
 
-	public List<Treatment> getIllnessTreatments(int illnessID) throws SQLException {
+	public List<Treatment> getIllnessTreatments(int illnessID) throws SQLException { // Opretter og returnerer en liste over treatments der hører til illness med indsat ID
 		ResultSet rs = IRI.getIllnessTreatmentIds(illnessID);
 		rs.last();
 		int[] ids = new int[rs.getRow()];
@@ -49,29 +49,16 @@ public class IllnessService {
 		return ts.getTreatments(ids);
 	}
 
-	public int CreateIllness(String name, int[] treatment_IDs) throws SQLException {
-		return IRI.CreateIllness(name, treatment_IDs);
+	public int createIllness(String name, int[] treatment_IDs) throws SQLException { // Kalder til repository for at oprette ny Illness
+		return IRI.createIllness(name, treatment_IDs);
 	}
 
-	public void EditIllness(int ID, String name, int[] treatment_IDs) throws SQLException {
-		IRI.EditIllness(ID, name, treatment_IDs);
+	public void editIllness(int ID, String name, int[] treatment_IDs) throws SQLException { // Kalder til repository for at opdatere en illness
+		IRI.editIllness(ID, name, treatment_IDs);
 	}
 
-	public void DeleteIllness(int ID) throws SQLException {
-		IRI.DeleteIllness(ID);
+	public void deleteIllness(int ID) throws SQLException { // Kalder til repository for at slette en illness
+		IRI.deleteIllness(ID);
 	}
 
 }
-/*
- 	public List<Treatment> GetTreatments(int[] IDS) throws SQLException{
-		if(IDS == null){
-	        return null;
-        }
-		ResultSet rs = TRI.GetTreatments(IDS);
-		List<Treatment> treatments = new ArrayList<>();
-        while (rs.next()){
-            treatments.add(new Treatment(rs.getInt("id"), rs.getString("name"), rs.getString("note"), getTreatmentMedicines(rs.getInt("id"))));
-		}
-		return treatments;
-	}
-*/

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import s2ooadoop.kea.models.Patient;
 import s2ooadoop.kea.models.PatientInterface;
+import s2ooadoop.kea.repositories.PatientRepository;
 import s2ooadoop.kea.repositories.PatientRepositoryInterface;
 
 import java.sql.ResultSet;

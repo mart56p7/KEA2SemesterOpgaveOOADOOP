@@ -14,10 +14,10 @@ public interface IllnessRepositoryInterface {
 
 	ResultSet getIllnessTreatmentIds(int ID) throws SQLException;
 
-	int CreateIllness(String Name, int[] treatment_IDs) throws SQLException;
+	int createIllness(String Name, int[] treatment_IDs) throws SQLException;
 
-	void EditIllness(int ID, String Name, int[] treatment_IDs) throws SQLException;
+	void editIllness(int ID, String Name, int[] treatment_IDs) throws SQLException;
 
-	void DeleteIllness(int ID) throws SQLException;
+	void deleteIllness(int ID) throws SQLException;
 
 }

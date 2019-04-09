@@ -4,17 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import s2ooadoop.kea.models.Illness;
-import s2ooadoop.kea.models.Treatment;
 import s2ooadoop.kea.models.UserType;
-import s2ooadoop.kea.repositories.IllnessRepository;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.IllnessService;
 import s2ooadoop.kea.services.TreatmentService;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.List;
 
 @Controller
 public class IllnessController {
@@ -94,9 +90,9 @@ public class IllnessController {
             return "users/error";
         }
         try {
-            IS.DeleteIllness(id);
+            IS.deleteIllness(id);
             logger.log("deleteIllness(@ModelAttribute int illnessID): END");
-            return "illnesses/";
+            return "redirect:/illnesses/";
         } catch (SQLException e) {
             logger.log("deleteIllness(@ModelAttribute int illnessID): END");
             return "redirect:/error";
@@ -126,7 +122,7 @@ public class IllnessController {
             return "users/error";
         }
         try {
-            IS.CreateIllness(name, treatment_ids);
+            IS.createIllness(name, treatment_ids);
             logger.log("Created illness", 1);
             logger.log("createIllness(): END");
             return "redirect:/illnesses/";
@@ -175,7 +171,7 @@ public class IllnessController {
             return "users/error";
         }
         try {
-            IS.EditIllness(ID, name, treatment_ids);
+            IS.editIllness(ID, name, treatment_ids);
             logger.log("Illness with " + ID + " edited");
 
         } catch (SQLException e) {

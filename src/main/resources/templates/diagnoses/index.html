@@ -1,0 +1,18 @@
+<th:block th:include="header.html"></th:block>
+
+
+<h1 th:text="'Diagnoses for ' + ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
+<a th:href="@{/diagnoses/create/} + ${patient.getID()}" class="btn btn-primary right">Create Diagnose</a><br/>
+
+<span class="numfield">Date</span>
+<span class="textfield300">Illness</span>
+
+<th:block th:each="diagnose : ${diagnoses}">
+    <div class="block">
+        <span class="numfield"><a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getDate()}"></a></span>
+        <span class="textfield300"><a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getIllness().getName()}"></a></span>
+    </div>
+</th:block>
+
+
+<th:block th:include="footer.html"></th:block>

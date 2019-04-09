@@ -1,0 +1,29 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Create Diagnose</h1>
+</div>
+
+<div class="form-group">
+    <form method="post" action="/diagnoses/create">
+        <input type="hidden" name="patientid" th:value="${patient.getID()}">
+        <br>
+        <p>Illness:
+            <select size="10" name="illnessid" class="form-control">
+                <th:block th:each="illness : ${illnesses}">
+                    <option th:value="${illness.getID()}" th:text="${illness.getName()}"></option>
+                </th:block>
+            </select>
+        </p>
+        <p>Note:<br/>
+            <textarea name="note" class="form-control"></textarea>
+        </p>
+        <p>Date: <input type="text" name="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+
+        <input type="submit" value="Create Diagnose" class="btn btn-info form-control">
+
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>

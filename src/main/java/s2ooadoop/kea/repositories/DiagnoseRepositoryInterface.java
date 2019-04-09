@@ -3,39 +3,22 @@ package s2ooadoop.kea.repositories;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 @Repository
 public interface DiagnoseRepositoryInterface {
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	ResultSet GetPatientDiagnose(int ID);
+	ResultSet getDiagnose(int ID) throws SQLException;
 
-	/**
-	 * 
-	 * @param PatientID
-	 * @param DiagnoseID
-	 * @param Note
-	 * @param Date
-	 */
-	int CreatePatientDiagnose(int PatientID, int DiagnoseID, String Note, Date Date);
+	ResultSet getDiagnoses(int PatientID) throws SQLException;
 
-	/**
-	 * 
-	 * @param PatientID
-	 * @param DiagnoseID
-	 * @param Note
-	 * @param Date
-	 */
-	void EditPatientDiagnose(int PatientID, int DiagnoseID, String Note, Date Date);
+	ResultSet getActiveDiagnoses(int PatientID) throws SQLException;
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	void DeletePatientDiagnose(int ID);
+	int createDiagnose(int PatientID, int IllnessID, String Note, Date Date) throws SQLException;
+
+	void editDiagnose(int DiagnoseID, int PatientID, int IllnessID, String Note, Date Date) throws SQLException;
+
+	void deleteDiagnose(int ID) throws SQLException;
 
 }
