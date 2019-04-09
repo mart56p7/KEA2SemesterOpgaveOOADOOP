@@ -5,7 +5,7 @@
 <div class="form-group">
     <form method="post" action="/patients/edit" class="fw500" modelAttribute="patient">
         <input type="hidden" name="ID" th:value="${patient.getID()}">
-        <p>CPR: <input type="text" name="Birthday" class="form-control" th:value="${patient.getBirthday()}"> - <input type="text" name="cpr" class="form-control" placeholder="Last 4" th:value="${patient.getCPR()}"></p>
+        <p>CPR: <input type="text" name="Birthday" class="form-control" th:value="${patient.getBirthday()}"> - <input type="text" name="CPR" class="form-control" placeholder="Last 4" th:value="${patient.getCPR()}"></p>
         <p>Firstname: <input type="text" name="Firstname" class="form-control" th:value="${patient.getFirstname()}"></p>
         <p>Lastname: <input type="text" name="Lastname" class="form-control" th:value="${patient.getLastname()}"></p>
         <p>Phonenumber: <input type="text" name="Phonenumber" class="form-control" th:value="${patient.getPhonenumber()}"></p>
