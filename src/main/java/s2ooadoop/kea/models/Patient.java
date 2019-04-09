@@ -46,6 +46,7 @@ public class Patient implements PatientInterface {
 
 	@Override
 	public void setCPR(int cpr) {
+		System.out.println("CPR" + cpr);
 		this.cpr = cpr;
 	}
 
@@ -57,6 +58,7 @@ public class Patient implements PatientInterface {
 	@Override
 	public void setBirthday(int birthday) {
 		this.birthday = birthday;
+		System.out.println("Birthday" + birthday);
 	}
 
 	@Override
