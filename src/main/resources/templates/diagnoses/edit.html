@@ -25,7 +25,7 @@
         </p>
         <span class="textfield">Note:</span>
             <input type="text" name="note" th:value="${diagnose.getNote()}" class="form-control">
-        <p>Date: <input type="text" name="date" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+        <p>Date: <input type="text" name="date" th:value="${#dates.format(diagnose.getDate(), 'dd/MM yyyy')}" class="form-control"></p>
 
         <input type="submit" value="Edit Diagnose" class="btn btn-info form-control">
 
