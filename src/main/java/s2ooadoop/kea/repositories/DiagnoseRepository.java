@@ -43,7 +43,7 @@ public class DiagnoseRepository implements DiagnoseRepositoryInterface {
 		stmt.setString(3, Note);
 		stmt.setDate(4,  new java.sql.Date(date.getTime()));
 		DB.ExecuteSql(stmt);
-		stmt = DB.CreateConnectionR().prepareStatement("SELECT max(id) FROM illness");
+		stmt = DB.CreateConnectionR().prepareStatement("SELECT max(id) FROM diagnose");
 		ResultSet rs = DB.QuerySql(stmt);
 		rs.next();
 		return rs.getInt("max(id)");
