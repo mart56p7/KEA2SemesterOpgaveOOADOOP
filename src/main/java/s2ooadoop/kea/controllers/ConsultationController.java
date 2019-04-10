@@ -14,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Controller
 public class ConsultationController {
@@ -91,8 +91,9 @@ public class ConsultationController {
 		}
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
+			format.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
 			try {
-				Date dateformatted = format.parse ( date );
+				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*7);
 				CS.CreateConsultation(new Consultation(PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Created consultation", 1);
 			} catch (ParseException e) {
@@ -196,7 +197,7 @@ public class ConsultationController {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
-				Date dateformatted = format.parse ( date );
+				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*7);
 				CS.EditConsultation(new Consultation(consultationid, PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Edited consultation", 1);
 			} catch (ParseException e) {

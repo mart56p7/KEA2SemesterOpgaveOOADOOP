@@ -1,13 +1,13 @@
 package s2ooadoop.kea.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Consultation {
 
 	private PatientInterface patient;
 	private String description;
 	private String conclusion;
-	private java.util.Date date;
+	private Date date;
 	private int id;
 
 	public Consultation(){

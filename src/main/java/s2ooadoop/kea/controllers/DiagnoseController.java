@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Controller
 public class DiagnoseController {
@@ -93,7 +93,7 @@ public class DiagnoseController {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
-				Date dateformatted = format.parse(date);
+				Date dateformatted = new Date(format.parse(date).getTime()+1000*60*60*7);
 				DS.createDiagnose(new Diagnose(PS.getPatient(patientid), IS.getIllness(illnessid), note, dateformatted));
 				logger.log("Created diagnoses", 1);
 			} catch (ParseException e) {
@@ -187,7 +187,7 @@ public class DiagnoseController {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
-				Date dateformatted = format.parse ( date );
+				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*7);
 				DS.editDiagnose(new Diagnose(diagnoseid, PS.getPatient(patientid), IS.getIllness(illnessid), note, dateformatted));
 				logger.log("Edited diagnose", 1);
 			} catch (ParseException e) {

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 @Repository
 public class ConsultationRepository implements ConsultationRepositoryInterface {
@@ -47,7 +47,9 @@ public class ConsultationRepository implements ConsultationRepositoryInterface {
 		pstmt.setInt(1, patientID);
 		pstmt.setString(2, description);
 		pstmt.setString(3, conclusion);
-		pstmt.setDate(4, new java.sql.Date(date.getTime()));
+		pstmt.setDate(4, new java.sql.Date(date.getTime()+1));
+		System.out.println(new java.sql.Date(date.getTime()).toString());
+		System.out.println(pstmt.toString());
 		return DB.ExecuteSql(pstmt);
 	}
 
