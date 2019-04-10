@@ -23,7 +23,7 @@ public class ConsultationRepository implements ConsultationRepositoryInterface {
 
 	@Override
 	public ResultSet getConsultations(int patientID) throws SQLException {
-		String sql = "SELECT * FROM consultations WHERE patient_id = ?";
+		String sql = "SELECT * FROM consultations WHERE patient_id = ? ORDER BY id DESC";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setInt(1, patientID);
 		return DB.QuerySql(pstmt);
@@ -34,7 +34,7 @@ public class ConsultationRepository implements ConsultationRepositoryInterface {
 	 */
 	@Override
 	public ResultSet getActiveConsultations(int patientID) throws SQLException {
-		String sql = "SELECT * FROM consultations WHERE date >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) AND patient_id = ?";
+		String sql = "SELECT * FROM consultations WHERE date >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) AND patient_id = ? ORDER BY id DESC";
 		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
 		pstmt.setInt(1, patientID);
 		return DB.QuerySql(pstmt);
@@ -48,8 +48,6 @@ public class ConsultationRepository implements ConsultationRepositoryInterface {
 		pstmt.setString(2, description);
 		pstmt.setString(3, conclusion);
 		pstmt.setDate(4, new java.sql.Date(date.getTime()+1));
-		System.out.println(new java.sql.Date(date.getTime()).toString());
-		System.out.println(pstmt.toString());
 		return DB.ExecuteSql(pstmt);
 	}
 

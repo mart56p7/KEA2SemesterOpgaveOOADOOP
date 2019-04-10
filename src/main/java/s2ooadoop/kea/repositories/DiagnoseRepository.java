@@ -23,14 +23,14 @@ public class DiagnoseRepository implements DiagnoseRepositoryInterface {
 
 	@Override
 	public ResultSet getDiagnoses(int PatientID) throws SQLException {
-		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM diagnoses WHERE patient_id = ?");
+		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM diagnoses WHERE patient_id = ? ORDER BY id DESC");
 		pstmt.setInt(1, PatientID);
 		return DB.QuerySql(pstmt);
 	}
 
 	@Override
 	public ResultSet getActiveDiagnoses(int PatientID) throws SQLException { // Returnerer diagnoser med PatientID, der er mindre end 1 år gammel
-		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM diagnoses WHERE date >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) AND patient_id = ?");
+		PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM diagnoses WHERE date >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) AND patient_id = ? ORDER BY id DESC");
 		pstmt.setInt(1, PatientID);
 		return DB.QuerySql(pstmt);
 	}
