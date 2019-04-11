@@ -78,7 +78,11 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 		PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 		pstmt.setString(1, name);
 		pstmt.setString(2, note);
-		int aid = DB.ExecuteSql(pstmt);
+		DB.ExecuteSql(pstmt);
+		pstmt = DB.CreateConnectionR().prepareStatement("SELECT id FROM treatment ORDER BY id DESC LIMIT 1");
+		ResultSet rs = DB.QuerySql(pstmt);
+		rs.next();
+		int aid = rs.getInt("id");
 		CreateTreatmentMedicine(aid, medicines);
 		return aid;
 	}
@@ -118,7 +122,9 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 			PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 			pstmt.setInt(1, treatment_id);
 			pstmt.setInt(2, medicine_ids[i]);
+			System.out.println(pstmt.toString());
 			DB.ExecuteSql(pstmt);
+			System.out.println("Done");
 		}
 	}
 

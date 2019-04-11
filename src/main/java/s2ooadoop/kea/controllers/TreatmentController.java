@@ -102,7 +102,7 @@ public class TreatmentController {
         try {
             TS.deleteTreatment(id);
             logger.log("deleteTreatment(@ModelAttribute int treatmentID): END");
-            return "treatments/";
+            return "redirect:/treatments/";
         } catch (SQLException e) {
             logger.log("deleteTreatment(@ModelAttribute int treatmentID): END");
             return "redirect:/error";
@@ -118,7 +118,7 @@ public class TreatmentController {
         }
 
         try {
-            model.addAttribute("medicine", MS.getMedicines());
+            model.addAttribute("medicines", MS.getMedicines());
         } catch (SQLException e) {
             e.printStackTrace();
         }
