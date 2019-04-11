@@ -7,7 +7,7 @@
 <p>Treatment:
 <p th:if="${illness.getTreatment().size() == 0}">None</p>
     <th:block th:each="treatment : ${illness.getTreatment()}">
-        <span class="textfield300"><p th:text="${treatment.getName()}"></p></span>
+        <span class="textfield300"><p><a th:href="@{/treatments/info/} + ${treatment.getID()}" th:text="${treatment.getName()}"></a></p></span>
     </th:block>
 </p>
 <th:block th:include="footer.html"></th:block>

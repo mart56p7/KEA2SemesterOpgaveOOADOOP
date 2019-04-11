@@ -17,7 +17,7 @@
 <label>Note for Diagnose</label>
 <p class="boxstyle" th:text="${diagnose.getNote()}"></p>
 <label>Illness</label>
-<p class="boxstyle" th:text="${diagnose.getIllness().getName()}"></p>
+<p><a th:href="@{/illnesses/info/} + ${diagnose.getIllness().getID()}" th:text="${diagnose.getIllness().getName()}"></a></p>
 
 
 
