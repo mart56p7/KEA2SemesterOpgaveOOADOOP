@@ -18,6 +18,8 @@ public class PrescriptionService {
     private PatientService PS;
 	@Autowired
     private MedicineService MS;
+	@Autowired
+	private TjekReceptService TJ;
 
 	public Prescription GetPrescription(int ID) throws SQLException {
         ResultSet rs = PRI.getPrescription(ID);
@@ -54,8 +56,9 @@ public class PrescriptionService {
         return prescriptions;
     }
 
-	public int CreatePrescription(Prescription Prescription) throws SQLException {
-	    return PRI.CreatePrescription(Prescription.getPatient().getID(),Prescription.getDescription(),Prescription.getMedicine().getID(),Prescription.getStartDate(),Prescription.getEndDate());
+	public int CreatePrescription(Prescription pre) throws SQLException, Exception {
+		TJ.TjekRecept(pre);
+		return PRI.CreatePrescription(pre.getPatient().getID(), pre.getDescription(), pre.getMedicine().getID(), pre.getStartDate(), pre.getEndDate());
 	}
 
 	public void EditPrescription(Prescription Prescription) throws SQLException{

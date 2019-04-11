@@ -48,18 +48,19 @@ public class PrescriptionController {
 
     @GetMapping("/prescriptions/create/{patientID}")
     public String create(@PathVariable int patientID, Model model, HttpSession session) {
+        logger.log("create: Start");
         if(userType(session) != UserType.DOCTOR) {
             logger.log("User access denied");
+            logger.log("create: End");
             return "users/error";
         }
-        boolean test = true;
         try {
             model.addAttribute("patient", PS.getPatient(patientID));
-            model.addAttribute("prescription", PRS.GetPrescriptions(patientID,test));
             model.addAttribute("medicines", MS.getMedicines());
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        logger.log("create: End");
         return "prescriptions/create";
     }
 
@@ -69,32 +70,30 @@ public class PrescriptionController {
                                  @RequestParam(value="medicineid", required=true) int medicineid,
                                  @RequestParam(value="startdate", required=true) String startdate,
                                  @RequestParam(value="enddate", required=true) String enddate,
-                                 HttpSession session){
+                                 HttpSession session, Model model){
         logger.log("createPrescriptions(): START");
         if(userType(session) != UserType.DOCTOR) {
             logger.log("User access denied");
             return "users/error";
         }
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
         try {
-            SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
-            try {
-                Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*7);
-                Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*7);
-                PRS.CreatePrescription(new Prescription(PS.getPatient(patientid),description, MS.GetMedicine(medicineid), startdateformatted,enddateformatted));
-                logger.log("Created prescriptions", 1);
-                System.out.println("1");
-            } catch (ParseException e) {
-                logger.log("Error parsing date format");
-                System.out.println("2");
-                return "redirect:error";
-            }
+            Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*7);
+            Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*7);
+            PRS.CreatePrescription(new Prescription(PS.getPatient(patientid),description, MS.GetMedicine(medicineid), startdateformatted,enddateformatted));
+            logger.log("Created prescriptions", 1);
             logger.log("createPrescription(): END");
-            System.out.println("3");
-            return "redirect:/patients/info/" + patientid;
+            return "redirect:/patients/info/" + patientid;            } catch (ParseException e) {
+            logger.log("Error parsing date format");
+            return "redirect:error";
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             logger.log("createPrescriptions(): END");
             return "redirect:error";
+        } catch (Exception e){
+            logger.log("Prescription request denied");
+            model.addAttribute("errmsg", new String(e.getMessage()));
+            return "/prescriptions/error";
         }
     }
     @GetMapping("/prescriptions/info/{prescriptionID}")
