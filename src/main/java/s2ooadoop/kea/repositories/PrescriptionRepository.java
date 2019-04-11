@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+import java.sql.Date;
 
 @Repository
 public class PrescriptionRepository implements PrescriptionRepositoryInterface {
@@ -52,8 +52,8 @@ public class PrescriptionRepository implements PrescriptionRepositoryInterface {
         pstmt.setString(2,Description );
         pstmt.setInt(3, MedicineID);
         pstmt.setDate(4,  new java.sql.Date(StartDate.getTime()));
-        pstmt.setDate(4,  new java.sql.Date(EndDate.getTime()));
-        pstmt.setInt(5, PrescriptionID);
+        pstmt.setDate(5,  new java.sql.Date(EndDate.getTime()));
+        pstmt.setInt(6, PrescriptionID);
         DB.ExecuteSql(pstmt);
     }
 

@@ -2,8 +2,8 @@
 
 <div class="box sectionheader">
     <h1>Prescription Info</h1>
-    <a th:href="@{/prescriptions/edit/} + ${patient.getID()} + '/' + ${prescription.getID()}" class="btn btn-primary right marginright5">Edit</a>
-    <a th:href="@{/prescriptions/delete/} + ${patient.getID()} + '/' + ${prescription.getID()}" class="btn btn-primary right marginright5">Delete</a>
+    <a th:href="@{/prescriptions/edit/} + ${prescription.getID()}" class="btn btn-primary right marginright5">Edit</a>
+    <a th:href="@{/prescriptions/delete/} + ${prescription.getID()}" class="btn btn-primary right marginright5">Delete</a>
 </div>
 
 <label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>

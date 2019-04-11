@@ -1,6 +1,6 @@
 package s2ooadoop.kea.models;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Prescription {
 
@@ -19,20 +19,20 @@ public class Prescription {
     }
 
     public Prescription(PatientInterface patient, String description, MedicineInterface medicine, Date startDate, Date endDate) {
-        Patient = patient;
-        Description = description;
-        Medicine = medicine;
-        StartDate = startDate;
-        EndDate = endDate;
+		this.Patient = patient;
+		this.Description = description;
+		this.Medicine = medicine;
+		this.StartDate = startDate;
+		this.EndDate = endDate;
     }
 
     public Prescription(int ID, PatientInterface patient, String description, MedicineInterface medicine, Date startDate, Date endDate) {
         this.ID = ID;
-        Patient = patient;
-        Description = description;
-        Medicine = medicine;
-        StartDate = startDate;
-        EndDate = endDate;
+        this.Patient = patient;
+		this.Description = description;
+		this.Medicine = medicine;
+		this.StartDate = startDate;
+		this.EndDate = endDate;
 
     }
     public PatientInterface getPatient() {
@@ -40,15 +40,15 @@ public class Prescription {
 	}
 
 	public void setPatient(PatientInterface patient) {
-		Patient = patient;
+		this.Patient = patient;
 	}
 
 	public String getDescription() {
-		return Description;
+		return this.Description;
 	}
 
 	public void setDescription(String description) {
-		Description = description;
+		this.Description = description;
 	}
 
 	public MedicineInterface getMedicine() {
@@ -56,23 +56,23 @@ public class Prescription {
 	}
 
 	public void setMedicine(MedicineInterface medicine) {
-		Medicine = medicine;
+		this.Medicine = medicine;
 	}
 
 	public Date getStartDate() {
-		return StartDate;
+		return this.StartDate;
 	}
 
 	public void setStartDate(Date startDate) {
-		StartDate = startDate;
+		this.StartDate = startDate;
 	}
 
 	public Date getEndDate() {
-		return EndDate;
+		return this.EndDate;
 	}
 
 	public void setEndDate(Date endDate) {
-		EndDate = endDate;
+		this.EndDate = endDate;
 	}
 
 	public int getID() {

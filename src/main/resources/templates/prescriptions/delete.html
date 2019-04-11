@@ -3,19 +3,19 @@
 <h1>Delete prescription</h1><br/>
 
 <p>You are about to delete the prescription that happened on date: </p>
-<p th:text="${prescription.getDate()}"></p>
+<p th:text="${prescription.getStartDate()} + ' - ' + ${prescription.getEndDate()}"></p>
 <p>That contains the following information</p>
 
 <label>Medicine:</label>
 <p th:text="${prescription.getMedicine().getName()}"></p>
 <label>Note:</label>
-<p th:text="${prescription.getNote()}"></p>
+<p th:text="${prescription.getDescription()}"></p>
 
 <p><br/>Please confirm.</p>
 <div class="form-group">
     <form method="post" action="/prescriptions/delete">
         <input type="hidden" name="prescriptionID" th:value="${prescription.getID()}">
-        <input type="hidden" name="patientID" th:value="${patient.getID()}">
+        <input type="hidden" name="patientID" th:value="${prescription.getPatient().getID()}">
         <input type="submit" value="Delete" class="btn btn-info form-control">
     </form>
 </div>

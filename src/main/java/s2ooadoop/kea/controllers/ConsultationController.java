@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.Consultation;
+import s2ooadoop.kea.models.User;
 import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.ConsultationService;
 import s2ooadoop.kea.services.Logging;
@@ -93,7 +94,7 @@ public class ConsultationController {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			format.setTimeZone(java.util.TimeZone.getTimeZone("GMT"));
 			try {
-				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*7);
+				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*8);
 				CS.CreateConsultation(new Consultation(PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Created consultation", 1);
 			} catch (ParseException e) {
@@ -197,7 +198,7 @@ public class ConsultationController {
 		try {
 			SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
 			try {
-				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*7);
+				Date dateformatted = new Date(format.parse ( date ).getTime()+1000*60*60*8);
 				CS.EditConsultation(new Consultation(consultationid, PS.getPatient(patientid), description, conclusion, dateformatted));
 				logger.log("Edited consultation", 1);
 			} catch (ParseException e) {
@@ -216,16 +217,14 @@ public class ConsultationController {
 
 	@ModelAttribute("userType")
 	public UserType userType(HttpSession session){
-		return UserType.DOCTOR;
 		//0 = Not logged in
 		//1 = Secretary
 		//2 = Doctor
-        /*Object user = session.getAttribute("user");
+        Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
             System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;
-    */
 	}
 }

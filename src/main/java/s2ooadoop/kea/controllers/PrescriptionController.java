@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.Prescription;
+import s2ooadoop.kea.models.User;
 import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.MedicineService;
@@ -15,7 +16,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Date;
 
 @Controller
 public class PrescriptionController {
@@ -78,8 +79,8 @@ public class PrescriptionController {
         }
         SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
         try {
-            Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*7);
-            Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*7);
+            Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*8);
+            Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*8);
             PRS.CreatePrescription(new Prescription(PS.getPatient(patientid),description, MS.GetMedicine(medicineid), startdateformatted,enddateformatted));
             logger.log("Created prescriptions", 1);
             logger.log("createPrescription(): END");
@@ -112,8 +113,8 @@ public class PrescriptionController {
         return "prescriptions/info";
     }
 
-    @GetMapping("/prescriptions/delete/{patientID}/{prescriptionID}")
-    public String delete(@PathVariable int patientID, @PathVariable int prescriptionID, Model model, HttpSession session) {
+    @GetMapping("/prescriptions/delete/{prescriptionID}")
+    public String delete(@PathVariable int prescriptionID, Model model, HttpSession session) {
         logger.log("delete(): START");
         if(userType(session) != UserType.DOCTOR) {
             logger.log("User access denied");
@@ -121,7 +122,6 @@ public class PrescriptionController {
         }
         try {
             model.addAttribute("prescription", PRS.GetPrescription(prescriptionID));
-            model.addAttribute("patient", PS.getPatient(patientID));
             logger.log("delete(): END");
             return "prescriptions/delete";
         } catch (SQLException e) {
@@ -152,15 +152,14 @@ public class PrescriptionController {
     }
 
 
-    @GetMapping("/prescriptions/edit/{patientID}/{prescriptionID}")
-    public String edit(@PathVariable int patientID, @PathVariable int prescriptionID, Model model, HttpSession session) {
+    @GetMapping("/prescriptions/edit/{prescriptionID}")
+    public String edit(@PathVariable int prescriptionID, Model model, HttpSession session) {
         logger.log("edit() : START");
         if(userType(session) != UserType.DOCTOR) {
             logger.log("User access denied");
             return "users/error";
         }
         try {
-            model.addAttribute("patient", PS.getPatient(patientID));
             model.addAttribute("prescription", PRS.GetPrescription(prescriptionID));
             model.addAttribute("medicines", MS.getMedicines());
             logger.log("edit() : END");
@@ -189,8 +188,8 @@ public class PrescriptionController {
         try {
             SimpleDateFormat format = new SimpleDateFormat("dd/MM yyyy");
             try {
-                Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*7);
-                Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*7);
+                Date startdateformatted = new Date(format.parse(startdate).getTime()+1000*60*60*8);
+                Date enddateformatted = new Date(format.parse(enddate).getTime()+1000*60*60*8);
                 PRS.EditPrescription(new Prescription(prescriptionid,PS.getPatient(patientid),description,MS.GetMedicine(medicineid),startdateformatted,enddateformatted));
                 logger.log("Edited prescription", 1);
             } catch (ParseException e) {
@@ -202,14 +201,22 @@ public class PrescriptionController {
             logger.log("editPrescription(): END");
             return "redirect:/users/error";
         }
-        return "redirect:/prescriptions/info/" + patientid;
+        return "redirect:/prescriptions/info/" + prescriptionid;
     }
 
 
 
     @ModelAttribute("userType")
-    public UserType userType(HttpSession session) {
-        return UserType.DOCTOR;
+    public UserType userType(HttpSession session){
+        //0 = Not logged in
+        //1 = Secretary
+        //2 = Doctor
+        Object user = session.getAttribute("user");
+        if(user instanceof User && user != null){
+            System.out.println(((User)user).getUserType().name());
+            return ((User)user).getUserType();
+        }
+        return UserType.NOTLOGGEDIN;
     }
 
 

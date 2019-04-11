@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.Treatment;
+import s2ooadoop.kea.models.User;
 import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.MedicineService;
@@ -208,19 +209,16 @@ public class TreatmentController {
     }
 
 
-@ModelAttribute("userType")
-public UserType userType(HttpSession session){
-    return UserType.DOCTOR;
-    //0 = Not logged in
-    //1 = Secretary
-    //2 = Doctor
-        /*Object user = session.getAttribute("user");
+    @ModelAttribute("userType")
+    public UserType userType(HttpSession session){
+        //0 = Not logged in
+        //1 = Secretary
+        //2 = Doctor
+        Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
             System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;
-    */
-}
-
+    }
 }

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import s2ooadoop.kea.models.User;
 import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.Logging;
 import s2ooadoop.kea.services.PatientService;
@@ -78,17 +79,15 @@ public class DefaultController {
 
     @ModelAttribute("userType")
     public UserType userType(HttpSession session){
-        return UserType.DOCTOR;
         //0 = Not logged in
         //1 = Secretary
         //2 = Doctor
-        /*Object user = session.getAttribute("user");
+        Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
             System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;
-    */
     }
 
 }
