@@ -7,7 +7,8 @@
 </div>
 
 <label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>
-<label>Date: </label> <p th:text="${prescription.getDate()}"></p>
+<label>Start Date: </label> <p th:text="${prescription.getStartDate()}"></p>
+<label>End Date: </label> <p th:text="${prescription.getEndDate()}"></p>
 
 <label>Description for prescription</label>
 <p class="boxstyle" th:text="${prescription.getDescription()}"></p>

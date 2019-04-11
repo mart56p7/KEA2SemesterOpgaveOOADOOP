@@ -4,16 +4,22 @@
 <h1 th:text="'Prescriptions for ' + ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
 <a th:href="@{/prescriptions/create/} + ${patient.getID()}" class="btn btn-primary right">Create prescription</a><br/>
 
-<span class="numfield">Date</span>
-<span class="textfield300">Medicine</span>
 
-<th:block th:each="prescription : ${prescriptions}">
-    <div class="block">
-        <span class="numfield"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getStartDate()}"></a></span>
-        <span class="numfield"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getEndDate()}"></a></span>
-        <span class="textfield300"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getMedicine().getName()}"></a></span>
-    </div>
-</th:block>
-
+<table class = "pdata">
+    <thead>
+    <tr>
+        <th class="pdata">Start Date</th>
+        <th class="pdata pdata-lp">End Date</th>
+        <th class="pdata pdata-lp">Medicine</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="prescription : ${prescriptions}">
+        <td class="pdata"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getStartDate()}"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getEndDate()}"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getMedicine().getName()}"></td>
+    </tr>
+    </tbody>
+</table>
 
 <th:block th:include="footer.html"></th:block>

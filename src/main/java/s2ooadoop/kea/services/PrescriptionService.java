@@ -27,9 +27,9 @@ public class PrescriptionService {
         if (rs.next()) {
             prescription = new Prescription(
             		rs.getInt("id"),
-					PS.getPatient(ID),
+					PS.getPatient(rs.getInt("patient_id")),
 					rs.getString("description"),
-					MS.GetMedicine(ID),
+					MS.GetMedicine(rs.getInt("medicine_id")),
 					rs.getDate("startdate"),
 					rs.getDate("enddate")
 			);

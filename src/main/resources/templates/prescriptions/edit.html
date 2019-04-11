@@ -23,9 +23,10 @@
                 </th:block>
             </select>
         </p>
-        <span class="textfield">Note:</span>
-        <input type="text" name="note" th:value="${prescription.getNote()}" class="form-control">
-        <p>Date: <input type="text" name="date" th:value="${#dates.format(prescription.getDate(), 'dd/MM yyyy')}" class="form-control"></p>
+        <span class="textfield">Description:</span>
+        <input type="text" name="description" th:value="${prescription.getDescription()}" class="form-control">
+        <p>Start date: <input type="text" name="startdate" path="startdate" th:value="${#dates.format(prescription.getStartDate(), 'dd/MM yyyy')}" class="form-control"></p>
+        <p>End date: <input type="text" name="enddate" th:value="${#dates.format(prescription.getEndDate(), 'dd/MM yyyy')}" class="form-control"></p>
 
         <input type="submit" value="Edit prescription" class="btn btn-info form-control">
 

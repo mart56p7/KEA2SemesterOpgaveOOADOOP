@@ -15,7 +15,7 @@ public class MedicineRepository implements MedicineRepositoryInterface {
 
 	@Override
 	public ResultSet getMedicine(int ID) throws SQLException {
-        String sql = "SELECT * FROM medicine WHERE ID = ?";
+        String sql = "SELECT * FROM medicine WHERE id = ?";
         PreparedStatement pstmt = DB.CreateConnectionR().prepareStatement(sql);
         pstmt.setInt(1, ID);
         return DB.QuerySql(pstmt);

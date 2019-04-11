@@ -106,7 +106,7 @@ public class PrescriptionController {
             Prescription prescription = PRS.GetPrescription(prescriptionID);
             model.addAttribute("prescription", prescription);
             model.addAttribute("patient", PS.getPatient(prescription.getPatient().getID()));
-        } catch (SQLException e) {
+         } catch (SQLException e) {
             e.printStackTrace();
         }
         return "prescriptions/info";
