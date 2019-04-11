@@ -37,13 +37,14 @@ public class DiagnoseRepository implements DiagnoseRepositoryInterface {
 
 	@Override
 	public int createDiagnose(int PatientID, int IllnessID, String Note, Date date) throws SQLException {
+		System.out.println("creatediagnose in repo");
 		PreparedStatement stmt = DB.CreateConnectionRWM().prepareStatement("INSERT INTO diagnoses (patient_id, illness_id, note, date) VALUES (?, ?, ?, ?)");
 		stmt.setInt(1, PatientID);
 		stmt.setInt(2, IllnessID);
 		stmt.setString(3, Note);
 		stmt.setDate(4,  new java.sql.Date(date.getTime()));
 		DB.ExecuteSql(stmt);
-		stmt = DB.CreateConnectionR().prepareStatement("SELECT max(id) FROM diagnose");
+		stmt = DB.CreateConnectionR().prepareStatement("SELECT max(id) FROM diagnoses");
 		ResultSet rs = DB.QuerySql(stmt);
 		rs.next();
 		return rs.getInt("max(id)");
