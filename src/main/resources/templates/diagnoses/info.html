@@ -1,14 +1,13 @@
 <th:block th:include="header.html"></th:block>
-<th:block th:switch="${userType.name()}">
 
 
 
 <div class="box sectionheader">
     <h1>Diagnose Info</h1>
-    <nav th:case="'DOCTOR'" class="topmenu">
+    <th:block th:if="${userType.name() == 'DOCTOR'}">
     <a th:href="@{/diagnoses/edit/} + ${diagnose.getID()}" class="btn btn-primary right marginright5">Edit</a>
     <a th:href="@{/diagnoses/delete/} + ${diagnose.getID()}" class="btn btn-primary right marginright5">Delete</a>
-    </nav>
+    </th:block>
 </div>
 
 <label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>

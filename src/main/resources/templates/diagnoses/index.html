@@ -1,12 +1,11 @@
 <th:block th:include="header.html"></th:block>
-<th:block th:switch="${userType.name()}">
 
 
 
 <h1 th:text="'Diagnoses for ' + ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
-<nav th:case="'DOCTOR'" class="topmenu">
+<th:block th:if="${userType.name() == 'DOCTOR'}">
 <a th:href="@{/diagnoses/create/} + ${patient.getID()}" class="btn btn-primary right">Create Diagnose</a><br/>
-</nav>
+</th:block>
 
 
 <table class="pdata">
@@ -22,10 +21,10 @@
     <tr th:each="diagnose : ${diagnoses}">
         <td class="pdata"><a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getDate()}"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/diagnoses/info/} + ${diagnose.getID()}" th:text="${diagnose.getIllness().getName()}"></a></td>
-        <nav th:case="'DOCTOR'" class="topmenu">
+        <th:block th:if="${userType.name() == 'DOCTOR'}">
         <td class="pdata pdata-lp"><a th:href="@{/diagnoses/edit/} + ${diagnose.getID()}" class="glyphicon glyphicon-pencil"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/diagnoses/delete/} + ${diagnose.getID()}" class="glyphicon glyphicon-remove"></a></td>
-        </nav>
+        </th:block>
     </tr>
     </tbody>
 </table>
