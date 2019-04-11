@@ -25,7 +25,7 @@ public class PrescriptionRepository implements PrescriptionRepositoryInterface {
         PreparedStatement pstmt = null;
         System.out.println(DB);
 	    if(ActiveOnly){
-            pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM prescription WHERE patient_id = ?");
+            pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM prescription WHERE enddate >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) and patient_id = ?");
         } else {
             pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM prescription WHERE patient_id = ?");
         }

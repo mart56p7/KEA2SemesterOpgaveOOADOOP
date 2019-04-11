@@ -33,7 +33,7 @@
         <a th:href="@{/prescriptions/}  + ${patient.getID()} " class="btn btn-primary right">View All</a>
     </div>
     <th:block th:each="prescription : ${prescriptions}">
-        <a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getDate()} + ' ' + ${prescription.getName()}"></a><br/>
+        <a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getStartDate()} + ' - ' + ${prescription.getEndDate()} + ': ' +  ${prescription.getMedicine().getName()}"></a><br/>
     </th:block>
 </th:block>
 

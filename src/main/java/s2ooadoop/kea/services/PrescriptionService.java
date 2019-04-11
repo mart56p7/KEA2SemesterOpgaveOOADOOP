@@ -23,7 +23,14 @@ public class PrescriptionService {
         ResultSet rs = PRI.getPrescription(ID);
         Prescription prescription = null;
         if (rs.next()) {
-            prescription = new Prescription(rs.getInt("ID"), PS.getPatient(ID), rs.getString("Description"), MS.GetMedicine(ID), rs.getDate("StartDate"),rs.getDate("EndDate"));
+            prescription = new Prescription(
+            		rs.getInt("id"),
+					PS.getPatient(ID),
+					rs.getString("description"),
+					MS.GetMedicine(ID),
+					rs.getDate("startdate"),
+					rs.getDate("enddate")
+			);
         }
         return prescription;
 	}
@@ -34,9 +41,12 @@ public class PrescriptionService {
 	    List<Prescription> prescriptions = new ArrayList<>();
 	    while(rs.next()){
 	        prescriptions.add(new Prescription(
-                    rs.getInt("ID"),
-                            PS.getPatient(rs.getInt("patientID")), rs.getString("Description"), MS.GetMedicine(rs.getInt("medicineID")), rs.getDate("StartDate"),
-                    rs.getDate("EndDate")
+                    rs.getInt("id"),
+					PS.getPatient(rs.getInt("patient_id")),
+					rs.getString("description"),
+					MS.GetMedicine(rs.getInt("medicine_id")),
+					rs.getDate("startdate"),
+                    rs.getDate("enddate")
                     )
             );
         }

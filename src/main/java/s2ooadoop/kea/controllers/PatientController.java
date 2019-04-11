@@ -6,10 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import s2ooadoop.kea.models.*;
-import s2ooadoop.kea.services.ConsultationService;
-import s2ooadoop.kea.services.DiagnoseService;
-import s2ooadoop.kea.services.Logging;
-import s2ooadoop.kea.services.PatientService;
+import s2ooadoop.kea.services.*;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -24,6 +21,8 @@ public class PatientController {
     ConsultationService CS;
     @Autowired
     DiagnoseService DS;
+    @Autowired
+    PrescriptionService PRS;
 
     Logging logger = new Logging("PatientController");
 
@@ -60,6 +59,8 @@ public class PatientController {
             model.addAttribute("patient", PS.getPatient(ID));
             model.addAttribute("consultations", CS.getActiveConsultations(ID));
             model.addAttribute("diagnoses", DS.getActiveDiagnoses(ID));
+            System.out.println("Prescription size = " + PRS.GetPrescriptions(ID, true).size());
+            model.addAttribute("prescriptions", PRS.GetPrescriptions(ID, true));
             logger.log("showPatient(): END");
             return "patients/info";
         } catch (SQLException e) {
