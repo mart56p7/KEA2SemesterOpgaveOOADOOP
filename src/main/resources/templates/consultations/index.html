@@ -1,9 +1,11 @@
 <th:block th:include="header.html"></th:block>
+<th:block th:switch="${userType.name()}">
 
 
 <h1 th:text="'Consultations for ' + ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
-<a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right">Create Consultation</a><br/>
-
+    <nav th:case="'DOCTOR'" class="topmenu">
+    <a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right">Create Consultation</a><br/>
+    </nav>
 <table class="pdata">
     <thead>
     <tr>
@@ -17,8 +19,10 @@
     <tr th:each="consultation : ${consultations}">
         <td class="pdata"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getDate()}"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/consultations/info/} + ${consultation.getID()}" th:text="${consultation.getConclusion()}"></a></td>
+        <nav th:case="'DOCTOR'" class="topmenu">
         <td class="pdata pdata-lp"><a th:href="@{/consultations/edit/} + ${consultation.getID()}" class="glyphicon glyphicon-pencil"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/consultations/delete/} + ${consultation.getID()}" class="glyphicon glyphicon-remove"></a></td>
+        </nav>
     </tr>
     </tbody>
 </table>

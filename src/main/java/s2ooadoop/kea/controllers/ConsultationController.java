@@ -30,7 +30,7 @@ public class ConsultationController {
 
 	@GetMapping("/consultations/{patientID}")
 	public String index(@PathVariable int patientID, Model model, HttpSession session) {
-		if(userType(session) != UserType.DOCTOR)
+		if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY))
 		{
 			logger.log("User access denied");
 			return "users/error";
@@ -46,7 +46,7 @@ public class ConsultationController {
 
 	@GetMapping("/consultations/info/{consultationID}")
 	public String info(@PathVariable int consultationID, Model model, HttpSession session) {
-		if(userType(session) != UserType.DOCTOR)
+		if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY))
 		{
 			logger.log("User access denied");
 			return "users/error";

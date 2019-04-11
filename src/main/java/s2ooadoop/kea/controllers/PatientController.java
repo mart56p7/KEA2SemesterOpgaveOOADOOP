@@ -3,13 +3,14 @@ package s2ooadoop.kea.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import s2ooadoop.kea.models.*;
+import s2ooadoop.kea.models.Patient;
+import s2ooadoop.kea.models.PatientInterface;
+import s2ooadoop.kea.models.User;
+import s2ooadoop.kea.models.UserType;
 import s2ooadoop.kea.services.*;
 
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -49,7 +50,7 @@ public class PatientController {
     @GetMapping("/patients/info/{ID}")
     public String showPatient(@PathVariable int ID, Model model, HttpSession session)
     {
-        if(userType(session) != UserType.DOCTOR)
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY))
         {
             logger.log("User access denied");
             return "users/error";

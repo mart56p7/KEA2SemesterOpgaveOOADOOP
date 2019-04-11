@@ -1,13 +1,19 @@
 <th:block th:include="header.html"></th:block>
+<th:block th:switch="${userType.name()}">
+
 
 <div class="box sectionheader">
     <th:block th:fragment="patientname">
         <h1 th:text="'Name: ' +  ${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></h1>
     </th:block>
+    <nav th:case="'DOCTOR'" class="topmenu">
     <a th:href="@{/consultations/create/} + ${patient.getID()}" class="btn btn-primary right" target="_blank">Start Consultation</a>
     <a th:href="@{/diagnoses/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Diagnose</a>
+    </nav>
     <a th:href="@{/prescriptions/create/} + ${patient.getID()}" class="btn btn-primary right marginright5" target="_blank">New Prescription</a>
+
 </div>
+
 
 <br/>
 

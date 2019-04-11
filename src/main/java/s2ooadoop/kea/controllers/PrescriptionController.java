@@ -32,7 +32,7 @@ public class PrescriptionController {
 
     @GetMapping("/prescriptions/{patientID}")
     public String index(@PathVariable int patientID, Model model, HttpSession session) {
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -50,7 +50,7 @@ public class PrescriptionController {
     @GetMapping("/prescriptions/create/{patientID}")
     public String create(@PathVariable int patientID, Model model, HttpSession session) {
         logger.log("create: Start");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             logger.log("create: End");
             return "users/error";
@@ -73,7 +73,7 @@ public class PrescriptionController {
                                  @RequestParam(value="enddate", required=true) String enddate,
                                  HttpSession session, Model model){
         logger.log("createPrescriptions(): START");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -99,7 +99,7 @@ public class PrescriptionController {
     }
     @GetMapping("/prescriptions/info/{prescriptionID}")
     public String info(@PathVariable int prescriptionID, Model model, HttpSession session) {
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -116,7 +116,7 @@ public class PrescriptionController {
     @GetMapping("/prescriptions/delete/{prescriptionID}")
     public String delete(@PathVariable int prescriptionID, Model model, HttpSession session) {
         logger.log("delete(): START");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -136,7 +136,7 @@ public class PrescriptionController {
                                  @RequestParam(value="prescriptionID", required=true) int prescriptionID,
                                  HttpSession session) {
         logger.log("deletePrescription(): START");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -155,7 +155,7 @@ public class PrescriptionController {
     @GetMapping("/prescriptions/edit/{prescriptionID}")
     public String edit(@PathVariable int prescriptionID, Model model, HttpSession session) {
         logger.log("edit() : START");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }
@@ -181,7 +181,7 @@ public class PrescriptionController {
             @RequestParam(value="enddate", required=true) String enddate,
             HttpSession session) {
         logger.log("editPrescription(): START");
-        if(userType(session) != UserType.DOCTOR) {
+        if(!(userType(session) == UserType.DOCTOR || userType(session) == UserType.SECRETARY)) {
             logger.log("User access denied");
             return "users/error";
         }

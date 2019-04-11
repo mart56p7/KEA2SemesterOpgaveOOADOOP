@@ -18,6 +18,8 @@
         <td class="pdata"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getStartDate()}"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getEndDate()}"></a></td>
         <td class="pdata pdata-lp"><a th:href="@{/prescriptions/info/} + ${prescription.getID()}" th:text="${prescription.getMedicine().getName()}"></td>
+        <td class="pdata pdata-lp"><a th:href="@{/prescriptions/edit/} + ${prescription.getID()}" class="glyphicon glyphicon-pencil"></a></td>
+        <td class="pdata pdata-lp"><a th:href="@{/prescriptions/delete/} + ${prescription.getID()}" class="glyphicon glyphicon-remove"></a></td>
     </tr>
     </tbody>
 </table>
