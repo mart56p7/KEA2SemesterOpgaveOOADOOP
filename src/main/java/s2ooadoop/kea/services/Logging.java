@@ -34,7 +34,6 @@ public class Logging {
             s = s + "\t";
         }
         s = s + str;
-        System.out.println(callerclass + s);
         history = history + "\n" + callerclass + s;
     }
 

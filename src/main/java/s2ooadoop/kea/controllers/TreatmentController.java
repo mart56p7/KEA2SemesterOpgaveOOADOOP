@@ -161,17 +161,8 @@ public class TreatmentController {
         }
         try {
             Treatment t = TS.getTreatment(treatmentID);
-            if(t == null){
-                System.out.println("NULL 1");
-            }
-            else{
-                if(((Treatment) t).getMedicine() == null){
-                    System.out.println("NULL 2");
-                }}
             model.addAttribute("medicines", MS.getMedicines());
             model.addAttribute("treatment", TS.getTreatment(treatmentID));
-
-
             logger.log("edit(@PathVariable int treatmentID, Model model) : END");
             return "treatments/edit";
         } catch (SQLException e) {
@@ -216,7 +207,6 @@ public class TreatmentController {
         //2 = Doctor
         Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
-            System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;

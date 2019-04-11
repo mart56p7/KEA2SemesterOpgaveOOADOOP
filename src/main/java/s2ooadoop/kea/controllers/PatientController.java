@@ -60,7 +60,6 @@ public class PatientController {
             model.addAttribute("patient", PS.getPatient(ID));
             model.addAttribute("consultations", CS.getActiveConsultations(ID));
             model.addAttribute("diagnoses", DS.getActiveDiagnoses(ID));
-            System.out.println("Prescription size = " + PRS.GetPrescriptions(ID, true).size());
             model.addAttribute("prescriptions", PRS.GetPrescriptions(ID, true));
             logger.log("showPatient(): END");
             return "patients/info";
@@ -225,7 +224,6 @@ public class PatientController {
         //2 = Doctor
         Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
-            System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;

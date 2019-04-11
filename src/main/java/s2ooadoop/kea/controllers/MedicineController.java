@@ -31,7 +31,6 @@ public class MedicineController {
 
         try {
             model.addAttribute("medicines", MS.getMedicines());
-            System.out.println(MS.getMedicines().size());
             logger.log("index(Model model): END");
             return "medicines/index";
         } catch (SQLException e) {
@@ -147,7 +146,6 @@ public class MedicineController {
         }
         try {
             model.addAttribute("medicine", MS.GetMedicine(medicineID));
-            System.out.println(MS.GetMedicine(medicineID));
             logger.log("delete(@PathVariable int medicineID): END");
             return "medicines/delete";
         } catch (SQLException e) {
@@ -185,7 +183,6 @@ public class MedicineController {
         //2 = Doctor
         Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
-            System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;

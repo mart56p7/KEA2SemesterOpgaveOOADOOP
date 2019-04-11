@@ -191,7 +191,6 @@ public class IllnessController {
         //2 = Doctor
             Object user = session.getAttribute("user");
             if(user instanceof User && user != null){
-                System.out.println(((User)user).getUserType().name());
                 return ((User)user).getUserType();
             }
             return UserType.NOTLOGGEDIN;

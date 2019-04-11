@@ -23,7 +23,6 @@ public class PrescriptionRepository implements PrescriptionRepositoryInterface {
 	@Override
 	public ResultSet getPrescriptions(int PatientID,boolean ActiveOnly) throws SQLException {
         PreparedStatement pstmt = null;
-        System.out.println(DB);
 	    if(ActiveOnly){
             pstmt = DB.CreateConnectionR().prepareStatement("SELECT * FROM prescription WHERE enddate >= DATE_ADD(CURRENT_DATE(), INTERVAL -12 MONTH) and patient_id = ?");
         } else {
@@ -41,7 +40,6 @@ public class PrescriptionRepository implements PrescriptionRepositoryInterface {
         stmt.setString(3, Description);
         stmt.setInt(4, PatientID);
         stmt.setInt(5, MedicineID);
-        System.out.println("DB Kald");
         return DB.ExecuteSql(stmt);
 	}
 

@@ -60,9 +60,6 @@ public class UserService {
 	}
 
 	public int createUser(User User) throws SQLException {
-		System.out.println(User.getUsername());
-		System.out.println(User.getPassword());
-		System.out.println(User.getUserType().getID());
 		return URI.createUser(User.getUsername(), User.getPassword(), User.getUserType().getID());
 	}
 

@@ -53,7 +53,7 @@ public class PatientService {
                 rs = PRI.findPatientFromName(findPatient);
             }
             catch (Exception e){
-                System.out.println("I caught something unexpected!");
+                System.out.println(e.getMessage());
             }
 
 

@@ -39,8 +39,6 @@ public class PrescriptionController {
         try {
             model.addAttribute("patient", PS.getPatient(patientID));
             model.addAttribute("prescriptions", PRS.GetPrescriptions(patientID,false));
-            System.out.println(PRS.GetPrescriptions(patientID,false));
-            System.out.println(PS.getPatient(patientID));
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -213,7 +211,6 @@ public class PrescriptionController {
         //2 = Doctor
         Object user = session.getAttribute("user");
         if(user instanceof User && user != null){
-            System.out.println(((User)user).getUserType().name());
             return ((User)user).getUserType();
         }
         return UserType.NOTLOGGEDIN;

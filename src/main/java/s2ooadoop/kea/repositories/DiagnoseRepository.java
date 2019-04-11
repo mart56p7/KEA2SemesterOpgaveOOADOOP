@@ -37,7 +37,6 @@ public class DiagnoseRepository implements DiagnoseRepositoryInterface {
 
 	@Override
 	public int createDiagnose(int PatientID, int IllnessID, String Note, Date date) throws SQLException {
-		System.out.println("creatediagnose in repo");
 		PreparedStatement stmt = DB.CreateConnectionRWM().prepareStatement("INSERT INTO diagnoses (patient_id, illness_id, note, date) VALUES (?, ?, ?, ?)");
 		stmt.setInt(1, PatientID);
 		stmt.setInt(2, IllnessID);

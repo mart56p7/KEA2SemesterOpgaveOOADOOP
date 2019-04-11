@@ -122,9 +122,7 @@ public class TreatmentRepository  implements TreatmentRepositoryInterface{
 			PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement(sql);
 			pstmt.setInt(1, treatment_id);
 			pstmt.setInt(2, medicine_ids[i]);
-			System.out.println(pstmt.toString());
 			DB.ExecuteSql(pstmt);
-			System.out.println("Done");
 		}
 	}
 
