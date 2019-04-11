@@ -111,8 +111,8 @@ public class DiagnoseController {
 	}
 
 
-	@GetMapping("/diagnoses/delete/{patientID}/{diagnoseID}")
-	public String delete(@PathVariable int patientID, @PathVariable int diagnoseID, Model model, HttpSession session) {
+	@GetMapping("/diagnoses/delete/{diagnoseID}")
+	public String delete(@PathVariable int diagnoseID, Model model, HttpSession session) {
 		logger.log("delete(): START");
 		if(userType(session) != UserType.DOCTOR) {
 			logger.log("User access denied");
@@ -120,7 +120,6 @@ public class DiagnoseController {
 		}
 		try {
 			model.addAttribute("diagnose", DS.getDiagnose(diagnoseID));
-			model.addAttribute("patient", PS.getPatient(patientID));
 			logger.log("delete(): END");
 			return "diagnoses/delete";
 		} catch (SQLException e) {
@@ -151,15 +150,14 @@ public class DiagnoseController {
 	}
 
 
-	@GetMapping("/diagnoses/edit/{patientID}/{diagnoseID}")
-	public String edit(@PathVariable int patientID, @PathVariable int diagnoseID, Model model, HttpSession session) {
+	@GetMapping("/diagnoses/edit/{diagnoseID}")
+	public String edit(@PathVariable int diagnoseID, Model model, HttpSession session) {
 		logger.log("edit() : START");
 		if(userType(session) != UserType.DOCTOR) {
 			logger.log("User access denied");
 			return "users/error";
 		}
 		try {
-			model.addAttribute("patient", PS.getPatient(patientID));
 			model.addAttribute("diagnose", DS.getDiagnose(diagnoseID));
 			model.addAttribute("illnesses", IS.getIllnesses());
 			logger.log("edit() : END");

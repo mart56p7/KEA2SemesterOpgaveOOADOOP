@@ -2,8 +2,8 @@
 
 <div class="box sectionheader">
     <h1>Diagnose Info</h1>
-    <a th:href="@{/diagnoses/edit/} + ${patient.getID()} + '/' + ${diagnose.getID()}" class="btn btn-primary right marginright5">Edit</a>
-    <a th:href="@{/diagnoses/delete/} + ${patient.getID()} + '/' + ${diagnose.getID()}" class="btn btn-primary right marginright5">Delete</a>
+    <a th:href="@{/diagnoses/edit/} + ${diagnose.getID()}" class="btn btn-primary right marginright5">Edit</a>
+    <a th:href="@{/diagnoses/delete/} + ${diagnose.getID()}" class="btn btn-primary right marginright5">Delete</a>
 </div>
 
 <label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>
