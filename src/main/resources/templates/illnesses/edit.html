@@ -11,7 +11,7 @@
         </div>
         <div class="block">
             <span class="textfield">Treatment:</span>
-            <select size="10" name="treatment_ids" class="form-control" multiple>
+            <select size="10" name="treatment_ids" class="form-control">
                 <th:block th:each="treatment : ${treatments}">
                     <th:block th:if="${illness.getTreatment().contains(treatment)}">
                         <option th:value="${treatment.getID()}" th:text="${treatment.getName()}" SELECTED></option>
@@ -21,7 +21,6 @@
                     </th:block>
                 </th:block>
             </select>
-            <p>* Use CTRL to select multiple values</p>
         </div>
         <input type="submit" value="Edit" class="btn btn-info form-control">
     </form>

@@ -96,6 +96,7 @@ public class Database {
 	}
 
 	public ResultSet QuerySql(PreparedStatement stmt) throws SQLException {
+		System.out.println("SQL KALD");
 		return stmt.executeQuery();
 	}
 

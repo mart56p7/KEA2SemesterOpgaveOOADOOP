@@ -11,6 +11,15 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * A diagnose is done for a patient.
+ * The diagnose contains the sickness the patient has.
+ * A note
+ * A date
+ *
+ * The diagnoseService gives access to CRUD and to get a single or multiple diagnoses for a specific patient.
+ * */
 @Service
 public class DiagnoseService {
 

@@ -11,6 +11,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The medicin service gives access to CRUD and getting a single Medicin or multiple.
+ *
+ * A medicin contains a name and a database ID.
+ */
+
+
 @Service
 public class MedicineService {
     @Autowired

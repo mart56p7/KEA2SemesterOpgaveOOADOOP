@@ -12,6 +12,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The Illness Service gives access to CRUD for illnesses.
+ *
+ * A illness contains a name and a treatment.
+ *
+ * Note: In version 2, we will be adding the option to have multiple treatments to one diagnose.
+ * */
+
 @Service
 public class IllnessService {
 

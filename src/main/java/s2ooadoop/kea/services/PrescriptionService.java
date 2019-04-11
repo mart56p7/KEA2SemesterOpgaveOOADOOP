@@ -11,6 +11,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The Prescription Service gives access to CRUD and to get a single or multiple prescriptions for a specific patient
+ * A description object contains patient ID, medicine ID, a periode the prescription is valid, and a description field.
+ * */
 @Service
 public class PrescriptionService {
 	private PrescriptionRepositoryInterface PRI = new PrescriptionRepository();
