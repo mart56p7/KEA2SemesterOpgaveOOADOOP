@@ -4,96 +4,86 @@ import java.util.Date;
 
 public class Prescription {
 
-	private PatientInterface Patient;
-	private String Description;
+
+
+    private PatientInterface Patient;
+
+
+    private String Description;
 	private MedicineInterface Medicine;
 	private Date StartDate;
 	private Date EndDate;
 	private int ID;
 
-	public PatientInterface getPatient() {
-		// TODO - implement Prescription.getPatient
-		throw new UnsupportedOperationException();
+    public Prescription() {
+    }
+
+    public Prescription(PatientInterface patient, String description, MedicineInterface medicine, Date startDate, Date endDate) {
+        Patient = patient;
+        Description = description;
+        Medicine = medicine;
+        StartDate = startDate;
+        EndDate = endDate;
+    }
+
+    public Prescription(int ID, PatientInterface patient, String description, MedicineInterface medicine, Date startDate, Date endDate) {
+        this.ID = ID;
+        Patient = patient;
+        Description = description;
+        Medicine = medicine;
+        StartDate = startDate;
+        EndDate = endDate;
+
+    }
+    public PatientInterface getPatient() {
+		return Patient;
 	}
 
-	/**
-	 * 
-	 * @param Patient
-	 */
-	public void setPatient(PatientInterface Patient) {
-		// TODO - implement Prescription.setPatient
-		throw new UnsupportedOperationException();
+	public void setPatient(PatientInterface patient) {
+		Patient = patient;
 	}
 
 	public String getDescription() {
-		// TODO - implement Prescription.getDescription
-		throw new UnsupportedOperationException();
+		return Description;
 	}
 
-	/**
-	 * 
-	 * @param Description
-	 */
-	public void setDescription(String Description) {
-		// TODO - implement Prescription.setDescription
-		throw new UnsupportedOperationException();
+	public void setDescription(String description) {
+		Description = description;
 	}
 
 	public MedicineInterface getMedicine() {
-		// TODO - implement Prescription.getMedicine
-		throw new UnsupportedOperationException();
+		return this.Medicine;
 	}
 
-	/**
-	 * 
-	 * @param Medicine
-	 */
-	public void setMedicine(MedicineInterface Medicine) {
-		// TODO - implement Prescription.setMedicine
-		throw new UnsupportedOperationException();
+	public void setMedicine(MedicineInterface medicine) {
+		Medicine = medicine;
 	}
 
 	public Date getStartDate() {
-		// TODO - implement Prescription.getStartDate
-		throw new UnsupportedOperationException();
+		return StartDate;
 	}
 
-	/**
-	 * 
-	 * @param StartDate
-	 */
-	public void setStartDate(Date StartDate) {
-		// TODO - implement Prescription.setStartDate
-		throw new UnsupportedOperationException();
+	public void setStartDate(Date startDate) {
+		StartDate = startDate;
 	}
 
 	public Date getEndDate() {
-		// TODO - implement Prescription.getEndDate
-		throw new UnsupportedOperationException();
+		return EndDate;
 	}
 
-	/**
-	 * 
-	 * @param EndDate
-	 */
-	public void setEndDate(Date EndDate) {
-		// TODO - implement Prescription.setEndDate
-		throw new UnsupportedOperationException();
+	public void setEndDate(Date endDate) {
+		EndDate = endDate;
 	}
 
 	public int getID() {
-		// TODO - implement Prescription.getID
-		throw new UnsupportedOperationException();
+		return ID;
 	}
 
-	/**
-	 * 
-	 * @param ID
-	 */
 	public void setID(int ID) {
-		// TODO - implement Prescription.setID
-		throw new UnsupportedOperationException();
+		this.ID = ID;
 	}
+
+
 
 
 	public boolean equals(Object obj){

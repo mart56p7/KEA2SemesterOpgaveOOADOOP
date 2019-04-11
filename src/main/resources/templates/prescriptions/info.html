@@ -1,0 +1,20 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>prescription Info</h1>
+    <a th:href="@{/prescriptions/edit/} + ${patient.getID()} + '/' + ${prescription.getID()}" class="btn btn-primary right marginright5">Edit</a>
+    <a th:href="@{/prescriptions/delete/} + ${patient.getID()} + '/' + ${prescription.getID()}" class="btn btn-primary right marginright5">Delete</a>
+</div>
+
+<label>Patient: </label> <p><a th:href="@{/patients/info/} + ${patient.getID()}" th:text="${patient.getFirstname()} + ' ' + ${patient.getLastname()}"></a></p>
+<label>Date: </label> <p th:text="${prescription.getDate()}"></p>
+
+<label>Note for prescription</label>
+<p class="boxstyle" th:text="${prescription.getDescription()}"></p>
+<label>Medicine</label>
+<p class="boxstyle" th:text="${prescription.getMedicine().getName()}"></p>
+
+
+
+
+<th:block th:include="footer.html"></th:block>
