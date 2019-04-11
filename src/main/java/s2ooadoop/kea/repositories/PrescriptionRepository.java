@@ -47,7 +47,7 @@ public class PrescriptionRepository implements PrescriptionRepositoryInterface {
 
 	@Override
 	public void EditPrescription(int PrescriptionID,int PatientID, String Description, int MedicineID, Date StartDate, Date EndDate) throws SQLException {
-        PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement("UPDATE prescription SET `PatientID`=?, `Description`=?, `MedicineID`=?, `StartDate`=?,`EndDate`=? WHERE id = ?");
+        PreparedStatement pstmt = DB.CreateConnectionRWM().prepareStatement("UPDATE prescription SET `patient_id`=?, `description`=?, `medicine_id`=?, `startdate`=?,`enddate`=? WHERE id = ?");
         pstmt.setInt(1, PatientID);
         pstmt.setString(2,Description );
         pstmt.setInt(3, MedicineID);

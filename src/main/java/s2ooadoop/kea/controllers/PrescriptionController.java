@@ -37,7 +37,9 @@ public class PrescriptionController {
         }
         try {
             model.addAttribute("patient", PS.getPatient(patientID));
-            model.addAttribute("prescription", PRS.GetPrescription(patientID));
+            model.addAttribute("prescriptions", PRS.GetPrescriptions(patientID,false));
+            System.out.println(PRS.GetPrescriptions(patientID,false));
+            System.out.println(PS.getPatient(patientID));
         } catch (SQLException e) {
             e.printStackTrace();
         }
