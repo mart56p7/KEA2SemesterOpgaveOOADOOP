@@ -1,0 +1,35 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Edit prescription</h1>
+</div>
+
+
+
+<div class="form-group">
+    <form method="post" action="/prescriptions/edit">
+        <input type="hidden" name="patientid" th:value="${patient.getID()}">
+        <input type="hidden" name="prescriptionid" th:value="${prescription.getID()}">
+        <br>
+        <p>Medicine:
+            <select size="10" name="medicineid" class="form-control">
+                <th:block th:each="medicine : ${medicines}">
+                    <th:block th:if="${prescription.getMedicine().equals(medicine)}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}" SELECTED></option>
+                    </th:block>
+                    <th:block th:unless="${prescription.getMedicine().equals(medicine)}">
+                        <option th:value="${medicine.getID()}" th:text="${medicine.getName()}"></option>
+                    </th:block>
+                </th:block>
+            </select>
+        </p>
+        <span class="textfield">Note:</span>
+        <input type="text" name="note" th:value="${prescription.getNote()}" class="form-control">
+        <p>Date: <input type="text" name="date" th:value="${#dates.format(prescription.getDate(), 'dd/MM yyyy')}" class="form-control"></p>
+
+        <input type="submit" value="Edit prescription" class="btn btn-info form-control">
+
+    </form>
+</div>
+
+<th:block th:include="footer.html"></th:block>

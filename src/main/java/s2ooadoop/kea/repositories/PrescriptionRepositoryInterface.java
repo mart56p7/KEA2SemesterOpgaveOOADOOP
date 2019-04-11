@@ -3,48 +3,21 @@ package s2ooadoop.kea.repositories;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Date;
 
 @Repository
 public interface PrescriptionRepositoryInterface {
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	ResultSet getPrescription(int ID);
 
-	/**
-	 * 
-	 * @param PatientID
-	 * @param ActiveOnly
-	 */
-	ResultSet getAllPrescriptions(int PatientID, boolean ActiveOnly);
+	ResultSet getPrescription(int ID) throws SQLException;
 
-	/**
-	 * 
-	 * @param PatientID
-	 * @param Description
-	 * @param MedicineID
-	 * @param StartDate
-	 * @param EndDate
-	 */
-	int CreatePrescription(int PatientID, String Description, int MedicineID, Date StartDate, Date EndDate);
+	ResultSet getPrescriptions(int PatientID,boolean ActiveOnly)throws SQLException;
 
-	/**
-	 * 
-	 * @param PatientID
-	 * @param Description
-	 * @param MedicineID
-	 * @param StartDate
-	 * @param EndDate
-	 */
-	void EditPrescription(int PatientID, String Description, int MedicineID, Date StartDate, Date EndDate);
+	int CreatePrescription(int PatientID, String Description, int MedicineID, Date StartDate, Date EndDate)throws SQLException;
 
-	/**
-	 * 
-	 * @param ID
-	 */
-	void DeletePrescription(int ID);
+	void EditPrescription(int PrescriptionID,int PatientID, String Description, int MedicineID, Date StartDate, Date EndDate)throws SQLException;
+
+	void DeletePrescription(int ID)throws SQLException;
 
 }

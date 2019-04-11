@@ -1,0 +1,32 @@
+<th:block th:include="header.html"></th:block>
+
+<div class="box sectionheader">
+    <h1>Create prescription</h1>
+</div>
+
+<div class="form-group">
+    <form method="post" action="/prescriptions/create">
+        <input type="hidden" name="patientid" th:value="${patient.getID()}">
+        <p>Description:<br/>
+            <textarea name="description" class="form-control"></textarea>
+        </p>
+        <br>
+        <p>Medicine:
+            <select size="10" name="medicineid" class="form-control">
+                <th:block th:each="medicine : ${medicines}">
+                    <option th:value="${medicine.getID()}" th:text="${medicine.getName()}"></option>
+                </th:block>
+            </select>
+        </p>
+
+        <p>Start date: <input type="text" name="startdate" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+        <p>End date: <input type="text" name="enddate" th:value="${#dates.format(#dates.createNow(), 'dd/MM yyyy')}" class="form-control"></p>
+
+
+        <input type="submit" value="Create prescription" class="btn btn-info form-control">
+
+    </form>
+</div>
+
+
+<th:block th:include="footer.html"></th:block>
