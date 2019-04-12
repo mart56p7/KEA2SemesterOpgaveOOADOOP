@@ -13,24 +13,22 @@ public class Database {
 	/**
 	 * If there already is an active database connection it will be returned, else we will create one.
 	 * This database connection can be used for READ, WRITE and MODIFY
+	 *
+	 * Note: We choose to make the CreateConnectionRWM() and CreateConnectionR() the same
 	 */
 	public Connection CreateConnectionRWM() throws SQLException {
-		if(mode == 777) {
-			try {
-				if(Conn.isValid(100)){
-					return Conn;
-				}
-				else{
-					return NewRWMConnection();
-				}
-			} catch (SQLException e) {
+		try {
+			if(Conn == null){
 				return NewRWMConnection();
 			}
-		}
-		else
-		{
-			CloseConnection();
-			return NewRWMConnection();
+			else if(Conn.isValid(100)){
+				return Conn;
+			}
+			else{
+				return NewRWMConnection();
+			}
+		} catch (SQLException e) {
+			return NewRConnection();
 		}
 	}
 
@@ -51,23 +49,21 @@ public class Database {
 	/**
 	 * If there already is an active database connection it will be returned, else we will create one.
 	 * This database connection can be used for READ
+	 *
+	 * Note: We choose to make the CreateConnectionRWM() and CreateConnectionR() the same
 	 */
 	public Connection CreateConnectionR() throws SQLException {
-		if(mode == 444) {
-			try {
-				if(Conn.isValid(100)){
-					return Conn;
-				}
-				else{
-					return NewRConnection();
-				}
-			} catch (SQLException e) {
-				return NewRConnection();
+		try {
+			if(Conn == null){
+				return NewRWMConnection();
 			}
-		}
-		else
-		{
-			CloseConnection();
+			else if(Conn.isValid(100)){
+				return Conn;
+			}
+			else{
+				return NewRWMConnection();
+			}
+		} catch (SQLException e) {
 			return NewRConnection();
 		}
 	}
